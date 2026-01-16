@@ -70,7 +70,6 @@
         .price span { font-size: 1.2rem; font-weight: 400; display: block; margin-bottom: 5px;}
         .installments { color: #ccc; font-size: 0.9rem; margin-bottom: 20px; }
 
-        /* Estilo da Imagem */
         .product-img {
             width: 100%;
             height: auto;
@@ -78,7 +77,6 @@
             object-fit: contain;
             margin-bottom: 20px;
             border-radius: 10px;
-            background-color: transparent;
         }
 
         .checklist { list-style: none; padding: 0; margin: 20px 0; text-align: left; }
@@ -98,20 +96,39 @@
         }
         .btn-buy:hover { background-color: #1a40d0; }
 
-        /* --- SEÇÃO DE DEPOIMENTOS --- */
+        /* --- SEÇÃO DE DEPOIMENTOS ATUALIZADA --- */
         .reviews-section { padding: 60px 20px; background: var(--bg-dark); }
-        .review-card { background: var(--card-bg); border-radius: 15px; padding: 25px; margin-bottom: 20px; text-align: left; border-left: 4px solid var(--primary-blue); }
-        .stars { color: var(--yellow-star); font-size: 1.2rem; margin-bottom: 10px; }
-        .review-text { font-style: italic; color: #dcdcdc; line-height: 1.5; margin-bottom: 10px; }
-        .review-author { font-weight: bold; color: var(--primary-blue); font-size: 0.9rem; }
+        .review-card { 
+            background: var(--card-bg); 
+            border-radius: 15px; 
+            padding: 25px; 
+            margin-bottom: 20px; 
+            text-align: left; 
+            border-left: 4px solid var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .review-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+            flex-shrink: 0;
+        }
+        .review-content { flex-grow: 1; }
+        .stars { color: var(--yellow-star); font-size: 1rem; margin-bottom: 5px; }
+        .review-text { font-style: italic; color: #dcdcdc; line-height: 1.4; margin-bottom: 8px; font-size: 0.95rem; }
+        .review-author { font-weight: bold; color: var(--primary-blue); font-size: 0.85rem; }
 
         .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
         .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.8rem; }
-            .price { font-size: 3rem; }
-            .offer-card.destaque { transform: none; margin-bottom: 20px; }
+            .review-card { flex-direction: column; text-align: center; }
+            .review-img { margin: 0 auto; }
         }
     </style>
 </head>
@@ -149,77 +166,66 @@
             <h2 class="ofertas-title">ESCOLHA SEU KIT</h2>
             
             <div class="ofertas-container">
-                
                 <div class="offer-card">
-                    <div class="offer-header">
-                        <h3>1 Unidade – Teste</h3>
-                    </div>
-                    
+                    <div class="offer-header"><h3>1 Unidade – Teste</h3></div>
                     <img src="imagens/imagem2.png" alt="Tadala Gel 1 Unidade" class="product-img">
-
-                    <div class="price">
-                        <span>Por apenas:</span>
-                        R$ 99,00
-                    </div>
+                    <div class="price"><span>Por apenas:</span> R$ 99,00</div>
                     <div class="installments">ou em até 12x no cartão de crédito</div>
-
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 1x Tadala Gel (90g)</li>
                         <li><span class="check-icon">✓</span> Envio discreto</li>
                         <li><span class="check-icon">✓</span> Suporte via WhatsApp</li>
                         <li><span class="check-icon">✓</span> Frete Grátis</li>
                     </ul>
-
                     <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
                 </div>
 
                 <div class="offer-card destaque">
-                    <div class="offer-header">
-                        <h3>2 Unidades + BRINDE</h3>
-                    </div>
-
+                    <div class="offer-header"><h3>2 Unidades + BRINDE</h3></div>
                     <img src="imagens/imagem2.png" alt="Tadala Gel 2 Unidades" class="product-img">
-
-                    <div class="price">
-                        <span>Por apenas:</span>
-                        R$ 149,00
-                    </div>
+                    <div class="price"><span>Por apenas:</span> R$ 149,00</div>
                     <div class="installments">ou em até 12x no cartão de crédito</div>
-
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 2x Tadala Gel</li>
                         <li><span class="check-icon">✓</span> Envio discreto</li>
                         <li><span class="check-icon">✓</span> Frete Grátis</li>
                         <li><span class="check-icon" style="background:#ccff00; color:black;">+</span> <strong>Brinde: Super Tadala Gotas</strong></li>
                     </ul>
-
                     <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
                 </div>
-
             </div>
         </div>
     </section>
 
     <section class="reviews-section">
         <div class="container">
-            <h2 style="margin-bottom: 40px;">O QUE DIZEM NOSSOS CLIENTES</h2>
+            <h2 style="margin-bottom: 40px;">DEPOIMENTOS DOS NOSSOS CLIENTES</h2>
             
             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"No começo fiquei meio assim, mas o resultado é real. Em 3 semanas já notei uma diferença absurda na firmeza e no volume. Recomendo demais!"</p>
-                <p class="review-author">— Ricardo S. (São Paulo - SP)</p>
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Cliente Ricardo" class="review-img">
+                <div class="review-content">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"No começo fiquei meio assim, mas o resultado é real. Em 3 semanas já notei uma diferença absurda na firmeza e no volume. Recomendo demais!"</p>
+                    <p class="review-author">— Ricardo S. (São Paulo - SP)</p>
+                </div>
             </div>
 
             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Chegou rápido e a embalagem é realmente discreta, ninguém na minha casa percebeu o que era. O gel absorve rápido e não mela."</p>
-                <p class="review-author">— Marcos J. (Curitiba - PR)</p>
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" alt="Cliente Marcos" class="review-img">
+                <div class="review-content">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Chegou rápido e a embalagem é realmente discreta, ninguém na minha casa percebeu o que era. O gel absorve rápido e não mela. Sinto muito mais energia."</p>
+                    <p class="review-author">— Marcos J. (Curitiba - PR)</p>
+                </div>
             </div>
 
             <div class="review-card">
-                <div class="stars">★★★★★</div>
-                <p class="review-text">"Melhor investimento que fiz. Minha confiança na cama subiu 100%. O brinde das gotas também é excelente."</p>
-                <p class="review-author">— André L. (Belo Horizonte - MG)</p>
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" alt="Cliente André" class="review-img">
+                <div class="review-content">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Melhor investimento que fiz. Minha confiança na cama subiu 100%. Minha esposa notou a diferença logo na primeira semana. O brinde é top."</p>
+                    <p class="review-author">— André L. (Belo Horizonte - MG)</p>
+                </div>
             </div>
         </div>
     </section>
