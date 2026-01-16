@@ -1,188 +1,72 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TADALA GEL OFICIAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0f1e;
-            --card-bg: #131826;
-            --primary-blue: #00b2ff;
-            --text-white: #ffffff;
-            --green-success: #1cb453;
-            --yellow-star: #ffcc00;
-            --gray-text: #a0a0a0;
-        }
-
-        * { box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; scroll-behavior: smooth; }
-        
-        header { background: #ffffff; padding: 15px; color: #122f73; text-align: center; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; text-align: center; }
-
-        .hero { padding: 40px 20px; }
-        .hero h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 20px; }
-        .highlight { color: var(--primary-blue); }
-        
-        .btn-cta {
-            background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
-            color: white; padding: 22px 45px; font-size: 1.3rem; font-weight: bold; 
-            text-decoration: none; border-radius: 8px; display: inline-block; 
-            margin: 20px 0; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 178, 255, 0.5);
-            transition: transform 0.2s; border: none; cursor: pointer;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* OFERTAS TURBINADAS */
-        .ofertas-section { background-color: #060a16; padding: 60px 10px; }
-        .ofertas-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 900; }
-        .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; }
-        
-        .offer-card {
-            background: var(--card-bg); border: 2px solid #252d42; border-radius: 20px;
-            width: 100%; max-width: 420px; /* Aumentado de 350px */
-            padding: 30px; text-align: center; 
-            display: flex; flex-direction: column;
-            position: relative; transition: 0.3s;
-        }
-
-        .offer-card.destaque { 
-            border: 3px solid var(--yellow-star); 
-            transform: scale(1.05); 
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-            background: #1a2035;
-        }
-
-        .tag-popular {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--yellow-star); color: #000; padding: 5px 20px;
-            font-weight: 900; border-radius: 20px; font-size: 0.9rem;
-        }
-
-        .offer-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        
-        .product-img { 
-            width: 100%; 
-            height: auto; 
-            max-height: 320px; /* Aumentado de 250px */
-            object-fit: contain; 
-            margin: 20px 0; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
-
-        .price-label { color: var(--gray-text); font-size: 1rem; text-decoration: line-through; }
-        .price { font-size: 4rem; font-weight: 900; margin: 5px 0; color: #fff; }
-        .price span { font-size: 1.5rem; vertical-align: middle; }
-        .price-info { color: var(--green-success); font-weight: bold; margin-bottom: 20px; display: block; }
-
-        .checklist { list-style: none; padding: 0; margin: 20px 0; text-align: left; border-top: 1px solid #252d42; padding-top: 20px; }
-        .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1.1rem; }
-        .check-icon { color: #000; background: #00ff88; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 12px; font-weight: bold; font-size: 0.8rem; }
-
-        .btn-buy { 
-            width: 100%; display: block; 
-            background: linear-gradient(180deg, #1cb453 0%, #158a40 100%);
-            color: white; padding: 20px; border-radius: 12px; 
-            font-weight: 900; text-transform: uppercase; text-decoration: none; 
-            font-size: 1.4rem; margin-top: auto;
-            box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3);
-        }
-
-        /* Reviews & Other styles keep same... */
-        .review-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #252d42; display: flex; align-items: flex-start; gap: 15px; }
-        .review-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); flex-shrink: 0; }
-        
-        @media (max-width: 768px) {
-            .offer-card.destaque { transform: scale(1); margin-top: 30px; }
-            .hero h1 { font-size: 1.8rem; }
-            .price { font-size: 3rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>Tadala Gel Oficial</header>
-
-    <div class="container hero">
-        <h1>Garanta sua Potência Máxima com <br><span class="highlight">OFERTAS EXCLUSIVAS</span></h1>
-        <p>Escolha o tratamento ideal para você. Resultados comprovados e aprovados pela ANVISA.</p>
-        <a href="#ofertas" class="btn-cta">VER PREÇOS PROMOCIONAIS</a>
-    </div>
-
-    <section id="ofertas" class="ofertas-section">
+<section class="reviews-section" style="padding: 60px 0; background: #0a0f1e;">
         <div class="container">
-            <h2 class="ofertas-title">OFERTAS DE HOJE</h2>
+            <h2 style="margin-bottom: 10px; font-weight: 900;">QUEM USA, RECOMENDA!</h2>
+            <p style="color: var(--gray-text); margin-bottom: 50px;">Mais de 15.200 homens já transformaram suas vidas este ano.</p>
             
-            <div class="ofertas-container">
-                <div class="offer-card">
-                    <h3>KIT INICIANTE</h3>
-                    <p style="color: var(--primary-blue); font-weight: bold;">Tratamento para 1 Mês</p>
-                    <img src="imagens/imagem2.png" alt="1 Unidade Tadala Gel" class="product-img">
-                    
-                    <div class="price-label">De R$ 197,00 por:</div>
-                    <div class="price"><span>R$</span> 99,00</div>
-                    <span class="price-info">FRETE GRÁTIS PARA TODO BRASIL</span>
-
-                    <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 1 Frasco Tadala Gel</li>
-                        <li><span class="check-icon">✓</span> Envio 100% Discreto</li>
-                        <li><span class="check-icon">✓</span> Guia de Uso Digital</li>
-                    </ul>
-                    <a href="#" class="btn-buy">COMPRAR AGORA</a>
+            <div class="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-img" alt="Cliente Ricardo">
+                    <div class="review-content">
+                        <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
+                        <p class="review-text">"Comprei o kit de 3 unidades pelo custo benefício. O brinde chegou certinho e o produto é sensacional. Entrega rápida e discreta!"</p>
+                        <span class="review-author"><strong>Ricardo S.</strong> - <span style="color: var(--green-success);">Compra Verificada</span></span>
+                    </div>
                 </div>
 
-                <div class="offer-card destaque">
-                    <div class="tag-popular">MAIS VENDIDO - RECOMENDADO</div>
-                    <h3>KIT MÁXIMO + BRINDE</h3>
-                    <p style="color: var(--yellow-star); font-weight: bold;">Tratamento para 3 Meses</p>
-                    <img src="imagens/imagem2.png" alt="3 Unidades Tadala Gel" class="product-img" style="max-height: 380px;">
-                    
-                    <div class="price-label">De R$ 497,00 por:</div>
-                    <div class="price"><span>R$</span> 149,00</div>
-                    <span class="price-info">ECONOMIA DE MAIS DE 60%</span>
-
-                    <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 3 Frascos Tadala Gel</li>
-                        <li><span class="check-icon" style="background:#ffd700;">★</span> <strong>BRINDE: Gel Volumão Extra</strong></li>
-                        <li><span class="check-icon">✓</span> Frete Grátis Prioritário</li>
-                        <li><span class="check-icon">✓</span> Garantia de 30 Dias</li>
-                    </ul>
-                    <a href="#" class="btn-buy">GARANTIR OFERTA MÁXIMA</a>
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/44.jpg" class="review-img" alt="Cliente Marcos">
+                    <div class="review-content">
+                        <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
+                        <p class="review-text">"Confesso que estava com receio, mas o Tadala Gel funciona mesmo. Senti a diferença logo na primeira semana. Recomendo o kit máximo."</p>
+                        <span class="review-author"><strong>Marcos T.</strong> - <span style="color: var(--green-success);">Compra Verificada</span></span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="reviews-section">
-        <div class="container">
-            <h2 style="margin-bottom: 40px;">QUEM USA, RECOMENDA!</h2>
-            <div class="review-card">
-                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
-                <div class="review-content">
-                    <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
-                    <p class="review-text">"Comprei o kit de 3 unidades pelo custo benefício. O brinde chegou certinho e o produto é sensacional."</p>
-                    <span class="review-author">Ricardo S. - Compra Verificada</span>
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/67.jpg" class="review-img" alt="Cliente Fernando">
+                    <div class="review-content">
+                        <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
+                        <p class="review-text">"O melhor é a discrição. A caixa não tem nada escrito por fora. O gel tem uma absorção muito rápida. Nota 10!"</p>
+                        <span class="review-author"><strong>Fernando A.</strong> - <span style="color: var(--green-success);">Compra Verificada</span></span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" class="review-img" alt="Cliente Juliano">
+                    <div class="review-content">
+                        <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
+                        <p class="review-text">"O suporte via WhatsApp me ajudou muito com as dúvidas de uso. Produto original, lacrado e com nota fiscal. Podem comprar sem medo."</p>
+                        <span class="review-author"><strong>Juliano M.</strong> - <span style="color: var(--green-success);">Compra Verificada</span></span>
+                    </div>
                 </div>
             </div>
             
             <div style="margin-top: 40px;">
-                <a href="#ofertas" class="btn-cta">QUERO MEU KIT AGORA</a>
+                <a href="#ofertas" class="btn-cta">QUERO MEU KIT COM DESCONTO</a>
             </div>
         </div>
     </section>
 
-    <footer class="container" style="font-size: 0.8rem; color: #666; padding-bottom: 40px; border-top: 1px solid #222; margin-top: 20px;">
-        <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
-    </footer>
+    <section style="background: #131826; padding: 40px 20px; border-top: 1px solid #252d42;">
+        <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; align-items: center;">
+            <div style="max-width: 300px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Anvisa_logo.png" alt="Anvisa" style="height: 40px; filter: grayscale(1) brightness(2);">
+                <p style="font-size: 0.9rem; color: var(--gray-text);">Produto dispensado de registro conforme RDC 240/2018.</p>
+            </div>
+            <div style="max-width: 300px;">
+                <strong style="display: block; font-size: 1.2rem; color: var(--green-success);">COMPRA 100% SEGURA</strong>
+                <p style="font-size: 0.9rem; color: var(--gray-text);">Seus dados são criptografados e a entrega é garantida.</p>
+            </div>
+            <div style="max-width: 300px;">
+                <strong style="display: block; font-size: 1.2rem; color: var(--primary-blue);">SITE OFICIAL</strong>
+                <p style="font-size: 0.9rem; color: var(--gray-text);">Cuidado com pirataria! Compre apenas aqui no site oficial.</p>
+            </div>
+        </div>
+    </section>
 
-</body>
-</html>
+    <footer class="container" style="font-size: 0.8rem; color: #666; padding: 40px 0; border-top: 1px solid #222; margin-top: 20px;">
+        <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
+        <p>Políticas de Privacidade | Termos de Uso | Envio e Prazos</p>
+        <p style="margin-top: 10px; font-size: 0.7rem;">As imagens são meramente ilustrativas. Os resultados podem variar de pessoa para pessoa.</p>
+    </footer>
