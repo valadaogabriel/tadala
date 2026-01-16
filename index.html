@@ -43,6 +43,7 @@
             100% { transform: scale(1); }
         }
 
+        /* SEÇÃO DE OFERTAS */
         .ofertas-section { background-color: #060a16; padding: 60px 10px; }
         .ofertas-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 900; }
         .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; }
@@ -70,6 +71,7 @@
 
         .offer-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
         .product-img { width: 100%; height: auto; max-height: 320px; object-fit: contain; margin: 20px 0; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
+
         .price-label { color: var(--gray-text); font-size: 1rem; text-decoration: line-through; }
         .price { font-size: 4rem; font-weight: 900; margin: 5px 0; color: #fff; }
         .price span { font-size: 1.5rem; vertical-align: middle; }
@@ -81,37 +83,42 @@
 
         .btn-buy { width: 100%; display: block; background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.4rem; margin-top: auto; box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3); }
 
-        .review-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #252d42; display: flex; align-items: flex-start; gap: 15px; }
-        .review-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); flex-shrink: 0; }
-        
-        /* SEÇÃO DE PAGAMENTO ARRUMADA */
+        /* RODAPÉ E FORMAS DE PAGAMENTO - ATUALIZADO */
         .info-footer { background-color: #080c18; padding: 60px 20px; border-top: 1px solid #1a2035; }
-        .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; }
+        .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; }
         
-        .info-title { color: var(--gold-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; }
+        .info-title { color: var(--gold-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
         .info-content { color: #fff; line-height: 1.6; font-size: 0.95rem; }
         .info-content a { color: #fff; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
         .info-content a:hover { color: var(--primary-blue); }
 
+        /* ESTILIZAÇÃO DOS ÍCONES DE PAGAMENTO */
         .payment-icons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .payment-icons img { 
-            height: 25px; 
-            background: #fff; 
-            padding: 3px; 
-            border-radius: 4px; 
+        .payment-card {
+            background: #ffffff;
+            width: 45px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            padding: 3px;
+        }
+        .payment-card img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
         }
 
-        .correios-logo { height: 40px; margin-top: 5px; filter: brightness(1.2); }
+        .correios-logo { height: 45px; margin-top: 5px; filter: brightness(1.1); }
 
-        .security-badge { display: flex; align-items: center; gap: 12px; margin-top: 10px; }
-        .security-badge img { width: 40px; }
+        .security-badge { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
+        .security-badge img { width: 45px; }
         .security-text { font-size: 0.8rem; font-weight: 700; line-height: 1.2; color: #fff; text-transform: uppercase; }
 
         @media (max-width: 768px) {
             .offer-card.destaque { transform: scale(1); margin-top: 30px; }
             .hero h1 { font-size: 1.8rem; }
-            .price { font-size: 3rem; }
             .info-grid { text-align: center; }
             .payment-icons, .security-badge { justify-content: center; }
         }
@@ -166,57 +173,40 @@
         </div>
     </section>
 
-    <div class="container" style="padding: 40px 0;">
-        <a href="#ofertas" class="btn-cta">GARANTIR MEU TADALA</a>
-    </div>
-
-    <section class="reviews-section">
-        <div class="container">
-            <h2 style="margin-bottom: 40px;">QUEM USA, RECOMENDA!</h2>
-            <div class="review-card">
-                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
-                <div class="review-content">
-                    <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
-                    <p class="review-text">"Comprei o kit de 3 unidades pelo custo benefício. O brinde chegou certinho e o produto é sensacional. O suporte me atendeu muito bem!"</p>
-                    <span class="review-author">Ricardo S. - <span style="color: var(--green-success);">Compra Verificada</span></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="info-footer">
         <div class="info-grid">
             <div>
-                <div class="info-title">Formas de pagamento</div>
+                <div class="info-title">Pagamento</div>
                 <div class="payment-icons">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="Paypal">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix">
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hiper"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
+                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/BoletoBancario.png" alt="Boleto"></div>
                 </div>
             </div>
 
             <div>
-                <div class="info-title">Central de Atendimento</div>
+                <div class="info-title">Atendimento</div>
                 <div class="info-content">
                     <a href="mailto:suporte@tadalagel.com">📧 suporte@tadalagel.com</a>
-                    <p style="font-size: 0.8rem; color: var(--gray-text); margin-top: 5px;">Segunda a Sexta: 09h às 18h</p>
+                    <p style="font-size: 0.8rem; color: var(--gray-text); margin: 5px 0 0 0;">Seg a Sex: 09h às 18h</p>
                 </div>
             </div>
 
             <div>
                 <div class="info-title">Informação</div>
                 <div class="info-content">
-                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Privacidade</a>
                     <a href="#">Termos de Uso</a>
-                    <a href="#">Rastrear Pedido</a>
+                    <a href="#">Rastreio</a>
                 </div>
             </div>
 
             <div>
-                <div class="info-title">Envio e Entrega</div>
+                <div class="info-title">Envio</div>
                 <img src="https://upload.wikimedia.org/wikipedia/pt/d/d4/Logomarca_dos_Correios.png" alt="Correios" class="correios-logo">
             </div>
 
@@ -225,18 +215,16 @@
                 <div class="security-badge">
                     <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Segurança">
                     <div class="security-text">
-                        Compra Segura<br>
-                        Site Protegido<br>
-                        <span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Certificado SSL</span>
+                        Compra 100% Segura<br>
+                        <span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Criptografia SSL</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="container" style="font-size: 0.8rem; color: #666; padding: 40px 20px; border-top: 1px solid #1a2035;">
+    <footer class="container" style="font-size: 0.75rem; color: #666; padding: 30px 20px; border-top: 1px solid #1a2035;">
         <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
-        <p>Aviso: Os resultados podem variar de pessoa para pessoa. Este produto não substitui aconselhamento médico.</p>
     </footer>
 
 </body>
