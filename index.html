@@ -31,12 +31,20 @@
         
         .btn-cta {
             background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
-            color: white; padding: 20px 40px; font-size: 1.3rem; font-weight: bold; 
+            color: white; padding: 22px 45px; font-size: 1.3rem; font-weight: bold; 
             text-decoration: none; border-radius: 8px; display: inline-block; 
             margin: 20px 0; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 178, 255, 0.5);
             transition: transform 0.2s; border: none; cursor: pointer;
+            animation: pulse 2s infinite;
         }
-        .btn-cta:hover { transform: scale(1.05); }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .btn-cta:hover { transform: scale(1.1); background: linear-gradient(90deg, #007bff 0%, #00b2ff 100%); }
 
         /* Grid de Benefícios e Garantias */
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 40px 0; }
@@ -90,6 +98,7 @@
             .rating-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px; }
             .rating-mid { padding: 0; margin-bottom: 20px; }
             .review-card { flex-direction: column; align-items: center; text-align: center; }
+            .btn-cta { font-size: 1.1rem; padding: 18px 30px; width: 100%; }
         }
     </style>
 </head>
@@ -100,7 +109,7 @@
     <div class="container hero">
         <h1>Quer mais potência, firmeza e um <br><span class="highlight">Pênis Maior?</span></h1>
         <p>Homens de todo o Brasil estão aumentando o tamanho, engrossando o pênis e dominando na cama.</p>
-        <a href="#ofertas" class="btn-cta">Quero Garantir o Meu</a>
+        <a href="#ofertas" class="btn-cta">GARANTIR AGORA</a>
     </div>
 
     <section id="ofertas" class="ofertas-section">
@@ -150,6 +159,10 @@
                     <p class="review-text">"Senti a diferença logo na primeira semana. Me deu muito mais confiança."</p>
                     <span class="review-author">Severino Costa - Compra Verificada</span>
                 </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <a href="#ofertas" class="btn-cta">GARANTIR AGORA</a>
             </div>
         </div>
     </section>
@@ -203,23 +216,17 @@
                         <div class="bar-bg"><div class="bar-fill" style="width: 1%;"></div></div>
                         <span>1%</span>
                     </div>
-                    <div class="bar-container" style="opacity: 0.3;">
-                        <span>2 ★</span>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
-                        <span>0%</span>
-                    </div>
-                    <div class="bar-container" style="opacity: 0.3;">
-                        <span>1 ★</span>
-                        <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
-                        <span>0%</span>
-                    </div>
                 </div>
 
                 <div class="rating-right">
                     <div class="verified-seal">🛡️</div>
                     <h3 style="margin: 5px 0; font-size: 1rem;">Qualidade Comprovada</h3>
-                    <p style="font-size: 0.8rem; color: var(--gray-text);">Auditado por sistemas de feedback real de clientes.</p>
+                    <p style="font-size: 0.8rem; color: var(--gray-text);">Auditado por compradores reais.</p>
                 </div>
+            </div>
+
+            <div style="margin-bottom: 40px;">
+                <a href="#ofertas" class="btn-cta">GARANTIR AGORA</a>
             </div>
         </div>
     </section>
