@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -43,6 +42,15 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+
+        /* NOVA SEÇÃO: ESCALA E USO (Baseado em top.png) */
+        .escala-section { padding: 60px 20px; background: #0c1226; border-bottom: 1px solid #1a2035; }
+        .escala-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto; text-align: left; }
+        .escala-img { width: 100%; max-width: 450px; }
+        .escala-info h2 { font-size: 2rem; color: #fff; margin-bottom: 20px; }
+        .escala-info p { color: var(--gray-text); line-height: 1.6; }
+        .instrucoes-box { background: rgba(0, 178, 255, 0.1); border-left: 4px solid var(--primary-blue); padding: 20px; margin-top: 30px; }
+        .instrucoes-box h3 { margin-top: 0; color: var(--primary-blue); }
 
         /* SEÇÃO DE OFERTAS */
         .ofertas-section { background-color: #060a16; padding: 60px 10px; }
@@ -91,8 +99,6 @@
         .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--primary-blue); }
         .faq-question:after { content: '+'; font-size: 1.5rem; }
         .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: #ccc; line-height: 1.6; }
-        
-        /* Classe para abrir o FAQ via JS ou CSS funcional */
         .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px 20px; }
         .faq-item.active .faq-question:after { content: '-'; }
 
@@ -111,6 +117,8 @@
         .security-text { font-size: 0.8rem; font-weight: 700; line-height: 1.2; color: #fff; text-transform: uppercase; }
 
         @media (max-width: 768px) {
+            .escala-grid { grid-template-columns: 1fr; text-align: center; }
+            .escala-img { margin: 0 auto; }
             .offer-card.destaque { transform: scale(1); margin-top: 30px; }
             .hero h1 { font-size: 1.8rem; }
             .info-grid { text-align: center; }
@@ -128,6 +136,27 @@
         <a href="#ofertas" class="btn-cta">GARANTIR MEU TADALA</a>
     </div>
 
+    <section class="escala-section">
+        <div class="container">
+            <div class="escala-grid">
+                <div>
+                    <img src="top.png" alt="Escala de Rigidez de Ereção" class="escala-img">
+                </div>
+                <div class="escala-info">
+                    <h2>Escala de Rigidez de Ereção (ERE)</h2>
+                    <p>Avalie seu desempenho atual. O Tadala Gel foi desenvolvido para ajudar você a atingir o <strong>Nível 4</strong>: rigidez total e duradoura.</p>
+                    
+                    <div class="instrucoes-box">
+                        <h3>Como usar para o máximo resultado</h3>
+                        <p>1. Aplique uma pequena quantidade do gel diariamente.</p>
+                        <p>2. Massageie suavemente até a completa absorção.</p>
+                        <p>3. Utilize de 15 a 20 minutos antes da relação para um efeito potencializado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="ofertas" class="ofertas-section">
         <div class="container">
             <h2 class="ofertas-title">OFERTAS DE HOJE</h2>
@@ -140,9 +169,9 @@
                     <div class="price"><span>R$</span> 99,00</div>
                     <span class="price-info">FRETE GRÁTIS PARA TODO BRASIL</span>
                     <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 1 Frasco Tadala Gel</li>
+                        <li><span class="check-icon">✓</span> 1 Frasco Tadala Gel (90g)</li>
                         <li><span class="check-icon">✓</span> Envio 100% Discreto</li>
-                        <li><span class="check-icon">✓</span> Guia de Uso Digital</li>
+                        <li><span class="check-icon">✓</span> Brinde Exclusivo</li>
                     </ul>
                     <a href="#" class="btn-buy">COMPRAR AGORA</a>
                 </div>
@@ -151,7 +180,7 @@
                     <div class="tag-popular">MAIS VENDIDO - RECOMENDADO</div>
                     <h3>KIT MÁXIMO + BRINDE</h3>
                     <p style="color: var(--yellow-star); font-weight: bold;">Tratamento para 3 Meses</p>
-                    <img src="imagens/imagem2.png" alt="3 Unidades Tadala Gel" class="product-img" style="max-height: 380px;">
+                    <img src="image.png" alt="3 Unidades Tadala Gel" class="product-img" style="max-height: 380px;">
                     <div class="price-label">De R$ 497,00 por:</div>
                     <div class="price"><span>R$</span> 149,00</div>
                     <span class="price-info">ECONOMIA DE MAIS DE 60%</span>
@@ -171,32 +200,14 @@
         <div class="container">
             <h2 style="font-size: 2rem; margin-bottom: 40px;">DÚVIDAS FREQUENTES</h2>
             <div class="faq-container">
-                
                 <div class="faq-item">
                     <div class="faq-question">O ENVIO É DISCRETO?</div>
-                    <div class="faq-answer">Sim! Sabemos da importância da sua privacidade. Todas as encomendas são enviadas em caixas pardas, totalmente discretas, sem qualquer menção ao nome do produto ou da loja na parte externa.</div>
+                    <div class="faq-answer">Sim! Sabemos da importância da sua privacidade. Todas as encomendas são enviadas em caixas pardas, totalmente discretas.</div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question">QUAL O PRAZO DE ENTREGA?</div>
-                    <div class="faq-answer">O prazo médio de entrega para o Brasil é de 5 a 12 dias úteis. O envio é feito via Correios e você receberá o código de rastreio em seu e-mail logo após a postagem.</div>
+                    <div class="faq-answer">O prazo médio de entrega para o Brasil é de 5 a 12 dias úteis via Correios.</div>
                 </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">COMO DEVO USAR O TADALA GEL?</div>
-                    <div class="faq-answer">Para resultados máximos, recomenda-se a aplicação diária de uma pequena quantidade do gel, massageando suavemente até a completa absorção. O uso contínuo é a chave para o tratamento.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">POSSUI CONTRAINDICAÇÕES?</div>
-                    <div class="faq-answer">O Tadala Gel é formulado com ingredientes seguros e testados. No entanto, recomendamos que pessoas com doenças pré-existentes ou alergias a componentes da fórmula consultem um médico antes de iniciar o uso.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">É APROVADO PELA ANVISA?</div>
-                    <div class="faq-answer">Sim, nosso produto é devidamente registrado e segue todas as normas de segurança da ANVISA, garantindo procedência e eficácia para o consumidor.</div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -208,51 +219,23 @@
                 <div class="payment-icons">
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/BoletoBancario.png" alt="Boleto"></div>
                 </div>
             </div>
-
             <div>
                 <div class="info-title">Atendimento</div>
                 <div class="info-content">
                     <a href="mailto:suporte@tadalagel.com">📧 suporte@tadalagel.com</a>
-                    <p style="font-size: 0.8rem; color: var(--gray-text); margin: 5px 0 0 0;">Seg a Sex: 09h às 18h</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="info-title">Informação</div>
-                <div class="info-content">
-                    <a href="#">Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Rastreio</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="info-title">Envio</div>
-                <img src="https://upload.wikimedia.org/wikipedia/pt/d/d4/Logomarca_dos_Correios.png" alt="Correios" class="correios-logo">
-            </div>
-
-            <div>
-                <div class="info-title">Segurança</div>
-                <div class="security-badge">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Segurança">
-                    <div class="security-text">Compra 100% Segura<br><span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Criptografia SSL</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="container" style="font-size: 0.75rem; color: #666; padding: 30px 20px; border-top: 1px solid #1a2035;">
+    <footer class="container" style="font-size: 0.75rem; color: #666; padding: 30px 20px;">
         <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        // Script simples para abrir e fechar as perguntas
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             item.querySelector('.faq-question').addEventListener('click', () => {
