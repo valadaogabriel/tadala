@@ -13,10 +13,11 @@
             --text-white: #ffffff;
             --green-success: #1cb453;
             --yellow-star: #ffcc00;
+            --gray-text: #a0a0a0;
         }
 
         * { box-sizing: border-box; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; scroll-behavior: smooth; }
         
         header { background: #ffffff; padding: 15px; color: #122f73; text-align: center; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -36,30 +37,35 @@
         }
         .btn-cta:hover { transform: scale(1.05); }
 
-        /* Estilo do Campo de Avaliação Geral */
-        .rating-summary {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 40px;
-            display: inline-block;
-            border: 1px solid var(--primary-blue);
+        /* --- Estilo Profissional do Painel de Avaliações --- */
+        .professional-rating-box {
+            background: #1a2030;
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .rating-score {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--text-white);
-            margin: 0;
-        }
-        .rating-stars-main {
-            color: var(--yellow-star);
-            font-size: 1.8rem;
-            margin: 5px 0;
-        }
-        .rating-text {
-            font-size: 0.9rem;
-            color: #aaa;
-        }
+
+        .rating-left { flex: 1; min-width: 250px; text-align: center; border-right: 1px solid rgba(255,255,255,0.1); }
+        .rating-mid { flex: 1; min-width: 300px; padding: 0 30px; }
+        .rating-right { flex: 1; min-width: 200px; text-align: center; }
+
+        .big-number { font-size: 4.5rem; font-weight: 900; line-height: 1; margin: 0; color: var(--text-white); }
+        .stars-large { color: var(--yellow-star); font-size: 1.5rem; margin: 10px 0; }
+        .total-votes { color: var(--gray-text); font-size: 0.9rem; }
+
+        .bar-container { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.85rem; color: var(--gray-text); }
+        .bar-bg { background: #0a0f1e; height: 8px; flex-grow: 1; margin: 0 10px; border-radius: 10px; overflow: hidden; }
+        .bar-fill { background: var(--yellow-star); height: 100%; border-radius: 10px; }
+
+        .verified-seal { background: rgba(28, 180, 83, 0.1); color: var(--green-success); padding: 10px; border-radius: 50%; font-size: 2rem; display: inline-block; margin-bottom: 10px; }
+
+        /* --- Fim do Estilo Avaliações --- */
 
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 50px 0; }
         .b-card { background: var(--card-bg); border: 1px solid var(--primary-blue); border-radius: 12px; padding: 30px; }
@@ -70,86 +76,32 @@
         .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
         
         .offer-card {
-            background: var(--bg-dark);
-            border: 2px solid var(--primary-blue);
-            border-radius: 20px;
-            width: 100%; max-width: 350px;
-            padding: 20px; text-align: center; 
-            position: relative;
+            background: var(--bg-dark); border: 2px solid var(--primary-blue); border-radius: 20px;
+            width: 100%; max-width: 350px; padding: 20px; text-align: center; 
             display: flex; flex-direction: column;
         }
 
-        .offer-card.destaque {
-            border: 3px solid #ffd700;
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
-        }
-
-        .offer-header h3 { font-size: 1.4rem; margin-bottom: 10px; color: white; }
+        .offer-card.destaque { border: 3px solid #ffd700; transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
         .price { font-size: 3.5rem; font-weight: 900; margin: 10px 0; line-height: 1; }
-        .price span { font-size: 1.2rem; font-weight: 400; display: block; margin-bottom: 5px;}
-        .installments { color: #ccc; font-size: 0.9rem; margin-bottom: 20px; }
 
-        .product-img {
-            width: 100%;
-            height: auto;
-            max-height: 250px;
-            object-fit: contain;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
+        .product-img { width: 100%; height: auto; max-height: 250px; object-fit: contain; margin-bottom: 20px; }
 
         .checklist { list-style: none; padding: 0; margin: 20px 0; text-align: left; }
         .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1rem; }
-        .check-icon { 
-            color: var(--bg-dark); background: #00ff88; 
-            width: 20px; height: 20px; display: inline-flex; 
-            align-items: center; justify-content: center; 
-            border-radius: 4px; margin-right: 10px; font-weight: bold; font-size: 14px;
-        }
+        .check-icon { color: var(--bg-dark); background: #00ff88; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; margin-right: 10px; font-weight: bold; }
 
-        .btn-buy {
-            width: 100%; display: block; text-align: center;
-            background-color: #2b57f5; color: white; 
-            padding: 15px; border-radius: 8px; font-weight: 900; 
-            text-transform: uppercase; text-decoration: none; font-size: 1.2rem; margin-top: auto;
-        }
-        .btn-buy:hover { background-color: #1a40d0; }
+        .btn-buy { width: 100%; display: block; background-color: #2b57f5; color: white; padding: 15px; border-radius: 8px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.2rem; margin-top: auto; }
 
         .reviews-section { padding: 60px 20px; background: var(--bg-dark); }
-        .review-card { 
-            background: var(--card-bg); 
-            border-radius: 15px; 
-            padding: 20px; 
-            margin-bottom: 25px; 
-            text-align: left; 
-            border: 1px solid #252d42;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        .review-img {
-            width: 100px;
-            height: 130px;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 2px solid #333;
-            flex-shrink: 0;
-            background: #000;
-        }
-        .review-content { flex-grow: 1; }
-        .stars { color: var(--yellow-star); font-size: 0.9rem; margin-bottom: 5px; }
-        .review-text { font-style: normal; color: #efefef; line-height: 1.4; margin-bottom: 8px; font-size: 0.95rem; }
-        .review-author { font-weight: bold; color: var(--green-success); font-size: 0.85rem; display: block; margin-top: 5px; }
-        .verified-badge { color: #00b2ff; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
-
+        .review-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #252d42; display: flex; align-items: flex-start; gap: 15px; }
+        .review-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); flex-shrink: 0; }
+        
         .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
-        .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 1.8rem; }
-            .review-card { flex-direction: column; }
-            .review-img { width: 100%; height: 200px; }
+            .rating-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px; }
+            .rating-mid { padding: 0; margin-bottom: 20px; }
+            .review-card { flex-direction: column; align-items: center; text-align: center; }
         }
     </style>
 </head>
@@ -159,26 +111,15 @@
 
     <div class="container hero">
         <h1>Quer mais potência, firmeza e um <br><span class="highlight">Pênis Maior?</span></h1>
-        <p>Homens de todo o Brasil estão aumentando o tamanho, engrossando o pênis e dominando na cama com apenas uma aplicação diária.</p>
-        <p class="highlight" style="font-weight: bold;">Efeito imediato, absorção rápida e envio 100% discreto.</p>
-        
+        <p>Homens de todo o Brasil estão aumentando o tamanho, engrossando o pênis e dominando na cama.</p>
         <a href="#ofertas" class="btn-cta">Quero Garantir o Meu</a>
     </div>
 
     <div class="container">
         <div class="benefits-grid">
-            <div class="b-card">
-                <h3>+20.000</h3>
-                <p>Clientes atendidos com satisfação garantida.</p>
-            </div>
-            <div class="b-card">
-                <h3>Resultados</h3>
-                <p>Pênis mais grosso e duro por muito mais tempo.</p>
-            </div>
-            <div class="b-card">
-                <h3>Sigilo Total</h3>
-                <p>Embalagem 100% confidencial até a sua porta.</p>
-            </div>
+            <div class="b-card"><h3>+20.000</h3><p>Clientes atendidos com satisfação.</p></div>
+            <div class="b-card"><h3>Resultados</h3><p>Pênis mais grosso e firme.</p></div>
+            <div class="b-card"><h3>Sigilo Total</h3><p>Embalagem 100% discreta.</p></div>
         </div>
     </div>
 
@@ -187,31 +128,25 @@
             <h2 class="ofertas-title">ESCOLHA SEU KIT</h2>
             <div class="ofertas-container">
                 <div class="offer-card">
-                    <div class="offer-header"><h3>1 Unidade – Teste</h3></div>
-                    <img src="imagens/imagem2.png" alt="Tadala Gel 1 Unidade" class="product-img">
-                    <div class="price"><span>Por apenas:</span> R$ 99,00</div>
-                    <div class="installments">ou em até 12x no cartão de crédito</div>
+                    <h3>1 Unidade</h3>
+                    <img src="imagens/imagem2.png" alt="Produto" class="product-img">
+                    <div class="price"><span>R$</span> 99,00</div>
                     <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 1x Tadala Gel (90g)</li>
                         <li><span class="check-icon">✓</span> Envio discreto</li>
-                        <li><span class="check-icon">✓</span> Suporte via WhatsApp</li>
                         <li><span class="check-icon">✓</span> Frete Grátis</li>
                     </ul>
-                    <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
+                    <a href="#" class="btn-buy">COMPRAR AGORA</a>
                 </div>
 
                 <div class="offer-card destaque">
-                    <div class="offer-header"><h3>2 Unidades + BRINDE</h3></div>
-                    <img src="imagens/imagem2.png" alt="Tadala Gel 2 Unidades" class="product-img">
-                    <div class="price"><span>Por apenas:</span> R$ 149,00</div>
-                    <div class="installments">ou em até 12x no cartão de crédito</div>
+                    <h3>2 Unidades + Brinde</h3>
+                    <img src="imagens/imagem2.png" alt="Produto" class="product-img">
+                    <div class="price"><span>R$</span> 149,00</div>
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 2x Tadala Gel</li>
-                        <li><span class="check-icon">✓</span> Envio discreto</li>
-                        <li><span class="check-icon">✓</span> Frete Grátis</li>
-                        <li><span class="check-icon" style="background:#ccff00; color:black;">+</span> <strong>Brinde: Super Tadala Gotas</strong></li>
+                        <li><span class="check-icon" style="background:#ccff00;">+</span> <strong>Brinde Exclusivo</strong></li>
                     </ul>
-                    <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
+                    <a href="#" class="btn-buy">GARANTIR OFERTA</a>
                 </div>
             </div>
         </div>
@@ -219,52 +154,79 @@
 
     <section class="reviews-section">
         <div class="container">
-            <h2 style="margin-bottom: 20px;">RELATOS REAIS DOS CLIENTES</h2>
-            
-            <div class="rating-summary">
-                <div class="rating-score">4.98</div>
-                <div class="rating-stars-main">★★★★★</div>
-                <div class="rating-text">Média de satisfação com base em 22.487 avaliações</div>
-            </div>
-            
+            <h2 style="margin-bottom: 40px;">DEPOIMENTOS DE QUEM USA</h2>
             <div class="review-card">
-                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 1" class="review-img">
+                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
                 <div class="review-content">
-                    <span class="verified-badge">✓ Compra Verificada</span>
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Chegou em 4 dias aqui no interior. Comecei a usar e a patroa já notou a diferença. O produto é bom mesmo, dá pra sentir que o sangue circula mais forte."</p>
-                    <span class="review-author">João Paulo M. - 42 anos</span>
+                    <p class="review-text">"Produto excelente. Chegou antes do prazo e a embalagem é realmente muito discreta."</p>
+                    <span class="review-author">João Paulo M. - Compra Verificada</span>
                 </div>
             </div>
-
             <div class="review-card">
-                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 2" class="review-img">
+                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
                 <div class="review-content">
-                    <span class="verified-badge">✓ Compra Verificada</span>
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Já tinha tentado de tudo, esse gel foi o único que me deu confiança de novo. Realmente engrossa se usar todo dia do jeito que explicam."</p>
-                    <span class="review-author">Severino Costa - 55 anos</span>
-                </div>
-            </div>
-
-            <div class="review-card">
-                <img src="https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 3" class="review-img">
-                <div class="review-content">
-                    <span class="verified-badge">✓ Compra Verificada</span>
-                    <div class="stars">★★★★★</div>
-                    <p class="review-text">"O melhor é que ninguém sabe o que é quando chega. A caixa é discreta. No primeiro dia já senti a ereção muito mais dura. Top demais."</p>
-                    <span class="review-author">Carlos Alberto - 38 anos</span>
+                    <p class="review-text">"Senti a diferença logo na primeira semana. Me deu muito mais confiança."</p>
+                    <span class="review-author">Severino Costa - Compra Verificada</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="guarantee-section bg-dark">
+    <section style="padding: 40px 20px;">
         <div class="container">
-            <div class="secure-icon">🔒</div>
-            <h2>Compra 100% segura e discreta</h2>
-            <p>Envio imediato, rastreio e embalagem confidencial. Se não ficar satisfeito, devolvemos 100% do seu dinheiro!</p>
-            <img src="https://img.shields.io/badge/SSL-Secure-green?style=for-the-badge&logo=appveyor" alt="Site Seguro" style="margin-top:20px;">
+            <div class="professional-rating-box">
+                <div class="rating-left">
+                    <p style="margin-bottom: 5px; font-weight: bold; color: var(--primary-blue);">AVALIAÇÃO GERAL</p>
+                    <h2 class="big-number">4.98</h2>
+                    <div class="stars-large">★★★★★</div>
+                    <p class="total-votes">Baseado em 22.487 clientes</p>
+                </div>
+
+                <div class="rating-mid">
+                    <div class="bar-container">
+                        <span>5 ★</span>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 96%;"></div></div>
+                        <span>96%</span>
+                    </div>
+                    <div class="bar-container">
+                        <span>4 ★</span>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 3%;"></div></div>
+                        <span>3%</span>
+                    </div>
+                    <div class="bar-container">
+                        <span>3 ★</span>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 1%;"></div></div>
+                        <span>1%</span>
+                    </div>
+                    <div class="bar-container" style="opacity: 0.3;">
+                        <span>2 ★</span>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span>0%</span>
+                    </div>
+                    <div class="bar-container" style="opacity: 0.3;">
+                        <span>1 ★</span>
+                        <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
+                        <span>0%</span>
+                    </div>
+                </div>
+
+                <div class="rating-right">
+                    <div class="verified-seal">🛡️</div>
+                    <h3 style="margin: 5px 0; font-size: 1rem;">100% Verificado</h3>
+                    <p style="font-size: 0.8rem; color: var(--gray-text);">Todas as avaliações são coletadas de compradores reais após a entrega.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="guarantee-section">
+        <div class="container">
+            <div class="secure-icon" style="color: var(--green-success); font-size: 3rem;">🔒</div>
+            <h2>Compra 100% Segura</h2>
+            <p>Se não ficar satisfeito, devolvemos seu dinheiro em até 30 dias!</p>
+            <img src="https://img.shields.io/badge/SSL-Protegido-green?style=for-the-badge" alt="Seguro">
         </div>
     </div>
 
