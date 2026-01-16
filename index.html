@@ -44,7 +44,7 @@
         .b-card { background: var(--card-bg); border: 1px solid var(--primary-blue); border-radius: 12px; padding: 30px; }
         .b-card h3 { color: var(--primary-blue); font-size: 1.8rem; margin: 0 0 10px 0; }
 
-        /* --- SEÇÃO DE PREÇOS (Baseada nos Prints) --- */
+        /* --- SEÇÃO DE PREÇOS --- */
         .ofertas-section { background-color: #060a16; padding: 50px 10px; }
         .ofertas-title { font-size: 2rem; margin-bottom: 40px; }
         
@@ -61,9 +61,8 @@
             position: relative;
         }
 
-        /* Destaque para o card de 2 unidades */
         .offer-card.destaque {
-            border: 3px solid #ffd700; /* Borda dourada/amarela para destaque */
+            border: 3px solid #ffd700;
             transform: scale(1.02);
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
@@ -75,13 +74,14 @@
 
         /* Imagem do Produto no Card */
         .product-img-placeholder {
-            width: 100%; height: 200px; background-color: #1a202c; 
+            width: 100%; height: 250px; /* Aumentei um pouco a altura para ver melhor a imagem */
+            background-color: #1a202c; 
             border-radius: 10px; margin-bottom: 20px;
-            display: flex; align-items: center; justify-content: center; color: #555;
-            background-size: contain; background-repeat: no-repeat; background-position: center;
+            background-size: cover; /* Ajusta a imagem para cobrir o espaço */
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        /* Lista de Vantagens (Checklist) */
         .checklist { list-style: none; padding: 0; margin: 20px 0; }
         .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1rem; }
         .check-icon { 
@@ -91,7 +91,6 @@
             border-radius: 4px; margin-right: 10px; font-weight: bold; font-size: 14px;
         }
 
-        /* Botão do Card */
         .btn-buy {
             width: 100%; display: block; text-align: center;
             background-color: #2b57f5; color: white; 
@@ -100,11 +99,9 @@
         }
         .btn-buy:hover { background-color: #1a40d0; }
 
-        /* Garantia */
         .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
         .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
 
-        /* Responsividade */
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.8rem; }
             .price { font-size: 3rem; }
@@ -156,8 +153,7 @@
                     </div>
                     <div class="installments">ou em até 12x no cartão de crédito</div>
 
-                    <div class="product-img-placeholder" style="background-image: url('URL_DA_SUA_IMAGEM_1_TUBO.png');">
-                        (Coloque a imagem do Tubo aqui)
+                    <div class="product-img-placeholder" style="background-image: url('imagens/imagens1.png');">
                     </div>
 
                     <ul class="checklist">
@@ -180,9 +176,8 @@
                     </div>
                     <div class="installments">ou em até 12x no cartão de crédito</div>
 
-                    <div class="product-img-placeholder" style="background-image: url('URL_DA_SUA_IMAGEM_2_TUBOS_E_GOTAS.png');">
-                        (Coloque a imagem dos 2 Tubos + Gotas)
-                    </div>
+                    <div class="product-img-placeholder" style="background-image: url('imagens/imagens2.png');">
+                        </div>
 
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 2x Tadala Gel</li>
