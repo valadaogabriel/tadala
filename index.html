@@ -13,6 +13,7 @@
             --text-white: #ffffff;
             --green-success: #1cb453;
             --yellow-star: #ffcc00;
+            --gold-text: #d4a76a; /* Cor extraída da imagem para títulos do rodapé */
             --gray-text: #a0a0a0;
         }
 
@@ -70,14 +71,7 @@
 
         .offer-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
         
-        .product-img { 
-            width: 100%; 
-            height: auto; 
-            max-height: 320px; 
-            object-fit: contain; 
-            margin: 20px 0; 
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
+        .product-img { width: 100%; height: auto; max-height: 320px; object-fit: contain; margin: 20px 0; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
 
         .price-label { color: var(--gray-text); font-size: 1rem; text-decoration: line-through; }
         .price { font-size: 4rem; font-weight: 900; margin: 5px 0; color: #fff; }
@@ -88,32 +82,36 @@
         .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1.1rem; }
         .check-icon { color: #000; background: #00ff88; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 12px; font-weight: bold; font-size: 0.8rem; }
 
-        .btn-buy { 
-            width: 100%; display: block; 
-            background: linear-gradient(180deg, #1cb453 0%, #158a40 100%);
-            color: white; padding: 20px; border-radius: 12px; 
-            font-weight: 900; text-transform: uppercase; text-decoration: none; 
-            font-size: 1.4rem; margin-top: auto;
-            box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3);
-        }
+        .btn-buy { width: 100%; display: block; background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.4rem; margin-top: auto; box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3); }
 
         /* SEÇÃO DE DEPOIMENTOS */
         .review-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #252d42; display: flex; align-items: flex-start; gap: 15px; }
         .review-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); flex-shrink: 0; }
         
-        /* ESTILO DA IMAGEM DE RODAPÉ (MELHORADA) */
-        .footer-info-img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            margin: 40px auto;
-            display: block;
-        }
+        /* NOVO RODAPÉ DE INFORMAÇÕES (MELHORADO) */
+        .info-footer { background-color: #080c18; padding: 60px 20px; border-top: 1px solid #1a2035; }
+        .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; text-align: left; }
+        
+        .info-title { color: var(--gold-text); font-size: 1.2rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+        .info-content { color: #fff; line-height: 1.6; }
+        .info-content a { color: #fff; text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.3s; }
+        .info-content a:hover { color: var(--primary-blue); }
+
+        .payment-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .payment-icons img { height: 30px; filter: grayscale(1); transition: 0.3s; }
+        .payment-icons img:hover { filter: grayscale(0); }
+
+        .security-badge { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid #252d42; }
+        .security-badge img { width: 50px; }
+        .security-text { font-size: 0.9rem; font-weight: bold; line-height: 1.2; }
 
         @media (max-width: 768px) {
             .offer-card.destaque { transform: scale(1); margin-top: 30px; }
             .hero h1 { font-size: 1.8rem; }
             .price { font-size: 3rem; }
+            .info-grid { text-align: center; }
+            .payment-icons { justify-content: center; }
+            .security-badge { justify-content: center; }
         }
     </style>
 </head>
@@ -130,17 +128,14 @@
     <section id="ofertas" class="ofertas-section">
         <div class="container">
             <h2 class="ofertas-title">OFERTAS DE HOJE</h2>
-            
             <div class="ofertas-container">
                 <div class="offer-card">
                     <h3>KIT INICIANTE</h3>
                     <p style="color: var(--primary-blue); font-weight: bold;">Tratamento para 1 Mês</p>
                     <img src="image.png" alt="1 Unidade Tadala Gel" class="product-img">
-                    
                     <div class="price-label">De R$ 197,00 por:</div>
                     <div class="price"><span>R$</span> 99,00</div>
                     <span class="price-info">FRETE GRÁTIS PARA TODO BRASIL</span>
-
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 1 Frasco Tadala Gel</li>
                         <li><span class="check-icon">✓</span> Envio 100% Discreto</li>
@@ -154,11 +149,9 @@
                     <h3>KIT MÁXIMO + BRINDE</h3>
                     <p style="color: var(--yellow-star); font-weight: bold;">Tratamento para 3 Meses</p>
                     <img src="imagens/imagem2.png" alt="3 Unidades Tadala Gel" class="product-img" style="max-height: 380px;">
-                    
                     <div class="price-label">De R$ 497,00 por:</div>
                     <div class="price"><span>R$</span> 149,00</div>
                     <span class="price-info">ECONOMIA DE MAIS DE 60%</span>
-
                     <ul class="checklist">
                         <li><span class="check-icon">✓</span> 3 Frascos Tadala Gel</li>
                         <li><span class="check-icon" style="background:#ffd700;">★</span> <strong>BRINDE: Gel Volumão Extra</strong></li>
@@ -178,7 +171,6 @@
     <section class="reviews-section">
         <div class="container">
             <h2 style="margin-bottom: 40px;">QUEM USA, RECOMENDA!</h2>
-            
             <div class="review-card">
                 <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
                 <div class="review-content">
@@ -187,29 +179,59 @@
                     <span class="review-author">Ricardo S. - <span style="color: var(--green-success);">Compra Verificada</span></span>
                 </div>
             </div>
-
-            <div class="review-card">
-                <img src="https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=150" class="review-img">
-                <div class="review-content">
-                    <div class="stars" style="color: var(--yellow-star);">★★★★★</div>
-                    <p class="review-text">"Chegou em 4 dias aqui em SP. A embalagem é bem discreta, ninguém na minha casa percebeu o que era. Comecei a usar e já senti diferença na firmeza."</p>
-                    <span class="review-author">Marcos Paulo - <span style="color: var(--green-success);">Compra Verificada</span></span>
-                </div>
-            </div>
-
             <div style="margin-top: 40px;">
                 <a href="#ofertas" class="btn-cta">GARANTIR MEU TADALA</a>
             </div>
         </div>
     </section>
 
-    <div class="container">
-        <img src="image_2d72a8.png" alt="Informações de Pagamento e Segurança" class="footer-info-img">
-    </div>
+    <section class="info-footer">
+        <div class="info-grid">
+            <div>
+                <div class="info-title">Formas de Pagamento</div>
+                <div class="payment-icons">
+                    <img src="https://logodownload.org/wp-content/uploads/2014/07/visa-logo-1.png" alt="Visa">
+                    <img src="https://logodownload.org/wp-content/uploads/2014/07/mastercard-logo-7.png" alt="Mastercard">
+                    <img src="https://logodownload.org/wp-content/uploads/2015/03/elo-logo-1.png" alt="Elo">
+                    <img src="https://logodownload.org/wp-content/uploads/2016/10/pix-logo-1.png" alt="Pix">
+                </div>
+                <p style="font-size: 0.8rem; margin-top: 10px; color: var(--gray-text);">Cartão de Crédito (até 12x) ou Pix à vista.</p>
+            </div>
 
-    <footer class="container" style="font-size: 0.8rem; color: #666; padding-bottom: 40px; border-top: 1px solid #222; margin-top: 20px;">
+            <div>
+                <div class="info-title">Central de Atendimento</div>
+                <div class="info-content">
+                    <a href="mailto:suporte@tadalagel.com">📧 suporte@tadalagel.com</a>
+                    <p style="font-size: 0.8rem; color: var(--gray-text);">Segunda a Sexta: 09h às 18h</p>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-title">Informação</div>
+                <div class="info-content">
+                    <a href="#">Política de Privacidade</a>
+                    <a href="#">Termos de Uso</a>
+                    <a href="#">Rastrear Pedido</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="info-title">Segurança</div>
+                <div class="security-badge">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Segurança">
+                    <div class="security-text">
+                        COMPRA SEGURA<br>
+                        <span style="color: var(--green-success);">SITE PROTEGIDO</span><br>
+                        CERTIFICADO SSL
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container" style="font-size: 0.8rem; color: #666; padding: 40px 20px; border-top: 1px solid #1a2035;">
         <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
-        <p>Aviso: Os resultados podem variar de pessoa para pessoa.</p>
+        <p>Aviso: Os resultados podem variar de pessoa para pessoa. Este produto não substitui aconselhamento médico.</p>
     </footer>
 
 </body>
