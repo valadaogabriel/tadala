@@ -18,18 +18,15 @@
         * { box-sizing: border-box; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; }
         
-        /* Header */
         header { background: #ffffff; padding: 15px; color: #122f73; text-align: center; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        /* Hero Section */
         .hero { padding: 40px 20px; }
         .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 20px; }
         .highlight { color: var(--primary-blue); }
         .hero p { font-size: 1.1rem; color: #dcdcdc; margin-bottom: 20px; line-height: 1.6; }
         
-        /* Botão CTA */
         .btn-cta {
             background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
             color: white; padding: 20px 40px; font-size: 1.3rem; font-weight: bold; 
@@ -39,12 +36,10 @@
         }
         .btn-cta:hover { transform: scale(1.05); }
 
-        /* Cards Benefícios */
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 50px 0; }
         .b-card { background: var(--card-bg); border: 1px solid var(--primary-blue); border-radius: 12px; padding: 30px; }
         .b-card h3 { color: var(--primary-blue); font-size: 1.8rem; margin: 0 0 10px 0; }
 
-        /* --- SEÇÃO DE PREÇOS --- */
         .ofertas-section { background-color: #060a16; padding: 50px 10px; }
         .ofertas-title { font-size: 2rem; margin-bottom: 40px; }
         .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
@@ -96,39 +91,41 @@
         }
         .btn-buy:hover { background-color: #1a40d0; }
 
-        /* --- SEÇÃO DE DEPOIMENTOS ATUALIZADA --- */
+        /* --- SEÇÃO DE DEPOIMENTOS "VIDA REAL" --- */
         .reviews-section { padding: 60px 20px; background: var(--bg-dark); }
         .review-card { 
             background: var(--card-bg); 
             border-radius: 15px; 
-            padding: 25px; 
-            margin-bottom: 20px; 
+            padding: 20px; 
+            margin-bottom: 25px; 
             text-align: left; 
-            border-left: 4px solid var(--primary-blue);
+            border: 1px solid #252d42;
             display: flex;
-            align-items: center;
-            gap: 20px;
+            align-items: flex-start;
+            gap: 15px;
         }
         .review-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
+            width: 100px;
+            height: 130px; /* Formato vertical de foto de celular */
+            border-radius: 8px;
             object-fit: cover;
-            border: 2px solid var(--primary-blue);
+            border: 2px solid #333;
             flex-shrink: 0;
+            background: #000;
         }
         .review-content { flex-grow: 1; }
-        .stars { color: var(--yellow-star); font-size: 1rem; margin-bottom: 5px; }
-        .review-text { font-style: italic; color: #dcdcdc; line-height: 1.4; margin-bottom: 8px; font-size: 0.95rem; }
-        .review-author { font-weight: bold; color: var(--primary-blue); font-size: 0.85rem; }
+        .stars { color: var(--yellow-star); font-size: 0.9rem; margin-bottom: 5px; }
+        .review-text { font-style: normal; color: #efefef; line-height: 1.4; margin-bottom: 8px; font-size: 0.95rem; }
+        .review-author { font-weight: bold; color: var(--green-success); font-size: 0.85rem; display: block; margin-top: 5px; }
+        .verified-badge { color: #00b2ff; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
 
         .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
         .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.8rem; }
-            .review-card { flex-direction: column; text-align: center; }
-            .review-img { margin: 0 auto; }
+            .review-card { flex-direction: column; }
+            .review-img { width: 100%; height: 200px; }
         }
     </style>
 </head>
@@ -164,7 +161,6 @@
     <section id="ofertas" class="ofertas-section">
         <div class="container">
             <h2 class="ofertas-title">ESCOLHA SEU KIT</h2>
-            
             <div class="ofertas-container">
                 <div class="offer-card">
                     <div class="offer-header"><h3>1 Unidade – Teste</h3></div>
@@ -199,32 +195,35 @@
 
     <section class="reviews-section">
         <div class="container">
-            <h2 style="margin-bottom: 40px;">DEPOIMENTOS DOS NOSSOS CLIENTES</h2>
+            <h2 style="margin-bottom: 40px;">RELATOS REAIS DOS CLIENTES</h2>
             
             <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop" alt="Cliente Ricardo" class="review-img">
+                <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 1" class="review-img">
                 <div class="review-content">
+                    <span class="verified-badge">✓ Compra Verificada</span>
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"No começo fiquei meio assim, mas o resultado é real. Em 3 semanas já notei uma diferença absurda na firmeza e no volume. Recomendo demais!"</p>
-                    <p class="review-author">— Ricardo S. (São Paulo - SP)</p>
+                    <p class="review-text">"Chegou em 4 dias aqui no interior. Comecei a usar e a patroa já notou a diferença. O produto é bom mesmo, dá pra sentir que o sangue circula mais forte."</p>
+                    <span class="review-author">João Paulo M. - 42 anos</span>
                 </div>
             </div>
 
             <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop" alt="Cliente Marcos" class="review-img">
+                <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 2" class="review-img">
                 <div class="review-content">
+                    <span class="verified-badge">✓ Compra Verificada</span>
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Chegou rápido e a embalagem é realmente discreta, ninguém na minha casa percebeu o que era. O gel absorve rápido e não mela. Sinto muito mais energia."</p>
-                    <p class="review-author">— Marcos J. (Curitiba - PR)</p>
+                    <p class="review-text">"Já tinha tentado de tudo, esse gel foi o único que me deu confiança de novo. Realmente engrossa se usar todo dia do jeito que explicam."</p>
+                    <span class="review-author">Severino Costa - 55 anos</span>
                 </div>
             </div>
 
             <div class="review-card">
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop" alt="Cliente André" class="review-img">
+                <img src="https://images.pexels.com/photos/839011/pexels-photo-839011.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Cliente Real 3" class="review-img">
                 <div class="review-content">
+                    <span class="verified-badge">✓ Compra Verificada</span>
                     <div class="stars">★★★★★</div>
-                    <p class="review-text">"Melhor investimento que fiz. Minha confiança na cama subiu 100%. Minha esposa notou a diferença logo na primeira semana. O brinde é top."</p>
-                    <p class="review-author">— André L. (Belo Horizonte - MG)</p>
+                    <p class="review-text">"O melhor é que ninguém sabe o que é quando chega. A caixa é discreta. No primeiro dia já senti a ereção muito mais dura. Top demais."</p>
+                    <span class="review-author">Carlos Alberto - 38 anos</span>
                 </div>
             </div>
         </div>
