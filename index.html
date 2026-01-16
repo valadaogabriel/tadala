@@ -1,90 +1,206 @@
-<style>
-    /* ... (mantenha o resto igual) ... */
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TADALA GEL OFICIAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0f1e;
+            --card-bg: #131826;
+            --primary-blue: #00b2ff;
+            --text-white: #ffffff;
+            --green-success: #1cb453;
+        }
 
-    .offer-card {
-        background: var(--bg-dark);
-        border: 2px solid var(--primary-blue);
-        border-radius: 20px;
-        width: 100%; max-width: 350px;
-        padding: 25px; text-align: center; /* Centralizei para focar no produto */
-        display: flex; flex-direction: column;
-        position: relative;
-    }
+        * { box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; }
+        
+        /* Header */
+        header { background: #ffffff; padding: 15px; color: #122f73; text-align: center; font-weight: 900; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* Estilo do Preço para ele se destacar da imagem */
-    .price { 
-        font-size: 3.5rem; 
-        font-weight: 900; 
-        margin: 5px 0; 
-        line-height: 1; 
-        color: #fff;
-        text-shadow: 0 0 10px rgba(0, 178, 255, 0.3); /* Brilho leve */
-    }
-    .price span { font-size: 1rem; font-weight: 400; display: block; color: var(--primary-blue); text-transform: uppercase; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; text-align: center; }
 
-    /* Ajuste da Imagem para não ter fundo e não brigar com o preço */
-    .product-img {
-        width: 100%;
-        height: auto;
-        max-height: 200px; /* Reduzi um pouco para dar respiro */
-        object-fit: contain;
-        margin: 15px 0;
-        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); /* Sombra no produto */
-    }
+        /* Hero Section */
+        .hero { padding: 40px 20px; }
+        .hero h1 { font-size: 2.2rem; line-height: 1.2; margin-bottom: 20px; }
+        .highlight { color: var(--primary-blue); }
+        .hero p { font-size: 1.1rem; color: #dcdcdc; margin-bottom: 20px; line-height: 1.6; }
+        
+        /* Botão CTA */
+        .btn-cta {
+            background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
+            color: white; padding: 20px 40px; font-size: 1.3rem; font-weight: bold; 
+            text-decoration: none; border-radius: 8px; display: inline-block; 
+            margin: 20px 0; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 178, 255, 0.5);
+            transition: transform 0.2s; border: none; cursor: pointer;
+        }
+        .btn-cta:hover { transform: scale(1.05); }
 
-    .installments { color: #00ff88; font-size: 0.9rem; margin-bottom: 15px; font-weight: bold; }
+        /* Cards Benefícios */
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 50px 0; }
+        .b-card { background: var(--card-bg); border: 1px solid var(--primary-blue); border-radius: 12px; padding: 30px; }
+        .b-card h3 { color: var(--primary-blue); font-size: 1.8rem; margin: 0 0 10px 0; }
 
-    /* ... */
-</style>
+        /* --- SEÇÃO DE PREÇOS --- */
+        .ofertas-section { background-color: #060a16; padding: 50px 10px; }
+        .ofertas-title { font-size: 2rem; margin-bottom: 40px; }
+        .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        
+        .offer-card {
+            background: var(--bg-dark);
+            border: 2px solid var(--primary-blue);
+            border-radius: 20px;
+            width: 100%; max-width: 350px;
+            padding: 20px; text-align: left; position: relative;
+            display: flex; flex-direction: column;
+        }
 
-<section id="ofertas" class="ofertas-section">
-    <div class="container">
-        <h2 class="ofertas-title">ESCOLHA SEU KIT</h2>
-        
-        <div class="ofertas-container">
-            
-            <div class="offer-card">
-                <div class="offer-header">
-                    <h3 style="color: #fff; text-transform: uppercase;">1 Unidade</h3>
-                </div>
+        .offer-card.destaque {
+            border: 3px solid #ffd700;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+        }
 
-                <img src="imagens/imagem1.png" alt="Produto" class="product-img">
+        .offer-header h3 { font-size: 1.4rem; margin: 0; color: white; }
+        .price { font-size: 3.5rem; font-weight: 900; margin: 10px 0; line-height: 1; }
+        .price span { font-size: 1.2rem; font-weight: 400; }
+        .installments { color: #ccc; font-size: 0.9rem; margin-bottom: 20px; }
 
-                <div class="price">
-                    <span>Por apenas</span>
-                    R$ 99,00
-                </div>
-                <div class="installments">12x no cartão de crédito</div>
+        /* ESTILO NOVO PARA A IMAGEM (IMG TAG) */
+        .product-img {
+            width: 100%;
+            height: auto;
+            max-height: 250px; /* Limita a altura para não estourar o card */
+            object-fit: contain; /* Garante que a imagem inteira apareça */
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: transparent; /* Remove fundo cinza */
+        }
 
-                <ul class="checklist" style="text-align: left;">
-                    <li><span class="check-icon">✓</span> 1x Tadala Gel (90g)</li>
-                    <li><span class="check-icon">✓</span> Frete Grátis</li>
-                </ul>
+        .checklist { list-style: none; padding: 0; margin: 20px 0; }
+        .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1rem; }
+        .check-icon { 
+            color: var(--bg-dark); background: #00ff88; 
+            width: 20px; height: 20px; display: inline-flex; 
+            align-items: center; justify-content: center; 
+            border-radius: 4px; margin-right: 10px; font-weight: bold; font-size: 14px;
+        }
 
-                <a href="SEU_LINK" class="btn-buy">COMPRAR AGORA</a>
-            </div>
+        .btn-buy {
+            width: 100%; display: block; text-align: center;
+            background-color: #2b57f5; color: white; 
+            padding: 15px; border-radius: 8px; font-weight: 900; 
+            text-transform: uppercase; text-decoration: none; font-size: 1.2rem; margin-top: auto;
+        }
+        .btn-buy:hover { background-color: #1a40d0; }
 
-            <div class="offer-card destaque">
-                <div class="offer-header">
-                    <h3 style="color: #ffd700; text-transform: uppercase;">2 Unidades + BRINDE</h3>
-                </div>
+        .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
+        .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
 
-                <img src="imagens/imagem2.png" alt="Produto Kit" class="product-img">
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.8rem; }
+            .price { font-size: 3rem; }
+            .offer-card.destaque { transform: none; margin-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
 
-                <div class="price">
-                    <span>Por apenas</span>
-                    R$ 149,00
-                </div>
-                <div class="installments">12x no cartão de crédito</div>
+    <header>Tadala Gel Oficial</header>
 
-                <ul class="checklist" style="text-align: left;">
-                    <li><span class="check-icon">✓</span> 2x Tadala Gel</li>
-                    <li><span class="check-icon" style="background:#ccff00; color:black;">+</span> <strong>Brinde: Tadala Gotas</strong></li>
-                </ul>
+    <div class="container hero">
+        <h1>Quer mais potência, firmeza e um <br><span class="highlight">Pênis Maior?</span></h1>
+        <p>Homens de todo o Brasil estão aumentando o tamanho, engrossando o pênis e dominando na cama com apenas uma aplicação diária.</p>
+        <p class="highlight" style="font-weight: bold;">Efeito imediato, absorção rápida e envio 100% discreto.</p>
+        
+        <a href="#ofertas" class="btn-cta">Quero Garantir o Meu</a>
+    </div>
 
-                <a href="SEU_LINK" class="btn-buy">COMPRAR AGORA</a>
-            </div>
+    <div class="container">
+        <div class="benefits-grid">
+            <div class="b-card">
+                <h3>+20.000</h3>
+                <p>Clientes atendidos com satisfação garantida.</p>
+            </div>
+            <div class="b-card">
+                <h3>Resultados</h3>
+                <p>Pênis mais grosso e duro por muito mais tempo.</p>
+            </div>
+            <div class="b-card">
+                <h3>Sigilo Total</h3>
+                <p>Embalagem 100% confidencial até a sua porta.</p>
+            </div>
+        </div>
+    </div>
 
-        </div>
-    </div>
-</section>
+    <section id="ofertas" class="ofertas-section">
+        <div class="container">
+            <h2 class="ofertas-title">ESCOLHA SEU KIT</h2>
+            
+            <div class="ofertas-container">
+                
+                <div class="offer-card">
+                    <div class="offer-header">
+                        <h3>1 Unidade – Teste</h3>
+                    </div>
+                    <div class="price">
+                        <span style="font-size: 1rem; display:block; margin-bottom:-5px;">Por apenas:</span>
+                        R$ 99,00
+                    </div>
+                    <div class="installments">ou em até 12x no cartão de crédito</div>
+
+                    <img src="imagens/imagem1.png" alt="Tadala Gel 1 Unidade" class="product-img">
+
+                    <ul class="checklist">
+                        <li><span class="check-icon">✓</span> 1x Tadala Gel (90g)</li>
+                        <li><span class="check-icon">✓</span> Envio discreto</li>
+                        <li><span class="check-icon">✓</span> Suporte via WhatsApp</li>
+                        <li><span class="check-icon">✓</span> Frete Grátis</li>
+                    </ul>
+
+                    <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
+                </div>
+
+                <div class="offer-card destaque">
+                    <div class="offer-header">
+                        <h3>2 Unidades + BRINDE</h3>
+                    </div>
+                    <div class="price">
+                        <span style="font-size: 1rem; display:block; margin-bottom:-5px;">Por apenas:</span>
+                        R$ 149,00
+                    </div>
+                    <div class="installments">ou em até 12x no cartão de crédito</div>
+
+                    <img src="imagens/imagem2.png" alt="Tadala Gel 2 Unidades" class="product-img">
+
+                    <ul class="checklist">
+                        <li><span class="check-icon">✓</span> 2x Tadala Gel</li>
+                        <li><span class="check-icon">✓</span> Envio discreto</li>
+                        <li><span class="check-icon">✓</span> Frete Grátis</li>
+                        <li><span class="check-icon" style="background:#ccff00; color:black;">+</span> <strong>Brinde: Super Tadala Gotas</strong></li>
+                    </ul>
+
+                    <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="guarantee-section bg-dark">
+        <div class="container">
+            <div class="secure-icon">🔒</div>
+            <h2>Compra 100% segura e discreta</h2>
+            <p>Envio imediato, rastreio e embalagem confidencial. Se não ficar satisfeito, devolvemos 100% do seu dinheiro!</p>
+            <img src="https://img.shields.io/badge/SSL-Secure-green?style=for-the-badge&logo=appveyor" alt="Site Seguro" style="margin-top:20px;">
+        </div>
+    </div>
+
+    <footer class="container" style="font-size: 0.8rem; color: #666; padding-bottom: 40px;">
+        <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
