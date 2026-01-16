@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -16,6 +15,7 @@
             --yellow-star: #ffcc00;
             --gold-text: #d4a76a; 
             --gray-text: #a0a0a0;
+            --urgent-red: #ff3e3e;
         }
 
         * { box-sizing: border-box; }
@@ -25,96 +25,62 @@
 
         .container { max-width: 1100px; margin: 0 auto; padding: 20px; text-align: center; }
 
-        .hero { padding: 40px 20px; }
-        .hero h1 { font-size: 2.5rem; line-height: 1.2; margin-bottom: 20px; }
-        .highlight { color: var(--primary-blue); }
-        
+        /* BANNER DE URGÊNCIA (Ref: Captura 2) */
+        .urgency-banner {
+            background: rgba(255, 62, 62, 0.1);
+            border: 2px solid var(--urgent-red);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .urgency-icon { font-size: 2.5rem; color: var(--urgent-red); }
+        .urgency-text { text-align: left; font-weight: 700; }
+
+        /* SEÇÃO ESCALA ERE (Ref: Top.png) */
+        .ere-section { background: #0c1226; padding: 60px 20px; border-bottom: 1px solid #1a2035; }
+        .ere-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 1000px; margin: 0 auto; }
+        .ere-content { text-align: left; }
+        .ere-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 15px; color: var(--primary-blue); }
+        .ere-item { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px; transition: 0.3s; }
+        .ere-item:hover { background: rgba(0, 178, 255, 0.1); }
+        .ere-number { background: var(--primary-blue); color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; }
+        .ere-desc b { display: block; color: #fff; font-size: 1rem; }
+        .ere-desc span { font-size: 0.85rem; color: var(--gray-text); }
+
+        .usage-instructions { margin-top: 30px; border-top: 2px dashed #252d42; padding-top: 20px; }
+        .usage-instructions h3 { color: var(--primary-blue); margin-bottom: 15px; }
+        .usage-step { margin-bottom: 10px; display: flex; gap: 10px; font-size: 0.95rem; }
+
+        /* BOTÃO CTA */
         .btn-cta {
             background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
             color: white; padding: 22px 45px; font-size: 1.3rem; font-weight: bold; 
             text-decoration: none; border-radius: 8px; display: inline-block; 
             margin: 20px 0; text-transform: uppercase; box-shadow: 0 0 15px rgba(0, 178, 255, 0.5);
-            transition: transform 0.2s; border: none; cursor: pointer;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            animation: pulse 2s infinite; border: none; cursor: pointer;
         }
 
-        /* SEÇÃO DE OFERTAS */
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* REUTILIZANDO SEUS ESTILOS DE OFERTAS */
         .ofertas-section { background-color: #060a16; padding: 60px 10px; }
-        .ofertas-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 900; }
-        .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; }
-        
-        .offer-card {
-            background: var(--card-bg); border: 2px solid #252d42; border-radius: 20px;
-            width: 100%; max-width: 420px; 
-            padding: 30px; text-align: center; 
-            display: flex; flex-direction: column;
-            position: relative; transition: 0.3s;
-        }
-
-        .offer-card.destaque { 
-            border: 3px solid var(--yellow-star); 
-            transform: scale(1.05); 
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
-            background: #1a2035;
-        }
-
-        .tag-popular {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--yellow-star); color: #000; padding: 5px 20px;
-            font-weight: 900; border-radius: 20px; font-size: 0.9rem;
-        }
-
-        .offer-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        .product-img { width: 100%; height: auto; max-height: 320px; object-fit: contain; margin: 20px 0; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-
-        .price-label { color: var(--gray-text); font-size: 1rem; text-decoration: line-through; }
-        .price { font-size: 4rem; font-weight: 900; margin: 5px 0; color: #fff; }
-        .price span { font-size: 1.5rem; vertical-align: middle; }
-        .price-info { color: var(--green-success); font-weight: bold; margin-bottom: 20px; display: block; }
-
-        .checklist { list-style: none; padding: 0; margin: 20px 0; text-align: left; border-top: 1px solid #252d42; padding-top: 20px; }
-        .checklist li { margin-bottom: 12px; display: flex; align-items: center; font-size: 1.1rem; }
-        .check-icon { color: #000; background: #00ff88; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 12px; font-weight: bold; font-size: 0.8rem; }
-
-        .btn-buy { width: 100%; display: block; background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.4rem; margin-top: auto; box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3); }
-
-        /* SEÇÃO FAQ */
-        .faq-section { padding: 80px 20px; background-color: var(--bg-dark); }
-        .faq-container { max-width: 800px; margin: 0 auto; text-align: left; }
-        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid #252d42; overflow: hidden; }
-        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--primary-blue); }
-        .faq-question:after { content: '+'; font-size: 1.5rem; }
-        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: #ccc; line-height: 1.6; }
-        
-        /* Classe para abrir o FAQ via JS ou CSS funcional */
-        .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px 20px; }
-        .faq-item.active .faq-question:after { content: '-'; }
-
-        /* RODAPÉ E FORMAS DE PAGAMENTO */
-        .info-footer { background-color: #080c18; padding: 60px 20px; border-top: 1px solid #1a2035; }
-        .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; }
-        .info-title { color: var(--gold-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-        .info-content { color: #fff; line-height: 1.6; font-size: 0.95rem; }
-        .info-content a { color: #fff; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
-        .payment-icons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .payment-card { background: #ffffff; width: 45px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 4px; padding: 3px; }
-        .payment-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .correios-logo { height: 45px; margin-top: 5px; filter: brightness(1.1); }
-        .security-badge { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
-        .security-badge img { width: 45px; }
-        .security-text { font-size: 0.8rem; font-weight: 700; line-height: 1.2; color: #fff; text-transform: uppercase; }
+        .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+        .offer-card { background: var(--card-bg); border: 2px solid #252d42; border-radius: 20px; width: 100%; max-width: 420px; padding: 30px; display: flex; flex-direction: column; position: relative; }
+        .offer-card.destaque { border: 3px solid var(--yellow-star); transform: scale(1.05); background: #1a2035; }
+        .tag-popular { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--yellow-star); color: #000; padding: 5px 20px; font-weight: 900; border-radius: 20px; }
+        .product-img { width: 100%; max-height: 320px; object-fit: contain; margin: 20px 0; }
+        .price { font-size: 3.5rem; font-weight: 900; margin: 5px 0; }
+        .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; margin-top: auto; }
 
         @media (max-width: 768px) {
-            .offer-card.destaque { transform: scale(1); margin-top: 30px; }
-            .hero h1 { font-size: 1.8rem; }
-            .info-grid { text-align: center; }
-            .payment-icons, .security-badge { justify-content: center; }
+            .ere-grid { grid-template-columns: 1fr; }
+            .urgency-banner { flex-direction: column; text-align: center; }
+            .offer-card.destaque { transform: scale(1); }
         }
     </style>
 </head>
@@ -122,144 +88,97 @@
 
     <header>Tadala Gel Oficial</header>
 
-    <div class="container hero">
-        <h1>Garanta sua Potência Máxima com <br><span class="highlight">OFERTAS EXCLUSIVAS</span></h1>
-        <p>Escolha o tratamento ideal para você. Resultados comprovados e aprovados pela ANVISA.</p>
-        <a href="#ofertas" class="btn-cta">GARANTIR MEU TADALA</a>
+    <div class="container">
+        <div class="urgency-banner">
+            <div class="urgency-icon">⚠️</div>
+            <div class="urgency-text">
+                ATENÇÃO: Alta demanda hoje!<br>
+                <span style="font-weight: 400; color: #ccc;">Alguns kits podem esgotar em poucas horas devido ao estoque limitado.</span>
+            </div>
+        </div>
+
+        <h1>Potência Máxima com <span class="highlight">OFERTAS EXCLUSIVAS</span></h1>
+        <p>Alcance a rigidez total aprovada por especialistas.</p>
+        <a href="#ofertas" class="btn-cta">EU QUERO O NÍVEL 4</a>
     </div>
+
+    <section class="ere-section">
+        <div class="container">
+            <div class="ere-grid">
+                <div class="ere-content">
+                    <h2 class="ere-title">Escala de Rigidez de Ereção (ERE)</h2>
+                    <p style="margin-bottom: 25px;">Identifique seu nível atual e veja onde o Tadala Gel vai te levar:</p>
+                    
+                    <div class="ere-item">
+                        <div class="ere-number">4</div>
+                        <div class="ere-desc">
+                            <b>Sem Disfunção Erétil</b>
+                            <span>Pênis totalmente rígido e pronto para penetração duradoura.</span>
+                        </div>
+                    </div>
+                    <div class="ere-item">
+                        <div class="ere-number" style="opacity: 0.7;">3</div>
+                        <div class="ere-desc">
+                            <b>Disfunção Erétil Suave</b>
+                            <span>Pênis parcialmente rígido, permitindo penetração com dificuldade.</span>
+                        </div>
+                    </div>
+                    <div class="ere-item">
+                        <div class="ere-number" style="opacity: 0.4;">2</div>
+                        <div class="ere-desc">
+                            <b>Disfunção Erétil Moderada</b>
+                            <span>Pênis parcialmente flácido, penetração insatisfatória.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ere-content">
+                    <div class="usage-instructions">
+                        <h3>Como usar para o máximo resultado:</h3>
+                        <div class="usage-step">✅ <span>Aplique uma pequena quantidade diariamente para tratamento contínuo.</span></div>
+                        <div class="usage-step">✅ <span>Massageie suavemente até a completa absorção do gel.</span></div>
+                        <div class="usage-step">✅ <span><b>Dica Hot:</b> Aplique 15 min antes da relação para efeito extra de rigidez.</span></div>
+                    </div>
+                    <img src="top.png" alt="Gráfico ERE" style="width: 100%; margin-top: 20px; filter: drop-shadow(0 0 10px var(--primary-blue));">
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="ofertas" class="ofertas-section">
         <div class="container">
-            <h2 class="ofertas-title">OFERTAS DE HOJE</h2>
+            <h2 class="ofertas-title">OFERTAS ESPECIAIS</h2>
             <div class="ofertas-container">
                 <div class="offer-card">
-                    <h3>KIT INICIANTE</h3>
-                    <p style="color: var(--primary-blue); font-weight: bold;">Tratamento para 1 Mês</p>
-                    <img src="image.png" alt="1 Unidade Tadala Gel" class="product-img">
-                    <div class="price-label">De R$ 197,00 por:</div>
+                    <h3>1 UNIDADE + BRINDE</h3>
+                    <p style="color: var(--primary-blue); font-weight: bold;">Inicie seu Tratamento</p>
+                    <img src="image.png" alt="Tadala Gel" class="product-img">
                     <div class="price"><span>R$</span> 99,00</div>
-                    <span class="price-info">FRETE GRÁTIS PARA TODO BRASIL</span>
-                    <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 1 Frasco Tadala Gel</li>
-                        <li><span class="check-icon">✓</span> Envio 100% Discreto</li>
-                        <li><span class="check-icon">✓</span> Guia de Uso Digital</li>
+                    <ul style="text-align: left; list-style: none; padding: 0;">
+                        <li>✔️ 1x Tadala Gel (90g)</li>
+                        <li>✔️ Envio 100% Discreto</li>
+                        <li>✔️ Frete Grátis</li>
+                        <li>✔️ <b>+ BRINDE SURPRESA HOT</b></li>
                     </ul>
                     <a href="#" class="btn-buy">COMPRAR AGORA</a>
                 </div>
 
                 <div class="offer-card destaque">
-                    <div class="tag-popular">MAIS VENDIDO - RECOMENDADO</div>
+                    <div class="tag-popular">RECOMENDADO</div>
                     <h3>KIT MÁXIMO + BRINDE</h3>
                     <p style="color: var(--yellow-star); font-weight: bold;">Tratamento para 3 Meses</p>
-                    <img src="imagens/imagem2.png" alt="3 Unidades Tadala Gel" class="product-img" style="max-height: 380px;">
-                    <div class="price-label">De R$ 497,00 por:</div>
+                    <img src="image.png" alt="Kit 3 Unidades" class="product-img">
                     <div class="price"><span>R$</span> 149,00</div>
-                    <span class="price-info">ECONOMIA DE MAIS DE 60%</span>
-                    <ul class="checklist">
-                        <li><span class="check-icon">✓</span> 3 Frascos Tadala Gel</li>
-                        <li><span class="check-icon" style="background:#ffd700;">★</span> <strong>BRINDE: Gel Volumão Extra</strong></li>
-                        <li><span class="check-icon">✓</span> Frete Grátis Prioritário</li>
-                        <li><span class="check-icon">✓</span> Garantia de 30 Dias</li>
-                    </ul>
+                    <span style="color: var(--green-success); font-weight: bold;">FRETE GRÁTIS PRIORITÁRIO</span>
                     <a href="#" class="btn-buy">GARANTIR OFERTA MÁXIMA</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="faq-section">
-        <div class="container">
-            <h2 style="font-size: 2rem; margin-bottom: 40px;">DÚVIDAS FREQUENTES</h2>
-            <div class="faq-container">
-                
-                <div class="faq-item">
-                    <div class="faq-question">O ENVIO É DISCRETO?</div>
-                    <div class="faq-answer">Sim! Sabemos da importância da sua privacidade. Todas as encomendas são enviadas em caixas pardas, totalmente discretas, sem qualquer menção ao nome do produto ou da loja na parte externa.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">QUAL O PRAZO DE ENTREGA?</div>
-                    <div class="faq-answer">O prazo médio de entrega para o Brasil é de 5 a 12 dias úteis. O envio é feito via Correios e você receberá o código de rastreio em seu e-mail logo após a postagem.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">COMO DEVO USAR O TADALA GEL?</div>
-                    <div class="faq-answer">Para resultados máximos, recomenda-se a aplicação diária de uma pequena quantidade do gel, massageando suavemente até a completa absorção. O uso contínuo é a chave para o tratamento.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">POSSUI CONTRAINDICAÇÕES?</div>
-                    <div class="faq-answer">O Tadala Gel é formulado com ingredientes seguros e testados. No entanto, recomendamos que pessoas com doenças pré-existentes ou alergias a componentes da fórmula consultem um médico antes de iniciar o uso.</div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">É APROVADO PELA ANVISA?</div>
-                    <div class="faq-answer">Sim, nosso produto é devidamente registrado e segue todas as normas de segurança da ANVISA, garantindo procedência e eficácia para o consumidor.</div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section class="info-footer">
-        <div class="info-grid">
-            <div>
-                <div class="info-title">Pagamento</div>
-                <div class="payment-icons">
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/BoletoBancario.png" alt="Boleto"></div>
-                </div>
-            </div>
-
-            <div>
-                <div class="info-title">Atendimento</div>
-                <div class="info-content">
-                    <a href="mailto:suporte@tadalagel.com">📧 suporte@tadalagel.com</a>
-                    <p style="font-size: 0.8rem; color: var(--gray-text); margin: 5px 0 0 0;">Seg a Sex: 09h às 18h</p>
-                </div>
-            </div>
-
-            <div>
-                <div class="info-title">Informação</div>
-                <div class="info-content">
-                    <a href="#">Privacidade</a>
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Rastreio</a>
-                </div>
-            </div>
-
-            <div>
-                <div class="info-title">Envio</div>
-                <img src="https://upload.wikimedia.org/wikipedia/pt/d/d4/Logomarca_dos_Correios.png" alt="Correios" class="correios-logo">
-            </div>
-
-            <div>
-                <div class="info-title">Segurança</div>
-                <div class="security-badge">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Segurança">
-                    <div class="security-text">Compra 100% Segura<br><span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Criptografia SSL</span></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="container" style="font-size: 0.75rem; color: #666; padding: 30px 20px; border-top: 1px solid #1a2035;">
+    <footer class="container" style="font-size: 0.75rem; color: #666; padding: 40px 20px;">
         <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
     </footer>
-
-    <script>
-        // Script simples para abrir e fechar as perguntas
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            item.querySelector('.faq-question').addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-    </script>
 
 </body>
 </html>
