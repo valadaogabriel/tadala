@@ -43,7 +43,6 @@
             100% { transform: scale(1); }
         }
 
-        /* SEÇÃO DE OFERTAS */
         .ofertas-section { background-color: #060a16; padding: 60px 10px; }
         .ofertas-title { font-size: 2.5rem; margin-bottom: 50px; font-weight: 900; }
         .ofertas-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; align-items: stretch; }
@@ -70,9 +69,7 @@
         }
 
         .offer-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        
         .product-img { width: 100%; height: auto; max-height: 320px; object-fit: contain; margin: 20px 0; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5)); }
-
         .price-label { color: var(--gray-text); font-size: 1rem; text-decoration: line-through; }
         .price { font-size: 4rem; font-weight: 900; margin: 5px 0; color: #fff; }
         .price span { font-size: 1.5rem; vertical-align: middle; }
@@ -84,11 +81,10 @@
 
         .btn-buy { width: 100%; display: block; background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.4rem; margin-top: auto; box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3); }
 
-        /* SEÇÃO DE DEPOIMENTOS */
         .review-card { background: var(--card-bg); border-radius: 15px; padding: 20px; margin-bottom: 25px; text-align: left; border: 1px solid #252d42; display: flex; align-items: flex-start; gap: 15px; }
         .review-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); flex-shrink: 0; }
         
-        /* RODAPÉ E FORMAS DE PAGAMENTO CORRIGIDOS */
+        /* SEÇÃO DE PAGAMENTO ARRUMADA */
         .info-footer { background-color: #080c18; padding: 60px 20px; border-top: 1px solid #1a2035; }
         .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; }
         
@@ -97,8 +93,14 @@
         .info-content a { color: #fff; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
         .info-content a:hover { color: var(--primary-blue); }
 
-        .payment-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; align-items: center; }
-        .payment-icons img { height: 22px; width: auto; object-fit: contain; background: white; padding: 2px; border-radius: 3px; }
+        .payment-icons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .payment-icons img { 
+            height: 25px; 
+            background: #fff; 
+            padding: 3px; 
+            border-radius: 4px; 
+            object-fit: contain;
+        }
 
         .correios-logo { height: 40px; margin-top: 5px; filter: brightness(1.2); }
 
@@ -179,9 +181,6 @@
                     <span class="review-author">Ricardo S. - <span style="color: var(--green-success);">Compra Verificada</span></span>
                 </div>
             </div>
-            <div style="margin-top: 40px;">
-                <a href="#ofertas" class="btn-cta">GARANTIR MEU TADALA</a>
-            </div>
         </div>
     </section>
 
@@ -192,10 +191,9 @@
                 <div class="payment-icons">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="Paypal">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hipercard">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Diners_Club_Logo3.svg" alt="Diners">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix">
                 </div>
             </div>
