@@ -12,6 +12,7 @@
             --primary-blue: #00b2ff;
             --text-white: #ffffff;
             --green-success: #1cb453;
+            --yellow-star: #ffcc00;
         }
 
         * { box-sizing: border-box; }
@@ -96,6 +97,13 @@
             text-transform: uppercase; text-decoration: none; font-size: 1.2rem; margin-top: auto;
         }
         .btn-buy:hover { background-color: #1a40d0; }
+
+        /* --- SEÇÃO DE DEPOIMENTOS --- */
+        .reviews-section { padding: 60px 20px; background: var(--bg-dark); }
+        .review-card { background: var(--card-bg); border-radius: 15px; padding: 25px; margin-bottom: 20px; text-align: left; border-left: 4px solid var(--primary-blue); }
+        .stars { color: var(--yellow-star); font-size: 1.2rem; margin-bottom: 10px; }
+        .review-text { font-style: italic; color: #dcdcdc; line-height: 1.5; margin-bottom: 10px; }
+        .review-author { font-weight: bold; color: var(--primary-blue); font-size: 0.9rem; }
 
         .guarantee-section { text-align: center; padding: 60px 20px; border-top: 1px solid #333; }
         .secure-icon { color: var(--green-success); font-size: 3rem; margin-bottom: 10px; }
@@ -188,6 +196,30 @@
                     <a href="SEU_LINK_DE_CHECKOUT_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section">
+        <div class="container">
+            <h2 style="margin-bottom: 40px;">O QUE DIZEM NOSSOS CLIENTES</h2>
+            
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"No começo fiquei meio assim, mas o resultado é real. Em 3 semanas já notei uma diferença absurda na firmeza e no volume. Recomendo demais!"</p>
+                <p class="review-author">— Ricardo S. (São Paulo - SP)</p>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Chegou rápido e a embalagem é realmente discreta, ninguém na minha casa percebeu o que era. O gel absorve rápido e não mela."</p>
+                <p class="review-author">— Marcos J. (Curitiba - PR)</p>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Melhor investimento que fiz. Minha confiança na cama subiu 100%. O brinde das gotas também é excelente."</p>
+                <p class="review-author">— André L. (Belo Horizonte - MG)</p>
             </div>
         </div>
     </section>
