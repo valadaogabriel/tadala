@@ -83,35 +83,28 @@
 
         .btn-buy { width: 100%; display: block; background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 20px; border-radius: 12px; font-weight: 900; text-transform: uppercase; text-decoration: none; font-size: 1.4rem; margin-top: auto; box-shadow: 0 4px 15px rgba(28, 180, 83, 0.3); }
 
-        /* RODAPÉ E FORMAS DE PAGAMENTO - ATUALIZADO */
+        /* SEÇÃO FAQ */
+        .faq-section { padding: 80px 20px; background-color: var(--bg-dark); }
+        .faq-container { max-width: 800px; margin: 0 auto; text-align: left; }
+        .faq-item { background: var(--card-bg); margin-bottom: 15px; border-radius: 10px; border: 1px solid #252d42; overflow: hidden; }
+        .faq-question { padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: bold; color: var(--primary-blue); }
+        .faq-question:after { content: '+'; font-size: 1.5rem; }
+        .faq-answer { padding: 0 20px; max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.3s ease; color: #ccc; line-height: 1.6; }
+        
+        /* Classe para abrir o FAQ via JS ou CSS funcional */
+        .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px 20px; }
+        .faq-item.active .faq-question:after { content: '-'; }
+
+        /* RODAPÉ E FORMAS DE PAGAMENTO */
         .info-footer { background-color: #080c18; padding: 60px 20px; border-top: 1px solid #1a2035; }
         .info-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; }
-        
         .info-title { color: var(--gold-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
         .info-content { color: #fff; line-height: 1.6; font-size: 0.95rem; }
         .info-content a { color: #fff; text-decoration: none; display: block; margin-bottom: 8px; transition: color 0.3s; }
-        .info-content a:hover { color: var(--primary-blue); }
-
-        /* ESTILIZAÇÃO DOS ÍCONES DE PAGAMENTO */
         .payment-icons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-        .payment-card {
-            background: #ffffff;
-            width: 45px;
-            height: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            padding: 3px;
-        }
-        .payment-card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
+        .payment-card { background: #ffffff; width: 45px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 4px; padding: 3px; }
+        .payment-card img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .correios-logo { height: 45px; margin-top: 5px; filter: brightness(1.1); }
-
         .security-badge { display: flex; align-items: center; gap: 12px; margin-top: 5px; }
         .security-badge img { width: 45px; }
         .security-text { font-size: 0.8rem; font-weight: 700; line-height: 1.2; color: #fff; text-transform: uppercase; }
@@ -173,6 +166,40 @@
         </div>
     </section>
 
+    <section class="faq-section">
+        <div class="container">
+            <h2 style="font-size: 2rem; margin-bottom: 40px;">DÚVIDAS FREQUENTES</h2>
+            <div class="faq-container">
+                
+                <div class="faq-item">
+                    <div class="faq-question">O ENVIO É DISCRETO?</div>
+                    <div class="faq-answer">Sim! Sabemos da importância da sua privacidade. Todas as encomendas são enviadas em caixas pardas, totalmente discretas, sem qualquer menção ao nome do produto ou da loja na parte externa.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">QUAL O PRAZO DE ENTREGA?</div>
+                    <div class="faq-answer">O prazo médio de entrega para o Brasil é de 5 a 12 dias úteis. O envio é feito via Correios e você receberá o código de rastreio em seu e-mail logo após a postagem.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">COMO DEVO USAR O TADALA GEL?</div>
+                    <div class="faq-answer">Para resultados máximos, recomenda-se a aplicação diária de uma pequena quantidade do gel, massageando suavemente até a completa absorção. O uso contínuo é a chave para o tratamento.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">POSSUI CONTRAINDICAÇÕES?</div>
+                    <div class="faq-answer">O Tadala Gel é formulado com ingredientes seguros e testados. No entanto, recomendamos que pessoas com doenças pré-existentes ou alergias a componentes da fórmula consultem um médico antes de iniciar o uso.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">É APROVADO PELA ANVISA?</div>
+                    <div class="faq-answer">Sim, nosso produto é devidamente registrado e segue todas as normas de segurança da ANVISA, garantindo procedência e eficácia para o consumidor.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <section class="info-footer">
         <div class="info-grid">
             <div>
@@ -182,7 +209,6 @@
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Elo_card_logo.svg" alt="Elo"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg" alt="Amex"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Hipercard_logo.svg" alt="Hiper"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/BoletoBancario.png" alt="Boleto"></div>
                 </div>
@@ -214,10 +240,7 @@
                 <div class="info-title">Segurança</div>
                 <div class="security-badge">
                     <img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Segurança">
-                    <div class="security-text">
-                        Compra 100% Segura<br>
-                        <span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Criptografia SSL</span>
-                    </div>
+                    <div class="security-text">Compra 100% Segura<br><span style="font-weight: 400; font-size: 0.7rem; opacity: 0.8;">Criptografia SSL</span></div>
                 </div>
             </div>
         </div>
@@ -226,6 +249,16 @@
     <footer class="container" style="font-size: 0.75rem; color: #666; padding: 30px 20px; border-top: 1px solid #1a2035;">
         <p>© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        // Script simples para abrir e fechar as perguntas
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
 
 </body>
 </html>
