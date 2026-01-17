@@ -58,7 +58,6 @@
         .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 15px; border-radius: 10px; font-weight: 900; text-decoration: none; font-size: 1.2rem; margin-top: auto; display: block; }
 
         /* ESTILOS DO SLIDER DE DEPOIMENTOS */
-        /* Ajustei a margem superior para colar mais no preço */
         .reviews-section { margin: 30px 0 50px 0; position: relative; border-top: 1px solid #1a2035; padding-top: 30px; }
         
         .slider-wrapper {
@@ -73,14 +72,14 @@
             gap: 15px;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding-bottom: 20px; /* Espaço para scrollbar invisível */
+            padding-bottom: 20px; 
             -webkit-overflow-scrolling: touch;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none; 
         }
-        .reviews-track::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+        .reviews-track::-webkit-scrollbar { display: none; }
         
         .review-card {
-            flex: 0 0 300px; /* Largura fixa do card */
+            flex: 0 0 300px; 
             scroll-snap-align: center;
             background: var(--card-bg);
             padding: 20px;
@@ -97,7 +96,6 @@
         .review-text { font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 10px; line-height: 1.3; min-height: 60px;}
         .verified-badge { font-size: 0.75rem; color: var(--green-success); display: flex; align-items: center; gap: 5px; font-weight: bold; }
 
-        /* Botões de Navegação do Slider */
         .nav-btn {
             position: absolute; top: 50%; transform: translateY(-50%);
             background: rgba(0, 178, 255, 0.8); color: white;
@@ -127,8 +125,8 @@
         @media (max-width: 600px) { 
             .ere-box { flex-direction: column; } 
             .offer-card.destaque { transform: scale(1); } 
-            .review-card { flex: 0 0 260px; } /* Card levemente menor no mobile */
-            .nav-btn { display: none; } /* Esconde setas no mobile, usa swipe */
+            .review-card { flex: 0 0 260px; } 
+            .nav-btn { display: none; } 
         }
     </style>
 </head>
@@ -220,117 +218,13 @@
                         <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
 
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Marcos V.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Já tinha testado pílulas que me davam dor de cabeça. O gel é mil vezes melhor, efeito local e potente. Recomendo o kit de 3."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Felipe J.</div>
-                                <div class="stars">★★★★☆</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Chegou em 6 dias aqui no interior de SP. Comecei a usar semana passada e já vejo aumento na grossura durante o ato."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">João Paulo</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Salvou meu casamento. A gente tava meio frio, agora parece lua de mel. O produto cumpre o que promete."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Ricardo T.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Tenho 52 anos e achava que não tinha mais jeito. O Tadala Gel devolveu minha confiança. Muito bom mesmo."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Lucas B.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Comprem sem medo. O suporte no WhatsApp me tirou todas as dúvidas e o rastreio funcionou certinho."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Fernando C.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"A sensação é ótima, não arde, só dá uma esquentada boa. A parceira adorou o resultado final rsrs."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Sérgio M.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Segunda vez que compro. Da primeira peguei um frasco só pra testar, agora peguei o kit com 3 pra garantir."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Paulo R.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Produto top de linha. Sensibilidade aumentou e o tempo de duração também. Nota 10!"</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                    <div class="review-card">
-                        <div class="review-header">
-                            <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Foto" class="review-img">
-                            <div>
-                                <div class="review-name">Gustavo H.</div>
-                                <div class="stars">★★★★★</div>
-                            </div>
-                        </div>
-                        <p class="review-text">"Melhor investimento do ano. Achei que fosse balela mas me surpreendi. Podem confiar."</p>
-                        <div class="verified-badge">✔ Compra Verificada</div>
-                    </div>
-
-                </div>
                 <button class="nav-btn next" id="nextBtn">&#10095;</button>
             </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <img src="top.png" alt="Escala de Rigidez de Ereção" style="width: 100%; max-width: 900px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
         </div>
 
     </div>
@@ -350,7 +244,7 @@
     <footer class="info-footer">
         <div class="container info-grid">
             <div>
-                <b style="color: var(--gold-text);">PAGAMENTO</b>
+                <b style="color: var(--yellow-star);">PAGAMENTO</b>
                 <div class="payment-icons">
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
                     <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"></div>
@@ -358,11 +252,11 @@
                 </div>
             </div>
             <div>
-                <b style="color: var(--gold-text);">SUPORTE</b><br>
+                <b style="color: var(--yellow-star);">SUPORTE</b><br>
                 suporte@tadalagel.com
             </div>
             <div>
-                <b style="color: var(--gold-text);">SEGURANÇA</b><br>
+                <b style="color: var(--yellow-star);">SEGURANÇA</b><br>
                 Site Criptografado SSL
             </div>
         </div>
@@ -370,12 +264,10 @@
     </footer>
 
     <script>
-        // Lógica do FAQ
         document.querySelectorAll('.faq-question').forEach(q => {
             q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
         });
 
-        // Lógica do Slider de Reviews
         const track = document.getElementById('reviewsTrack');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
