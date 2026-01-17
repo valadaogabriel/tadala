@@ -58,7 +58,9 @@
         .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 15px; border-radius: 10px; font-weight: 900; text-decoration: none; font-size: 1.2rem; margin-top: auto; display: block; }
 
         /* ESTILOS DO SLIDER DE DEPOIMENTOS */
-        .reviews-section { margin: 40px 0; position: relative; }
+        /* Ajustei a margem superior para colar mais no preço */
+        .reviews-section { margin: 30px 0 50px 0; position: relative; border-top: 1px solid #1a2035; padding-top: 30px; }
+        
         .slider-wrapper {
             position: relative;
             max-width: 100%;
@@ -173,164 +175,165 @@
                 <a href="#" class="btn-buy">EU QUERO</a>
             </div>
         </div>
-    </div>
 
-    <section class="container reviews-section">
-        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">QUEM USOU, <span class="highlight">APROVOU!</span></h3>
-        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Deslize para ver mais resultados reais.</p>
-        
-        <div class="slider-wrapper">
-            <button class="nav-btn prev" id="prevBtn">&#10094;</button>
-            <div class="reviews-track" id="reviewsTrack">
-                
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Carlos M.</div>
-                            <div class="stars">★★★★★</div>
+        <div class="reviews-section">
+            <h3 style="font-size: 1.5rem; margin-bottom: 10px;">QUEM USOU, <span class="highlight">APROVOU!</span></h3>
+            <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Deslize para ver mais resultados reais.</p>
+            
+            <div class="slider-wrapper">
+                <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+                <div class="reviews-track" id="reviewsTrack">
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Carlos M.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Sinceramente, superou minhas expectativas. Em 15 dias usando o gel, a diferença na firmeza é absurda. Minha esposa agradece!"</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Sinceramente, superou minhas expectativas. Em 15 dias usando o gel, a diferença na firmeza é absurda. Minha esposa agradece!"</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Roberto S.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Roberto S.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Entrega muito discreta, caixa marrom sem nada escrito. O produto funciona de verdade, senti a diferença no primeiro uso."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Entrega muito discreta, caixa marrom sem nada escrito. O produto funciona de verdade, senti a diferença no primeiro uso."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">André L.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">André L.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Tinha receio de comprar online, mas valeu cada centavo. Me sinto um garoto de novo, a disposição aumentou demais."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Tinha receio de comprar online, mas valeu cada centavo. Me sinto um garoto de novo, a disposição aumentou demais."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Marcos V.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Marcos V.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Já tinha testado pílulas que me davam dor de cabeça. O gel é mil vezes melhor, efeito local e potente. Recomendo o kit de 3."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Já tinha testado pílulas que me davam dor de cabeça. O gel é mil vezes melhor, efeito local e potente. Recomendo o kit de 3."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Felipe J.</div>
-                            <div class="stars">★★★★☆</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Felipe J.</div>
+                                <div class="stars">★★★★☆</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Chegou em 6 dias aqui no interior de SP. Comecei a usar semana passada e já vejo aumento na grossura durante o ato."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Chegou em 6 dias aqui no interior de SP. Comecei a usar semana passada e já vejo aumento na grossura durante o ato."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">João Paulo</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">João Paulo</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Salvou meu casamento. A gente tava meio frio, agora parece lua de mel. O produto cumpre o que promete."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Salvou meu casamento. A gente tava meio frio, agora parece lua de mel. O produto cumpre o que promete."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Ricardo T.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Ricardo T.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Tenho 52 anos e achava que não tinha mais jeito. O Tadala Gel devolveu minha confiança. Muito bom mesmo."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Tenho 52 anos e achava que não tinha mais jeito. O Tadala Gel devolveu minha confiança. Muito bom mesmo."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Lucas B.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Lucas B.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Comprem sem medo. O suporte no WhatsApp me tirou todas as dúvidas e o rastreio funcionou certinho."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Comprem sem medo. O suporte no WhatsApp me tirou todas as dúvidas e o rastreio funcionou certinho."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Fernando C.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Fernando C.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"A sensação é ótima, não arde, só dá uma esquentada boa. A parceira adorou o resultado final rsrs."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"A sensação é ótima, não arde, só dá uma esquentada boa. A parceira adorou o resultado final rsrs."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Sérgio M.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Sérgio M.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Segunda vez que compro. Da primeira peguei um frasco só pra testar, agora peguei o kit com 3 pra garantir."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Segunda vez que compro. Da primeira peguei um frasco só pra testar, agora peguei o kit com 3 pra garantir."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Paulo R.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Paulo R.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Produto top de linha. Sensibilidade aumentou e o tempo de duração também. Nota 10!"</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Produto top de linha. Sensibilidade aumentou e o tempo de duração também. Nota 10!"</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Foto" class="review-img">
-                        <div>
-                            <div class="review-name">Gustavo H.</div>
-                            <div class="stars">★★★★★</div>
+                    <div class="review-card">
+                        <div class="review-header">
+                            <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Foto" class="review-img">
+                            <div>
+                                <div class="review-name">Gustavo H.</div>
+                                <div class="stars">★★★★★</div>
+                            </div>
                         </div>
+                        <p class="review-text">"Melhor investimento do ano. Achei que fosse balela mas me surpreendi. Podem confiar."</p>
+                        <div class="verified-badge">✔ Compra Verificada</div>
                     </div>
-                    <p class="review-text">"Melhor investimento do ano. Achei que fosse balela mas me surpreendi. Podem confiar."</p>
-                    <div class="verified-badge">✔ Compra Verificada</div>
-                </div>
 
+                </div>
+                <button class="nav-btn next" id="nextBtn">&#10095;</button>
             </div>
-            <button class="nav-btn next" id="nextBtn">&#10095;</button>
         </div>
-    </section>
+
+    </div>
 
     <section class="container">
         <h3 style="font-size: 1.2rem; margin-bottom: 15px;">DÚVIDAS</h3>
