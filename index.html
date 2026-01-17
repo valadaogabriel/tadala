@@ -57,6 +57,17 @@
         .price span { font-size: 1.2rem; }
         .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 15px; border-radius: 10px; font-weight: 900; text-decoration: none; font-size: 1.2rem; margin-top: auto; }
 
+        /* NOVA SEÇÃO DE AVALIAÇÕES */
+        .reviews-section { margin: 40px 0; }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; text-align: left; margin-top: 20px; }
+        .review-card { background: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid #252d42; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+        .review-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); }
+        .review-name { font-weight: bold; font-size: 0.95rem; color: #fff; }
+        .stars { color: var(--yellow-star); font-size: 0.9rem; margin-top: 2px; letter-spacing: 2px; }
+        .review-text { font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 10px; }
+        .verified-badge { font-size: 0.75rem; color: var(--green-success); display: flex; align-items: center; gap: 5px; font-weight: bold; }
+
         /* FAQ COMPACTO */
         .faq-item { background: var(--card-bg); margin-bottom: 8px; border-radius: 8px; border: 1px solid #252d42; }
         .faq-question { padding: 12px 20px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; color: var(--primary-blue); font-size: 0.9rem; }
@@ -118,6 +129,49 @@
             </div>
         </div>
     </div>
+
+    <section class="container reviews-section">
+        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">QUEM USOU, <span class="highlight">APROVOU!</span></h3>
+        <p style="font-size: 0.9rem; color: #aaa;">Veja o que nossos clientes estão falando.</p>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto Cliente" class="review-img">
+                    <div>
+                        <div class="review-name">Carlos M.</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p class="review-text">"Sinceramente, superou minhas expectativas. Em 15 dias usando o gel, a diferença na firmeza é absurda. Minha esposa agradece!"</p>
+                <div class="verified-badge">✔ Compra Verificada</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto Cliente" class="review-img">
+                    <div>
+                        <div class="review-name">Roberto S.</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p class="review-text">"Chegou super rápido e a embalagem é bem discreta mesmo, ninguém percebeu o que era. O produto funciona de verdade, recomendo o kit de 3."</p>
+                <div class="verified-badge">✔ Compra Verificada</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Foto Cliente" class="review-img">
+                    <div>
+                        <div class="review-name">André L.</div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <p class="review-text">"Tinha receio de comprar online, mas valeu cada centavo. Me sinto um garoto de novo, a disposição aumentou muito."</p>
+                <div class="verified-badge">✔ Compra Verificada</div>
+            </div>
+        </div>
+    </section>
 
     <section class="container">
         <h3 style="font-size: 1.2rem; margin-bottom: 15px;">DÚVIDAS</h3>
