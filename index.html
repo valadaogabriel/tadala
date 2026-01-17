@@ -31,10 +31,10 @@
             background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
             color: white; padding: 15px 30px; font-size: 1.1rem; font-weight: bold; 
             text-decoration: none; border-radius: 8px; display: inline-block; 
-            text-transform: uppercase; animation: pulse 2s infinite; border: none;
+            text-transform: uppercase; animation: pulse 2s infinite; border: none; cursor: pointer;
         }
 
-        /* SEÇÃO ERE (TOP.PNG) - LADO A LADO */
+        /* SEÇÃO ERE */
         .ere-box { 
             background: #0c1226; border: 1px solid #1a2035; border-radius: 15px; 
             display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; margin: 20px 0; text-align: left;
@@ -55,18 +55,58 @@
         .product-img { width: 100%; height: 160px; object-fit: contain; margin: 10px 0; }
         .price { font-size: 2.8rem; font-weight: 900; margin: 5px 0; }
         .price span { font-size: 1.2rem; }
-        .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 15px; border-radius: 10px; font-weight: 900; text-decoration: none; font-size: 1.2rem; margin-top: auto; }
+        .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 15px; border-radius: 10px; font-weight: 900; text-decoration: none; font-size: 1.2rem; margin-top: auto; display: block; }
 
-        /* NOVA SEÇÃO DE AVALIAÇÕES */
-        .reviews-section { margin: 40px 0; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; text-align: left; margin-top: 20px; }
-        .review-card { background: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid #252d42; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        /* ESTILOS DO SLIDER DE DEPOIMENTOS */
+        .reviews-section { margin: 40px 0; position: relative; }
+        .slider-wrapper {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 10px 0;
+        }
+        .reviews-track {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px; /* Espaço para scrollbar invisível */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox */
+        }
+        .reviews-track::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+        
+        .review-card {
+            flex: 0 0 300px; /* Largura fixa do card */
+            scroll-snap-align: center;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #252d42;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: left;
+        }
+
         .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-        .review-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); }
+        .review-img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); }
         .review-name { font-weight: bold; font-size: 0.95rem; color: #fff; }
-        .stars { color: var(--yellow-star); font-size: 0.9rem; margin-top: 2px; letter-spacing: 2px; }
-        .review-text { font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 10px; }
+        .stars { color: var(--yellow-star); font-size: 0.8rem; margin-top: 2px; letter-spacing: 1px; }
+        .review-text { font-size: 0.85rem; color: #ccc; font-style: italic; margin-bottom: 10px; line-height: 1.3; min-height: 60px;}
         .verified-badge { font-size: 0.75rem; color: var(--green-success); display: flex; align-items: center; gap: 5px; font-weight: bold; }
+
+        /* Botões de Navegação do Slider */
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0, 178, 255, 0.8); color: white;
+            border: none; width: 40px; height: 40px; border-radius: 50%;
+            cursor: pointer; z-index: 10; font-size: 1.2rem; font-weight: bold;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .nav-btn.prev { left: -10px; }
+        .nav-btn.next { right: -10px; }
+        .nav-btn:hover { background: var(--primary-blue); }
 
         /* FAQ COMPACTO */
         .faq-item { background: var(--card-bg); margin-bottom: 8px; border-radius: 8px; border: 1px solid #252d42; }
@@ -82,7 +122,12 @@
         .payment-card img { max-width: 100%; max-height: 100%; }
 
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-        @media (max-width: 600px) { .ere-box { flex-direction: column; } .offer-card.destaque { transform: scale(1); } }
+        @media (max-width: 600px) { 
+            .ere-box { flex-direction: column; } 
+            .offer-card.destaque { transform: scale(1); } 
+            .review-card { flex: 0 0 260px; } /* Card levemente menor no mobile */
+            .nav-btn { display: none; } /* Esconde setas no mobile, usa swipe */
+        }
     </style>
 </head>
 <body>
@@ -132,44 +177,158 @@
 
     <section class="container reviews-section">
         <h3 style="font-size: 1.5rem; margin-bottom: 10px;">QUEM USOU, <span class="highlight">APROVOU!</span></h3>
-        <p style="font-size: 0.9rem; color: #aaa;">Veja o que nossos clientes estão falando.</p>
+        <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 20px;">Deslize para ver mais resultados reais.</p>
         
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto Cliente" class="review-img">
-                    <div>
-                        <div class="review-name">Carlos M.</div>
-                        <div class="stars">★★★★★</div>
+        <div class="slider-wrapper">
+            <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+            <div class="reviews-track" id="reviewsTrack">
+                
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Carlos M.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
                     </div>
+                    <p class="review-text">"Sinceramente, superou minhas expectativas. Em 15 dias usando o gel, a diferença na firmeza é absurda. Minha esposa agradece!"</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
                 </div>
-                <p class="review-text">"Sinceramente, superou minhas expectativas. Em 15 dias usando o gel, a diferença na firmeza é absurda. Minha esposa agradece!"</p>
-                <div class="verified-badge">✔ Compra Verificada</div>
-            </div>
 
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto Cliente" class="review-img">
-                    <div>
-                        <div class="review-name">Roberto S.</div>
-                        <div class="stars">★★★★★</div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Roberto S.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
                     </div>
+                    <p class="review-text">"Entrega muito discreta, caixa marrom sem nada escrito. O produto funciona de verdade, senti a diferença no primeiro uso."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
                 </div>
-                <p class="review-text">"Chegou super rápido e a embalagem é bem discreta mesmo, ninguém percebeu o que era. O produto funciona de verdade, recomendo o kit de 3."</p>
-                <div class="verified-badge">✔ Compra Verificada</div>
-            </div>
 
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Foto Cliente" class="review-img">
-                    <div>
-                        <div class="review-name">André L.</div>
-                        <div class="stars">★★★★★</div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">André L.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
                     </div>
+                    <p class="review-text">"Tinha receio de comprar online, mas valeu cada centavo. Me sinto um garoto de novo, a disposição aumentou demais."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
                 </div>
-                <p class="review-text">"Tinha receio de comprar online, mas valeu cada centavo. Me sinto um garoto de novo, a disposição aumentou muito."</p>
-                <div class="verified-badge">✔ Compra Verificada</div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Marcos V.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Já tinha testado pílulas que me davam dor de cabeça. O gel é mil vezes melhor, efeito local e potente. Recomendo o kit de 3."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Felipe J.</div>
+                            <div class="stars">★★★★☆</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Chegou em 6 dias aqui no interior de SP. Comecei a usar semana passada e já vejo aumento na grossura durante o ato."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">João Paulo</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Salvou meu casamento. A gente tava meio frio, agora parece lua de mel. O produto cumpre o que promete."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Ricardo T.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Tenho 52 anos e achava que não tinha mais jeito. O Tadala Gel devolveu minha confiança. Muito bom mesmo."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Lucas B.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Comprem sem medo. O suporte no WhatsApp me tirou todas as dúvidas e o rastreio funcionou certinho."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Fernando C.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"A sensação é ótima, não arde, só dá uma esquentada boa. A parceira adorou o resultado final rsrs."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Sérgio M.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Segunda vez que compro. Da primeira peguei um frasco só pra testar, agora peguei o kit com 3 pra garantir."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/91.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Paulo R.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Produto top de linha. Sensibilidade aumentou e o tempo de duração também. Nota 10!"</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/28.jpg" alt="Foto" class="review-img">
+                        <div>
+                            <div class="review-name">Gustavo H.</div>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+                    <p class="review-text">"Melhor investimento do ano. Achei que fosse balela mas me surpreendi. Podem confiar."</p>
+                    <div class="verified-badge">✔ Compra Verificada</div>
+                </div>
+
             </div>
+            <button class="nav-btn next" id="nextBtn">&#10095;</button>
         </div>
     </section>
 
@@ -208,8 +367,22 @@
     </footer>
 
     <script>
+        // Lógica do FAQ
         document.querySelectorAll('.faq-question').forEach(q => {
             q.addEventListener('click', () => q.parentElement.classList.toggle('active'));
+        });
+
+        // Lógica do Slider de Reviews
+        const track = document.getElementById('reviewsTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        nextBtn.addEventListener('click', () => {
+            track.scrollBy({ left: 320, behavior: 'smooth' });
+        });
+
+        prevBtn.addEventListener('click', () => {
+            track.scrollBy({ left: -320, behavior: 'smooth' });
         });
     </script>
 </body>
