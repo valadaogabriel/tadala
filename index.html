@@ -3,129 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioSlim - O Fim do Efeito Sanfona</title>
+    <title>VallaTrade | Terminal Avançado</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: { dark: '#2e1065', green: '#10b981', cta: '#f97316' }
-                    }
-                }
-            }
-        }
-    </script>
+    
     <style>
-        html { scroll-behavior: smooth; }
-        .animate-pulse-slow { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .chart-container { height: 400px; width: 100%; }
+        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
+        .trade-input:focus { outline: none; border-color: #3b82f6; }
     </style>
 </head>
-<body class="bg-white text-gray-800 font-sans">
+<body class="h-screen flex flex-col overflow-hidden">
 
-    <nav class="w-full py-4 bg-white shadow-sm sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
-            <div class="text-2xl font-black text-brand-dark">BIO<span class="text-brand-green">SLIM</span></div>
-            <a href="#ofertas" class="bg-brand-green hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition shadow-md">
-                COMPRE AGORA
-            </a>
+    <nav class="border-b border-slate-800 px-6 py-3 flex justify-between items-center glass">
+        <div class="flex items-center gap-8">
+            <div class="text-2xl font-black tracking-tighter text-blue-500">
+                VALLA<span class="text-white">TRADE</span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-400">
+                <a href="#" class="hover:text-white transition">Mercado</a>
+                <a href="#" class="text-blue-500">Trade</a>
+                <a href="#" class="hover:text-white transition">Portfólio</a>
+                <a href="#" class="hover:text-white transition">Histórico</a>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-6">
+            <div class="text-right hidden sm:block">
+                <div class="text-xs text-slate-500 uppercase font-bold">Saldo disponível</div>
+                <div class="text-green-400 mono font-bold">R$ 45.230,88</div>
+            </div>
+            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700">
+                <i class="fas fa-user"></i>
+            </div>
         </div>
     </nav>
 
-    <header class="pt-10 pb-16 md:pt-20">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h1 class="text-4xl md:text-6xl font-black text-slate-900 leading-tight mb-6">
-                    Derreta Gordura Profunda sem Passar Fome.
-                </h1>
-                <p class="text-lg text-gray-600 mb-8">Fórmula natural que ativa a queima metabólica 24h por dia.</p>
-                <a href="#ofertas" class="inline-block bg-brand-cta hover:bg-orange-600 text-white text-xl font-bold py-4 px-10 rounded-lg shadow-xl animate-pulse-slow transition transform hover:scale-105">
-                    COMPRE AGORA <i class="fas fa-arrow-right ml-2"></i>
-                </a>
+    <main class="flex-1 flex overflow-hidden">
+        
+        <aside class="w-72 border-r border-slate-800 overflow-y-auto hidden lg:block bg-slate-950/50">
+            <div class="p-4 border-b border-slate-800 flex justify-between items-center">
+                <span class="font-bold text-sm uppercase text-slate-500">Ativos Populares</span>
+                <i class="fas fa-search text-slate-600 cursor-pointer"></i>
             </div>
-            <div class="flex justify-center">
-                <img src="imagens/image.png" alt="Frasco BioSlim" class="w-full max-w-sm drop-shadow-2xl">
-            </div>
-        </div>
-    </header>
-
-    <section class="py-16 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-center">
-            <div class="p-6">
-                <i class="fas fa-fire text-4xl text-orange-500 mb-4"></i>
-                <h3 class="font-bold text-xl mb-2">Queima Gordura</h3>
-                <p class="text-gray-500">Acelera o metabolismo basal naturalmente.</p>
-            </div>
-            <div class="p-6">
-                <i class="fas fa-utensils text-4xl text-green-500 mb-4"></i>
-                <h3 class="font-bold text-xl mb-2">Inibe o Apetite</h3>
-                <p class="text-gray-500">Acaba com a vontade de comer doces.</p>
-            </div>
-            <div class="p-6">
-                <i class="fas fa-tint text-4xl text-blue-500 mb-4"></i>
-                <h3 class="font-bold text-xl mb-2">Efeito Detox</h3>
-                <p class="text-gray-500">Elimina o inchaço e a retenção de líquidos.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 bg-brand-dark text-white text-center">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-6">Recupere sua autoestima e vista as roupas que você ama!</h2>
-            <a href="#ofertas" class="inline-block bg-brand-green hover:bg-green-600 text-white text-xl font-bold py-4 px-12 rounded-full shadow-lg transition transform hover:scale-105">
-                COMPRE AGORA COM DESCONTO
-            </a>
-            <p class="mt-4 text-purple-200 text-sm"><i class="fas fa-truck mr-2"></i> Frete Grátis para todo o Brasil hoje!</p>
-        </div>
-    </section>
-
-    <section id="ofertas" class="py-20 bg-white">
-        <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-black mb-12">Escolha seu Kit</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="border rounded-2xl p-6 hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl">1 POTE</h3>
-                    <img src="imagens/image.png" class="h-32 mx-auto my-4 grayscale opacity-50">
-                    <div class="text-2xl font-black">R$ 147,00</div>
-                    <a href="#" class="block bg-gray-800 text-white font-bold py-3 mt-4 rounded-lg">COMPRE AGORA</a>
+            
+            <div class="divide-y divide-slate-800/50">
+                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-bold">PETR4</span>
+                        <span class="text-green-400 mono text-sm">+2.45%</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500">
+                        <span>Petróleo Brasil</span>
+                        <span class="mono">R$ 38,42</span>
+                    </div>
                 </div>
-                <div class="border-4 border-brand-green rounded-2xl p-6 shadow-2xl transform md:-translate-y-4 relative bg-white">
-                    <span class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-green text-white px-4 py-1 rounded-full text-xs font-bold">MAIS VENDIDO</span>
-                    <h3 class="font-bold text-xl">3 POTES</h3>
-                    <img src="imagens/image.png" class="h-40 mx-auto my-4">
-                    <div class="text-sm text-green-600 font-bold">FRETE GRÁTIS</div>
-                    <div class="text-3xl font-black">R$ 297,00</div>
-                    <a href="#" class="block bg-brand-cta text-white font-bold py-4 mt-4 rounded-lg animate-pulse-slow">COMPRE AGORA</a>
+                <div class="p-4 bg-slate-900 border-l-4 border-blue-500 transition">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-bold">VALE3</span>
+                        <span class="text-red-400 mono text-sm">-1.12%</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500">
+                        <span>Vale S.A.</span>
+                        <span class="mono">R$ 62,15</span>
+                    </div>
                 </div>
-                <div class="border rounded-2xl p-6 hover:shadow-xl transition">
-                    <h3 class="font-bold text-xl">5 POTES</h3>
-                    <img src="imagens/image.png" class="h-32 mx-auto my-4">
-                    <div class="text-2xl font-black">R$ 397,00</div>
-                    <a href="#" class="block bg-gray-800 text-white font-bold py-3 mt-4 rounded-lg">COMPRE AGORA</a>
+                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-bold">ITUB4</span>
+                        <span class="text-green-400 mono text-sm">+0.85%</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500">
+                        <span>Itaú Unibanco</span>
+                        <span class="mono">R$ 32,10</span>
+                    </div>
+                </div>
+                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
+                    <div class="flex justify-between mb-1">
+                        <span class="font-bold">MGLU3</span>
+                        <span class="text-red-500 animate-pulse mono text-sm">-4.20%</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500">
+                        <span>Magazine Luiza</span>
+                        <span class="mono">R$ 2,15</span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </aside>
 
-    <section class="py-16 bg-gray-100 border-t">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <img src="imagens/image.png" class="h-24 mx-auto mb-6 opacity-80">
-            <h2 class="text-3xl font-bold mb-4">Ainda tem dúvidas?</h2>
-            <p class="text-gray-600 mb-8">Junte-se a mais de 15.000 mulheres que transformaram suas vidas com BioSlim.</p>
-            <a href="#ofertas" class="inline-block bg-brand-cta hover:bg-orange-600 text-white text-2xl font-black py-5 px-16 rounded-xl shadow-2xl transition transform hover:scale-110">
-                SIM! QUERO COMPRE AGORA
-            </a>
-            <div class="mt-6 flex justify-center gap-4 text-gray-400 text-2xl">
-                <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-pix"></i>
+        <section class="flex-1 flex flex-col p-6 overflow-y-auto">
+            <div class="flex justify-between items-end mb-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <h2 class="text-3xl font-black uppercase">Vale S.A. (VALE3)</h2>
+                        <span class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-xs font-bold">B3</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-4xl mono font-bold">R$ 62,15</span>
+                        <span class="text-red-400 font-bold">
+                            <i class="fas fa-caret-down"></i> -R$ 0,72 (-1.12%)
+                        </span>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1H</button>
+                    <button class="bg-blue-600 px-4 py-2 rounded text-xs font-bold">1D</button>
+                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1W</button>
+                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1M</button>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <footer class="bg-slate-900 text-gray-500 py-8 text-center text-xs">
-        <p>&copy; 2024 BioSlim Oficial - Todos os direitos reservados.</p>
+            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 mb-6">
+                <canvas id="mainChart"></canvas>
+            </div>
+
+            <div class="flex-1">
+                <h3 class="font-bold mb-4 text-slate-400 uppercase text-xs">Ordens em Aberto</h3>
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <tr class="text-slate-500 border-b border-slate-800">
+                            <th class="pb-3 font-medium">Data</th>
+                            <th class="pb-3 font-medium">Tipo</th>
+                            <th class="pb-3 font-medium">Preço (R$)</th>
+                            <th class="pb-3 font-medium">Quantidade</th>
+                            <th class="pb-3 font-medium">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/50">
+                        <tr>
+                            <td class="py-4 text-slate-400">27/01/2026 14:20</td>
+                            <td class="py-4 text-green-400 font-bold uppercase">Compra</td>
+                            <td class="py-4 mono">62,10</td>
+                            <td class="py-4">100</td>
+                            <td class="py-4"><span class="bg-green-900/30 text-green-500 px-2 py-1 rounded-full text-xs">Executada</span></td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 text-slate-400">27/01/2026 10:15</td>
+                            <td class="py-4 text-red-400 font-bold uppercase">Venda</td>
+                            <td class="py-4 mono">63,45</td>
+                            <td class="py-4">50</td>
+                            <td class="py-4"><span class="bg-blue-900/30 text-blue-500 px-2 py-1 rounded-full text-xs">Pendente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <aside class="w-80 border-l border-slate-800 p-6 bg-slate-950/50 hidden xl:block">
+            <div class="bg-slate-900 rounded-xl p-1 flex mb-6">
+                <button id="buyBtn" class="flex-1 py-2 rounded-lg font-bold transition bg-green-500 text-white">COMPRA</button>
+                <button id="sellBtn" class="flex-1 py-2 rounded-lg font-bold transition text-slate-500 hover:text-white">VENDA</button>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Tipo de Ordem</label>
+                    <select class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm trade-input">
+                        <option>Ordem a Mercado</option>
+                        <option>Ordem Limitada</option>
+                        <option>Stop Loss</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Quantidade</label>
+                    <input type="number" value="100" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-lg font-bold mono trade-input">
+                </div>
+
+                <div>
+                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Preço Estimado</label>
+                    <div class="text-2xl font-black mono text-slate-300">R$ 6.215,00</div>
+                    <div class="text-xs text-slate-500 mt-1">+ Taxas de corretagem: R$ 4,50</div>
+                </div>
+
+                <button class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-xl shadow-lg shadow-blue-900/20 transition transform active:scale-95">
+                    EXECUTAR OPERAÇÃO
+                </button>
+
+                <div class="p-4 bg-slate-800/50 rounded-lg border border-slate-700 mt-10">
+                    <h4 class="text-xs font-bold text-slate-400 mb-2 uppercase">Dica do Analista Valla</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        VALE3 encontra-se em zona de suporte. Observe o volume de negociação antes de confirmar o rompimento.
+                    </p>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="h-10 border-t border-slate-800 flex items-center px-4 justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-slate-950">
+        <div class="flex gap-6">
+            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Mercado Aberto</span>
+            <span>Ibovespa: <span class="text-green-400">128.450 (+0.45%)</span></span>
+            <span>Dólar: <span class="text-red-400">R$ 4,92 (+1.20%)</span></span>
+        </div>
+        <div>Server Time: 27/01/2026 15:30:45</div>
     </footer>
 
+    <script>
+        // Configuração do Gráfico Principal
+        const ctx = document.getElementById('mainChart').getContext('2d');
+        const mainChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
+                datasets: [{
+                    label: 'Preço VALE3',
+                    data: [63.50, 62.80, 63.20, 62.40, 62.15, 61.90, 62.15],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 0,
+                    pointHoverRadius: 6,
+                    pointHoverBackgroundColor: '#fff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
+                    y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } }
+                }
+            }
+        });
+
+        // Lógica dos Botões de Compra/Venda
+        const buyBtn = document.getElementById('buyBtn');
+        const sellBtn = document.getElementById('sellBtn');
+
+        buyBtn.addEventListener('click', () => {
+            buyBtn.classList.add('bg-green-500', 'text-white');
+            buyBtn.classList.remove('text-slate-500');
+            sellBtn.classList.remove('bg-red-500', 'text-white');
+            sellBtn.classList.add('text-slate-500');
+        });
+
+        sellBtn.addEventListener('click', () => {
+            sellBtn.classList.add('bg-red-500', 'text-white');
+            sellBtn.classList.remove('text-slate-500');
+            buyBtn.classList.remove('bg-green-500', 'text-white');
+            buyBtn.classList.add('text-slate-500');
+        });
+    </script>
 </body>
 </html>
