@@ -1,257 +1,337 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VallaTrade | Terminal Avançado</title>
+    <title>VallaTrade Pro | Institutional Terminal</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;600;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
         
-        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+        :root {
+            --bg-main: #0a0a0c;
+            --bg-card: #141417;
+            --border: #27272a;
+            --accent: #3b82f6;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-main);
+            color: #e4e4e7;
+        }
+
         .mono { font-family: 'JetBrains Mono', monospace; }
-        .chart-container { height: 400px; width: 100%; }
-        .glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); }
-        .trade-input:focus { outline: none; border-color: #3b82f6; }
+        
+        /* Scrollbar Customization */
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg-main); }
+        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+
+        .glass-header {
+            background: rgba(10, 10, 12, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .order-book-row:hover { background: rgba(255, 255, 255, 0.03); }
+        
+        .btn-buy { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
+        .btn-sell { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
     </style>
 </head>
 <body class="h-screen flex flex-col overflow-hidden">
 
-    <nav class="border-b border-slate-800 px-6 py-3 flex justify-between items-center glass">
-        <div class="flex items-center gap-8">
-            <div class="text-2xl font-black tracking-tighter text-blue-500">
-                VALLA<span class="text-white">TRADE</span>
+    <nav class="glass-header px-6 py-3 flex justify-between items-center z-50">
+        <div class="flex items-center gap-10">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="trending-up" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-extrabold tracking-tight">VALLA<span class="text-blue-500">TRADE</span></span>
             </div>
-            <div class="hidden md:flex gap-6 text-sm font-medium text-slate-400">
-                <a href="#" class="hover:text-white transition">Mercado</a>
-                <a href="#" class="text-blue-500">Trade</a>
-                <a href="#" class="hover:text-white transition">Portfólio</a>
-                <a href="#" class="hover:text-white transition">Histórico</a>
+            
+            <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
+                <a href="#" class="hover:text-white flex items-center gap-2"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
+                <a href="#" class="text-blue-500 flex items-center gap-2"><i data-lucide="candlestick-chart" class="w-4 h-4"></i> Terminal</a>
+                <a href="#" class="hover:text-white flex items-center gap-2"><i data-lucide="wallet" class="w-4 h-4"></i> Wallet</a>
             </div>
         </div>
-        
-        <div class="flex items-center gap-6">
-            <div class="text-right hidden sm:block">
-                <div class="text-xs text-slate-500 uppercase font-bold">Saldo disponível</div>
-                <div class="text-green-400 mono font-bold">R$ 45.230,88</div>
+
+        <div class="flex items-center gap-4">
+            <div class="hidden md:block px-4 py-1.5 border border-zinc-800 rounded-full bg-zinc-900/50">
+                <span class="text-[10px] text-zinc-500 block leading-none font-bold uppercase">Equity Value</span>
+                <span class="text-sm font-bold text-emerald-400 mono">R$ 124.502,30</span>
             </div>
-            <div class="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center border border-slate-700">
-                <i class="fas fa-user"></i>
-            </div>
+            <button class="p-2 hover:bg-zinc-800 rounded-lg transition text-zinc-400">
+                <i data-lucide="bell" class="w-5 h-5"></i>
+            </button>
+            <div class="w-9 h-9 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full border-2 border-zinc-800"></div>
         </div>
     </nav>
 
-    <main class="flex-1 flex overflow-hidden">
+    <div class="flex flex-1 overflow-hidden">
         
-        <aside class="w-72 border-r border-slate-800 overflow-y-auto hidden lg:block bg-slate-950/50">
-            <div class="p-4 border-b border-slate-800 flex justify-between items-center">
-                <span class="font-bold text-sm uppercase text-slate-500">Ativos Populares</span>
-                <i class="fas fa-search text-slate-600 cursor-pointer"></i>
-            </div>
-            
-            <div class="divide-y divide-slate-800/50">
-                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
-                    <div class="flex justify-between mb-1">
-                        <span class="font-bold">PETR4</span>
-                        <span class="text-green-400 mono text-sm">+2.45%</span>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500">
-                        <span>Petróleo Brasil</span>
-                        <span class="mono">R$ 38,42</span>
-                    </div>
-                </div>
-                <div class="p-4 bg-slate-900 border-l-4 border-blue-500 transition">
-                    <div class="flex justify-between mb-1">
-                        <span class="font-bold">VALE3</span>
-                        <span class="text-red-400 mono text-sm">-1.12%</span>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500">
-                        <span>Vale S.A.</span>
-                        <span class="mono">R$ 62,15</span>
-                    </div>
-                </div>
-                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
-                    <div class="flex justify-between mb-1">
-                        <span class="font-bold">ITUB4</span>
-                        <span class="text-green-400 mono text-sm">+0.85%</span>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500">
-                        <span>Itaú Unibanco</span>
-                        <span class="mono">R$ 32,10</span>
-                    </div>
-                </div>
-                <div class="p-4 hover:bg-slate-900 cursor-pointer transition">
-                    <div class="flex justify-between mb-1">
-                        <span class="font-bold">MGLU3</span>
-                        <span class="text-red-500 animate-pulse mono text-sm">-4.20%</span>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500">
-                        <span>Magazine Luiza</span>
-                        <span class="mono">R$ 2,15</span>
-                    </div>
+        <aside class="w-80 border-r border-zinc-800 bg-[#0a0a0c] hidden md:flex flex-col">
+            <div class="p-4 flex gap-2">
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-zinc-500"></i>
+                    <input type="text" placeholder="Search Assets..." class="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-blue-500">
                 </div>
             </div>
+
+            <div class="flex-1 overflow-y-auto" id="assetList">
+                </div>
         </aside>
 
-        <section class="flex-1 flex flex-col p-6 overflow-y-auto">
-            <div class="flex justify-between items-end mb-8">
-                <div>
-                    <div class="flex items-center gap-3 mb-1">
-                        <h2 class="text-3xl font-black uppercase">Vale S.A. (VALE3)</h2>
-                        <span class="bg-slate-800 text-slate-400 px-2 py-0.5 rounded text-xs font-bold">B3</span>
+        <main class="flex-1 flex flex-col bg-[#0e0e10]">
+            <div class="p-6 border-b border-zinc-800 flex justify-between items-center bg-[#0a0a0c]">
+                <div class="flex items-center gap-6">
+                    <div>
+                        <h2 class="text-2xl font-extrabold tracking-tight uppercase" id="currentAsset">PETR4</h2>
+                        <span class="text-xs text-zinc-500 font-bold">PETRÓLEO BRASILEIRO S.A.</span>
                     </div>
-                    <div class="flex items-center gap-4">
-                        <span class="text-4xl mono font-bold">R$ 62,15</span>
-                        <span class="text-red-400 font-bold">
-                            <i class="fas fa-caret-down"></i> -R$ 0,72 (-1.12%)
-                        </span>
+                    <div class="h-10 w-px bg-zinc-800"></div>
+                    <div>
+                        <div class="text-2xl font-bold mono" id="livePrice">R$ 38,42</div>
+                        <div class="text-xs font-bold text-emerald-500">+2.45% <span class="text-zinc-500 ml-1">Today</span></div>
                     </div>
                 </div>
-                <div class="flex gap-2">
-                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1H</button>
-                    <button class="bg-blue-600 px-4 py-2 rounded text-xs font-bold">1D</button>
-                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1W</button>
-                    <button class="bg-slate-800 px-4 py-2 rounded text-xs font-bold hover:bg-slate-700">1M</button>
+                <div class="flex bg-zinc-900 p-1 rounded-lg">
+                    <button class="px-3 py-1 text-xs font-bold rounded hover:bg-zinc-800">1H</button>
+                    <button class="px-3 py-1 text-xs font-bold rounded bg-zinc-800 text-blue-500 shadow-sm">4H</button>
+                    <button class="px-3 py-1 text-xs font-bold rounded hover:bg-zinc-800">1D</button>
                 </div>
             </div>
 
-            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 mb-6">
-                <canvas id="mainChart"></canvas>
+            <div class="flex-1 p-4 relative">
+                <div id="mainChart" class="h-full w-full"></div>
             </div>
 
-            <div class="flex-1">
-                <h3 class="font-bold mb-4 text-slate-400 uppercase text-xs">Ordens em Aberto</h3>
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="text-slate-500 border-b border-slate-800">
-                            <th class="pb-3 font-medium">Data</th>
-                            <th class="pb-3 font-medium">Tipo</th>
-                            <th class="pb-3 font-medium">Preço (R$)</th>
-                            <th class="pb-3 font-medium">Quantidade</th>
-                            <th class="pb-3 font-medium">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800/50">
-                        <tr>
-                            <td class="py-4 text-slate-400">27/01/2026 14:20</td>
-                            <td class="py-4 text-green-400 font-bold uppercase">Compra</td>
-                            <td class="py-4 mono">62,10</td>
-                            <td class="py-4">100</td>
-                            <td class="py-4"><span class="bg-green-900/30 text-green-500 px-2 py-1 rounded-full text-xs">Executada</span></td>
-                        </tr>
-                        <tr>
-                            <td class="py-4 text-slate-400">27/01/2026 10:15</td>
-                            <td class="py-4 text-red-400 font-bold uppercase">Venda</td>
-                            <td class="py-4 mono">63,45</td>
-                            <td class="py-4">50</td>
-                            <td class="py-4"><span class="bg-blue-900/30 text-blue-500 px-2 py-1 rounded-full text-xs">Pendente</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="h-64 border-t border-zinc-800 flex bg-[#0a0a0c]">
+                <div class="w-1/2 border-r border-zinc-800 p-4">
+                    <h3 class="text-[10px] font-black uppercase text-zinc-500 mb-3 tracking-widest">Order Book</h3>
+                    <div class="grid grid-cols-3 text-[10px] text-zinc-600 mb-2 font-bold px-2">
+                        <span>PRICE</span>
+                        <span class="text-center">SIZE</span>
+                        <span class="text-right">TOTAL</span>
+                    </div>
+                    <div class="space-y-1" id="orderBook">
+                        </div>
+                </div>
+                <div class="w-1/2 p-4">
+                    <h3 class="text-[10px] font-black uppercase text-zinc-500 mb-3 tracking-widest">Recent Activity</h3>
+                    <div class="space-y-3" id="tradesList">
+                        </div>
+                </div>
             </div>
-        </section>
+        </main>
 
-        <aside class="w-80 border-l border-slate-800 p-6 bg-slate-950/50 hidden xl:block">
-            <div class="bg-slate-900 rounded-xl p-1 flex mb-6">
-                <button id="buyBtn" class="flex-1 py-2 rounded-lg font-bold transition bg-green-500 text-white">COMPRA</button>
-                <button id="sellBtn" class="flex-1 py-2 rounded-lg font-bold transition text-slate-500 hover:text-white">VENDA</button>
+        <aside class="w-80 border-l border-zinc-800 bg-[#0a0a0c] p-6 flex flex-col">
+            <div class="flex gap-2 p-1 bg-zinc-900 rounded-xl mb-8">
+                <button class="flex-1 py-3 text-xs font-black rounded-lg bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">BUY</button>
+                <button class="flex-1 py-3 text-xs font-black rounded-lg text-zinc-500 hover:text-white transition">SELL</button>
             </div>
 
-            <div class="space-y-6">
+            <div class="space-y-6 flex-1">
                 <div>
-                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Tipo de Ordem</label>
-                    <select class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-sm trade-input">
-                        <option>Ordem a Mercado</option>
-                        <option>Ordem Limitada</option>
-                        <option>Stop Loss</option>
-                    </select>
+                    <label class="text-[10px] font-black text-zinc-500 uppercase mb-2 block">Order Type</label>
+                    <div class="relative">
+                        <select class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-xs appearance-none focus:border-blue-500 outline-none">
+                            <option>Limit Order</option>
+                            <option>Market Order</option>
+                            <option>Stop-Limit</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="absolute right-3 top-3 w-4 h-4 text-zinc-500"></i>
+                    </div>
                 </div>
 
                 <div>
-                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Quantidade</label>
-                    <input type="number" value="100" class="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-lg font-bold mono trade-input">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-[10px] font-black text-zinc-500 uppercase">Amount</label>
+                        <span class="text-[10px] text-blue-500 font-bold cursor-pointer hover:underline">Max: 3.2k</span>
+                    </div>
+                    <div class="relative">
+                        <input type="number" value="100" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-lg font-bold mono focus:border-blue-500 outline-none">
+                        <span class="absolute right-4 top-5 text-xs font-bold text-zinc-600">QTY</span>
+                    </div>
                 </div>
 
-                <div>
-                    <label class="text-xs text-slate-500 font-bold uppercase mb-2 block">Preço Estimado</label>
-                    <div class="text-2xl font-black mono text-slate-300">R$ 6.215,00</div>
-                    <div class="text-xs text-slate-500 mt-1">+ Taxas de corretagem: R$ 4,50</div>
+                <div class="p-4 bg-zinc-900/50 rounded-xl border border-dashed border-zinc-800">
+                    <div class="flex justify-between text-xs mb-2">
+                        <span class="text-zinc-500">Execution Price</span>
+                        <span class="mono font-bold">R$ 38,42</span>
+                    </div>
+                    <div class="flex justify-between text-xs font-bold">
+                        <span class="text-zinc-500">Total (Incl. Fees)</span>
+                        <span class="text-white mono">R$ 3.846,50</span>
+                    </div>
                 </div>
 
-                <button class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-xl shadow-lg shadow-blue-900/20 transition transform active:scale-95">
-                    EXECUTAR OPERAÇÃO
+                <button class="w-full py-4 btn-buy text-white font-black rounded-xl shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition active:scale-95">
+                    PLACE BUY ORDER
                 </button>
+            </div>
 
-                <div class="p-4 bg-slate-800/50 rounded-lg border border-slate-700 mt-10">
-                    <h4 class="text-xs font-bold text-slate-400 mb-2 uppercase">Dica do Analista Valla</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">
-                        VALE3 encontra-se em zona de suporte. Observe o volume de negociação antes de confirmar o rompimento.
-                    </p>
+            <div class="mt-auto pt-6 border-t border-zinc-800">
+                <div class="flex items-center gap-3 text-zinc-500">
+                    <i data-lucide="info" class="w-4 h-4"></i>
+                    <p class="text-[10px] leading-tight">Prices are delayed by 0.5s. Your account is protected by Valla Shield.</p>
                 </div>
             </div>
         </aside>
-    </main>
+    </div>
 
-    <footer class="h-10 border-t border-slate-800 flex items-center px-4 justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500 bg-slate-950">
-        <div class="flex gap-6">
-            <span class="flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div> Mercado Aberto</span>
-            <span>Ibovespa: <span class="text-green-400">128.450 (+0.45%)</span></span>
-            <span>Dólar: <span class="text-red-400">R$ 4,92 (+1.20%)</span></span>
+    <div class="h-8 bg-zinc-950 border-t border-zinc-900 flex items-center overflow-hidden">
+        <div class="flex animate-[scroll_30s_linear_infinite] whitespace-nowrap gap-10 text-[10px] font-bold text-zinc-500">
+            <span>NASDAQ: <span class="text-emerald-400">15.230 (+1.2%)</span></span>
+            <span>BTC/BRL: <span class="text-red-400">R$ 230.120 (-0.4%)</span></span>
+            <span>PETR4: <span class="text-emerald-400">R$ 38,42 (+2.4%)</span></span>
+            <span>VALE3: <span class="text-emerald-400">R$ 62,15 (+0.1%)</span></span>
+            <span>IBOV: <span class="text-zinc-300">128.450 (0.0%)</span></span>
+            <span>NASDAQ: <span class="text-emerald-400">15.230 (+1.2%)</span></span>
+            <span>BTC/BRL: <span class="text-red-400">R$ 230.120 (-0.4%)</span></span>
         </div>
-        <div>Server Time: 27/01/2026 15:30:45</div>
-    </footer>
+    </div>
 
     <script>
-        // Configuração do Gráfico Principal
-        const ctx = document.getElementById('mainChart').getContext('2d');
-        const mainChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'],
-                datasets: [{
-                    label: 'Preço VALE3',
-                    data: [63.50, 62.80, 63.20, 62.40, 62.15, 61.90, 62.15],
-                    borderColor: '#3b82f6',
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 0,
-                    pointHoverRadius: 6,
-                    pointHoverBackgroundColor: '#fff'
-                }]
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Assets Mock Data
+        const assets = [
+            { symbol: 'PETR4', price: 38.42, change: 2.45, name: 'Petrobras' },
+            { symbol: 'VALE3', price: 62.15, change: -1.12, name: 'Vale S.A.' },
+            { symbol: 'ITUB4', price: 32.10, change: 0.85, name: 'Itaú Unibanco' },
+            { symbol: 'MGLU3', price: 2.15, change: -4.20, name: 'Magalu' },
+            { symbol: 'WEGE3', price: 36.40, change: 1.50, name: 'Weg' }
+        ];
+
+        const assetList = document.getElementById('assetList');
+        assets.forEach(asset => {
+            const div = document.createElement('div');
+            div.className = `p-4 hover:bg-zinc-900 cursor-pointer transition border-l-2 ${asset.symbol === 'PETR4' ? 'border-blue-500 bg-zinc-900/50' : 'border-transparent'}`;
+            div.innerHTML = `
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-sm">${asset.symbol}</span>
+                    <span class="${asset.change > 0 ? 'text-emerald-500' : 'text-red-500'} mono text-[10px] font-bold">${asset.change > 0 ? '+' : ''}${asset.change}%</span>
+                </div>
+                <div class="flex justify-between text-[10px] text-zinc-500">
+                    <span>${asset.name}</span>
+                    <span class="mono italic">R$ ${asset.price.toFixed(2)}</span>
+                </div>
+            `;
+            assetList.appendChild(div);
+        });
+
+        // Chart Configuration (ApexCharts)
+        const chartOptions = {
+            series: [{
+                data: Array.from({length: 40}, (_, i) => ({
+                    x: new Date(Date.now() - (40 - i) * 3600000),
+                    y: [37 + Math.random(), 38 + Math.random(), 36 + Math.random(), 37 + Math.random()]
+                }))
+            }],
+            chart: {
+                type: 'candlestick',
+                height: '100%',
+                background: 'transparent',
+                toolbar: { show: false },
+                animations: { enabled: true }
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
-                    y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } }
+            theme: { mode: 'dark' },
+            xaxis: { type: 'datetime', labels: { style: { colors: '#71717a', fontSize: '10px' } }, axisBorder: { show: false } },
+            yaxis: { labels: { style: { colors: '#71717a', fontSize: '10px' } } },
+            grid: { borderColor: '#18181b', strokeDashArray: 4 },
+            plotOptions: {
+                candlestick: {
+                    colors: { upward: '#10b981', downward: '#ef4444' }
                 }
             }
-        });
+        };
 
-        // Lógica dos Botões de Compra/Venda
-        const buyBtn = document.getElementById('buyBtn');
-        const sellBtn = document.getElementById('sellBtn');
+        const chart = new ApexCharts(document.querySelector("#mainChart"), chartOptions);
+        chart.render();
 
-        buyBtn.addEventListener('click', () => {
-            buyBtn.classList.add('bg-green-500', 'text-white');
-            buyBtn.classList.remove('text-slate-500');
-            sellBtn.classList.remove('bg-red-500', 'text-white');
-            sellBtn.classList.add('text-slate-500');
-        });
+        // Order Book Simulation
+        function updateOrderBook() {
+            const container = document.getElementById('orderBook');
+            container.innerHTML = '';
+            // Sells (Red)
+            for(let i=0; i<4; i++) {
+                const price = 38.50 + (i * 0.05);
+                const size = (Math.random() * 2000).toFixed(0);
+                container.innerHTML += `
+                    <div class="grid grid-cols-3 text-[11px] mono py-1 px-2 order-book-row relative">
+                        <span class="text-red-500 font-bold">${price.toFixed(2)}</span>
+                        <span class="text-center text-zinc-400">${size}</span>
+                        <span class="text-right text-zinc-500">${(price * size / 1000).toFixed(1)}k</span>
+                        <div class="absolute right-0 top-0 h-full bg-red-500/5" style="width: ${Math.random() * 60}%"></div>
+                    </div>
+                `;
+            }
+            // Bids (Green)
+            for(let i=0; i<4; i++) {
+                const price = 38.40 - (i * 0.05);
+                const size = (Math.random() * 2000).toFixed(0);
+                container.innerHTML += `
+                    <div class="grid grid-cols-3 text-[11px] mono py-1 px-2 order-book-row relative">
+                        <span class="text-emerald-500 font-bold">${price.toFixed(2)}</span>
+                        <span class="text-center text-zinc-400">${size}</span>
+                        <span class="text-right text-zinc-500">${(price * size / 1000).toFixed(1)}k</span>
+                        <div class="absolute right-0 top-0 h-full bg-emerald-500/5" style="width: ${Math.random() * 60}%"></div>
+                    </div>
+                `;
+            }
+        }
 
-        sellBtn.addEventListener('click', () => {
-            sellBtn.classList.add('bg-red-500', 'text-white');
-            sellBtn.classList.remove('text-slate-500');
-            buyBtn.classList.remove('bg-green-500', 'text-white');
-            buyBtn.classList.add('text-slate-500');
-        });
+        // Live Trades Simulation
+        function updateTrades() {
+            const container = document.getElementById('tradesList');
+            const icons = ['arrow-up-right', 'arrow-down-right'];
+            const types = ['Buy', 'Sell'];
+            const colors = ['text-emerald-500', 'text-red-500'];
+            
+            const rand = Math.floor(Math.random() * 2);
+            const price = 38.42 + (Math.random() * 0.1);
+            
+            const tradeHtml = `
+                <div class="flex justify-between items-center text-xs border-b border-zinc-900 pb-2">
+                    <div class="flex items-center gap-2">
+                        <div class="w-2 h-2 rounded-full ${rand === 0 ? 'bg-emerald-500' : 'bg-red-500'} animate-pulse"></div>
+                        <span class="font-bold">${types[rand]} Order</span>
+                    </div>
+                    <span class="mono font-bold">${price.toFixed(2)}</span>
+                    <span class="text-zinc-600 text-[10px]">15:30:12</span>
+                </div>
+            `;
+            container.insertAdjacentHTML('afterbegin', tradeHtml);
+            if(container.children.length > 5) container.lastElementChild.remove();
+        }
+
+        // Real-time Updates
+        setInterval(() => {
+            const priceEl = document.getElementById('livePrice');
+            const currentPrice = 38.42 + (Math.random() * 0.4 - 0.2);
+            priceEl.innerText = `R$ ${currentPrice.toFixed(2)}`;
+            updateOrderBook();
+            updateTrades();
+        }, 2000);
+
+        updateOrderBook();
+        updateTrades();
+
     </script>
+
+    <style>
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
 </body>
 </html>
