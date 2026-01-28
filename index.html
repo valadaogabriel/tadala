@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VallaTrade Pro | Plataforma de Trading Institucional</title>
+    <title>VallaTrade Ultra | Terminal Profissional</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
@@ -13,12 +13,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap');
         
         :root {
-            --iq-bg-main: #0b0e18;     /* Fundo Principal Escuro */
-            --iq-bg-sec: #141824;      /* Fundo Secundário */
-            --iq-green: #00ff88;       /* Cor de Alta/Call */
-            --iq-red: #ff3366;         /* Cor de Baixa/Put */
-            --iq-blue: #2e5bff;        /* Cor de Destaque */
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --iq-bg-main: #06080f;
+            --iq-bg-sec: #0e121f;
+            --iq-blue: #2e5bff;
+            --iq-gold: #f59e0b;
+            --iq-emerald: #10b981;
+            --glass-border: rgba(255, 255, 255, 0.05);
         }
 
         body { 
@@ -29,203 +29,120 @@
         }
 
         .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass-panel { background: rgba(14, 18, 31, 0.8); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); }
         
-        /* Efeito de Vidro (Glassmorphism) */
-        .glass-panel {
-            background: rgba(20, 24, 36, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #2d3446; border-radius: 10px; }
 
-        /* Efeitos Neon */
-        .neon-green-text { color: var(--iq-green); text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
-        .neon-red-text { color: var(--iq-red); text-shadow: 0 0 10px rgba(255, 51, 102, 0.3); }
-
-        /* Botões de Trading */
-        .btn-call { background: linear-gradient(135deg, #00ff88 0%, #00b35f 100%); box-shadow: 0 4px 15px rgba(0, 255, 136, 0.2); }
-        .btn-put { background: linear-gradient(135deg, #ff3366 0%, #cc2952 100%); box-shadow: 0 4px 15px rgba(255, 51, 102, 0.2); }
+        /* Botões Estilizados */
+        .btn-call { background: linear-gradient(135deg, #00ff88 0%, #008f4c 100%); }
+        .btn-put { background: linear-gradient(135deg, #ff3366 0%, #a31a3d 100%); }
         
-        /* Inputs Customizados */
-        .trade-input { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); transition: all 0.3s; }
-        .trade-input:focus { border-color: var(--iq-blue); background: rgba(46, 91, 255, 0.05); outline: none; }
-
-        /* Animação de Carregamento */
-        .loader { border-top-color: var(--iq-blue); -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
-        @-webkit-keyframes spinner { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        #auth-overlay { transition: opacity 0.5s ease-in-out, visibility 0.5s; }
-        #app-container { opacity: 0; transition: opacity 0.8s ease-in-out; }
+        .asset-tab.active { border-bottom: 2px solid var(--iq-blue); background: rgba(46, 91, 255, 0.1); color: white; }
+        
+        #app-container { opacity: 0; transition: opacity 0.8s ease; }
     </style>
 </head>
-<body class="h-screen relative">
+<body class="h-screen flex flex-col">
 
-    <div id="auth-overlay" class="absolute inset-0 z-[100] flex items-center justify-center bg-[#0b0e18]">
-        <div class="absolute inset-0 overflow-hidden">
-             <div class="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[120px]"></div>
-             <div class="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-purple-600/10 blur-[120px]"></div>
-        </div>
-
-        <div class="glass-panel p-8 md:p-12 rounded-2xl w-full max-w-md relative z-10 mx-4">
-            <div class="text-center mb-8">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center rotate-12 shadow-lg shadow-blue-900/30">
-                        <i data-lucide="trending-up" class="text-white w-6 h-6 -rotate-12"></i>
-                    </div>
-                    <span class="text-3xl font-extrabold tracking-tight text-white">VALLA<span class="text-blue-500">TRADE</span></span>
+    <div id="auth-overlay" class="absolute inset-0 z-[100] flex items-center justify-center bg-[#06080f]">
+        <div class="glass-panel p-10 rounded-3xl w-full max-w-sm text-center">
+            <div class="flex justify-center mb-6">
+                <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center rotate-12 shadow-xl shadow-blue-900/40">
+                    <i data-lucide="layout-dashboard" class="text-white w-7 h-7 -rotate-12"></i>
                 </div>
-                <h2 class="text-xl font-bold text-zinc-100">Crie sua conta de Trader</h2>
-                <p class="text-sm text-zinc-400 mt-2">Acesse o mercado financeiro global em segundos.</p>
             </div>
-
-            <form id="register-form" class="space-y-4">
-                <div>
-                    <label class="text-xs font-bold text-zinc-500 uppercase pl-1">E-mail</label>
-                    <div class="relative mt-1">
-                        <i data-lucide="mail" class="absolute left-3 top-3 w-5 h-5 text-zinc-600"></i>
-                        <input type="email" placeholder="seu@email.com" class="w-full trade-input rounded-lg py-3 pl-10 pr-4 text-sm text-white" required>
-                    </div>
-                </div>
-                <div>
-                    <label class="text-xs font-bold text-zinc-500 uppercase pl-1">Senha</label>
-                    <div class="relative mt-1">
-                        <i data-lucide="lock" class="absolute left-3 top-3 w-5 h-5 text-zinc-600"></i>
-                        <input type="password" placeholder="Mínimo 8 caracteres" class="w-full trade-input rounded-lg py-3 pl-10 pr-4 text-sm text-white" required>
-                    </div>
-                </div>
-                 <div>
-                    <label class="text-xs font-bold text-zinc-500 uppercase pl-1">Moeda da Conta</label>
-                    <select class="w-full trade-input rounded-lg py-3 px-4 text-sm text-white mt-1 appearance-none bg-transparent">
-                        <option value="BRL">BRL - Real Brasileiro (R$)</option>
-                        <option value="USD">USD - Dólar Americano ($)</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-lg text-sm transition-all transform active:scale-95 shadow-lg shadow-blue-900/20 mt-6 flex items-center justify-center">
-                    <span id="btn-text">COMEÇAR A OPERAR AGORA</span>
-                    <div id="btn-loader" class="loader border-2 border-t-2 border-gray-200 h-5 w-5 rounded-full hidden"></div>
-                </button>
-            </form>
-            <p class="text-xs text-center text-zinc-500 mt-6">Ao se cadastrar, você concorda com os Termos de Uso da VallaTrade.</p>
+            <h1 class="text-2xl font-black mb-2">VALLATRADE <span class="text-blue-500">ULTRA</span></h1>
+            <p class="text-zinc-500 text-sm mb-8">O terminal mais rápido do mercado</p>
+            <button onclick="startApp()" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-xl font-bold transition transform active:scale-95">ACESSAR TERMINAL</button>
         </div>
     </div>
 
-
-    <div id="app-container" class="h-full flex flex-col">
+    <div id="app-container" class="flex flex-col h-full">
         
-        <header class="h-16 glass-panel flex items-center justify-between px-6 z-50 relative">
-            <div class="flex items-center gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center rotate-12">
-                        <i data-lucide="zap" class="text-white w-5 h-5 -rotate-12"></i>
-                    </div>
-                    <span class="text-xl font-extrabold tracking-tight">VALLA<span class="text-blue-500">TRADE</span></span>
+        <header class="h-14 border-b border-white/5 flex items-center justify-between px-4 bg-[#080b14]">
+            <div class="flex items-center gap-4 h-full">
+                <div class="flex items-center gap-2 pr-4 border-r border-white/10 font-black tracking-tighter italic">
+                    <span class="text-blue-500 text-xl">V</span>TRADE
                 </div>
-                <div class="hidden md:flex items-center gap-2 overflow-x-auto">
-                    <div class="flex items-center gap-2 bg-zinc-900/50 border border-blue-500/30 px-3 py-1.5 rounded-lg cursor-pointer transition hover:bg-zinc-800">
-                        <img src="https://flagcdn.com/w20/eu.png" class="w-4 h-3 rounded-sm object-cover"><img src="https://flagcdn.com/w20/us.png" class="w-4 h-3 rounded-sm object-cover -ml-1">
-                        <span class="text-sm font-bold">EUR/USD</span>
-                        <span class="text-xs bg-green-500/20 text-green-400 px-1.5 rounded-md font-bold ml-1">87%</span>
-                    </div>
-                     <div class="flex items-center gap-2 bg-zinc-900/50 border border-zinc-800 px-3 py-1.5 rounded-lg cursor-pointer transition hover:bg-zinc-800 opacity-60 hover:opacity-100">
-                        <i data-lucide="bitcoin" class="w-4 h-4 text-orange-500"></i>
-                        <span class="text-sm font-bold">BTC/USD</span>
-                        <span class="text-xs bg-green-500/20 text-green-400 px-1.5 rounded-md font-bold ml-1">82%</span>
-                    </div>
-                </div>
+                <nav class="flex h-full overflow-hidden" id="asset-nav">
+                    </nav>
             </div>
 
             <div class="flex items-center gap-6">
-                <div class="text-right hidden sm:block bg-zinc-900/50 px-4 py-1 rounded-lg border border-zinc-800/50 cursor-pointer hover:border-zinc-700 transition group">
-                    <div class="text-[10px] text-zinc-500 font-bold uppercase tracking-wider group-hover:text-blue-400 transition">Conta de Treinamento <i data-lucide="chevron-down" class="w-3 h-3 inline ml-1"></i></div>
-                    <div class="text-green-400 font-extrabold mono text-lg" id="user-balance">R$ 10.000,00</div>
+                <div class="bg-zinc-900/80 px-4 py-1 rounded border border-white/5">
+                    <div class="text-[9px] text-zinc-500 font-bold uppercase">Saldo em Conta</div>
+                    <div class="text-emerald-400 font-bold mono text-sm" id="main-balance">R$ 10.000,00</div>
                 </div>
-                <button class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg font-bold text-xs transition uppercase shadow-lg shadow-orange-900/20 hidden md:block">
-                    Depositar
-                </button>
-                <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 border-2 border-zinc-800 cursor-pointer"></div>
+                <button class="bg-blue-600 px-4 py-2 rounded text-xs font-black uppercase">Depósito</button>
             </div>
         </header>
 
-        <div class="flex flex-1 overflow-hidden relative">
+        <div class="flex flex-1 overflow-hidden">
             
-            <aside class="w-16 glass-panel flex flex-col items-center py-6 gap-8 z-20">
-                <i data-lucide="line-chart" class="w-6 h-6 text-blue-500 cursor-pointer"></i>
-                <div class="relative group cursor-pointer">
-                    <i data-lucide="history" class="w-6 h-6 text-zinc-500 hover:text-white transition"></i>
-                    <div class="absolute left-10 top-0 hidden group-hover:block w-48 glass-panel p-3 rounded-lg z-50 ml-2">
-                        <h4 class="text-xs font-bold text-zinc-400 uppercase mb-2">Últimas Operações</h4>
-                        <div class="space-y-2 text-xs" id="trades-history-tooltip">
-                            <p class="text-zinc-600 italic">Nenhuma operação hoje.</p>
+            <aside class="w-14 border-r border-white/5 flex flex-col items-center py-4 gap-6 bg-[#080b14]">
+                <button onclick="toggleSettings()" class="hover:text-blue-500 transition"><i data-lucide="settings-2" class="w-5 h-5"></i></button>
+                <i data-lucide="bar-chart-2" class="w-5 h-5 text-zinc-500"></i>
+                <i data-lucide="clock" class="w-5 h-5 text-zinc-500"></i>
+                <i data-lucide="help-circle" class="w-5 h-5 text-zinc-500 mt-auto"></i>
+            </aside>
+
+            <main class="flex-1 relative bg-gradient-to-b from-[#080b14] to-[#04060a]">
+                <div id="price-tag" class="absolute right-0 top-1/2 z-30 flex items-center">
+                    <div class="bg-blue-600 px-3 py-1 rounded-l text-xs font-bold mono shadow-2xl" id="live-price-val">...</div>
+                </div>
+                
+                <div id="chart-main" class="w-full h-full"></div>
+
+                <div id="settings-panel" class="absolute left-4 top-4 w-64 glass-panel p-5 rounded-2xl z-40 hidden">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-sm font-bold uppercase tracking-wider text-zinc-400">Configurações</h3>
+                        <i data-lucide="x" class="w-4 h-4 cursor-pointer" onclick="toggleSettings()"></i>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="text-[10px] font-bold text-zinc-500 block mb-2 uppercase">Tema do Gráfico</label>
+                            <div class="flex gap-2">
+                                <button onclick="setChartColor('#2e5bff')" class="w-8 h-8 rounded-full bg-blue-600 border-2 border-white/10"></button>
+                                <button onclick="setChartColor('#f59e0b')" class="w-8 h-8 rounded-full bg-amber-500 border-2 border-white/10"></button>
+                                <button onclick="setChartColor('#10b981')" class="w-8 h-8 rounded-full bg-emerald-500 border-2 border-white/10"></button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-bold text-zinc-500 block mb-2 uppercase">Tipo de Linha</label>
+                            <div class="grid grid-cols-2 gap-2 text-[10px] font-black">
+                                <button onclick="setChartType('area')" class="bg-zinc-800 p-2 rounded hover:bg-zinc-700">ÁREA</button>
+                                <button onclick="setChartType('line')" class="bg-zinc-800 p-2 rounded hover:bg-zinc-700">LINHA</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <i data-lucide="trophy" class="w-6 h-6 text-zinc-500 hover:text-white cursor-pointer transition"></i>
-                <i data-lucide="settings" class="w-6 h-6 text-zinc-500 hover:text-white cursor-pointer transition mt-auto"></i>
-            </aside>
-
-            <main class="flex-1 relative flex flex-col bg-gradient-to-b from-[#0b0e18] to-[#141824]">
-                <div id="floating-price-tag" class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 px-2 py-1 rounded-l-md font-bold mono text-xs shadow-xl z-30 flex items-center gap-2 transition-all duration-300">
-                    <span id="live-price-value">1.08450</span>
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                    </span>
-                </div>
-                
-                <div id="main-chart-container" class="flex-1 w-full h-full"></div>
             </main>
 
-            <aside class="w-72 glass-panel p-5 flex flex-col gap-5 z-20 border-l border-white/5">
-                
-                <div class="space-y-1">
-                    <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest pl-1">Tempo</label>
+            <aside class="w-64 border-l border-white/5 p-5 flex flex-col gap-6 bg-[#080b14]">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Valor da Operação</label>
                     <div class="relative">
-                        <select class="w-full trade-input rounded-lg p-3 text-sm font-bold text-center appearance-none cursor-pointer bg-transparent">
-                            <option>00:01:00 (60s)</option>
-                            <option>00:05:00 (5m)</option>
-                            <option>00:15:00 (15m)</option>
-                        </select>
-                         <i data-lucide="chevron-down" class="absolute right-4 top-3.5 w-4 h-4 text-zinc-500 pointer-events-none"></i>
+                        <input type="number" id="trade-amount" value="100" class="w-full bg-zinc-900 border border-white/10 rounded-lg p-3 text-lg font-bold text-center mono outline-none focus:border-blue-500">
                     </div>
                 </div>
 
-                <div class="space-y-3">
-                    <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest pl-1">Investimento (R$)</label>
-                    <div class="relative group">
-                        <input type="number" id="investment-amount" value="100" min="10" class="w-full trade-input rounded-lg p-4 text-xl font-black text-center mono text-white" oninput="calculateProfit()">
-                        <span class="absolute left-4 top-5 text-zinc-500 font-bold text-sm">R$</span>
+                <div class="mt-auto space-y-4">
+                    <div class="flex justify-between items-center px-1">
+                        <span class="text-xs font-bold text-zinc-500 uppercase">Rendimento</span>
+                        <span class="text-emerald-400 font-black text-lg">+87%</span>
                     </div>
-                    <div class="flex gap-2">
-                         <button onclick="quickAdd(10)" class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-1 rounded text-xs font-bold transition">+10</button>
-                         <button onclick="quickAdd(50)" class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-1 rounded text-xs font-bold transition">+50</button>
-                         <button onclick="quickAdd(100)" class="flex-1 bg-zinc-800 hover:bg-zinc-700 py-1 rounded text-xs font-bold transition">+100</button>
-                    </div>
-                </div>
 
-                <div class="mt-auto bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                     <div class="flex justify-between text-xs font-bold px-1 mb-1">
-                        <span class="text-zinc-500 uppercase">Payout (87%)</span>
-                    </div>
-                    <div class="flex justify-between items-end">
-                         <span class="text-sm font-bold text-zinc-400">Lucro Potencial:</span>
-                         <span class="text-green-400 font-extrabold mono text-xl" id="potential-profit">+R$ 87,00</span>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <button id="btn-call" class="w-full py-5 btn-call text-white rounded-xl flex flex-col items-center justify-center gap-1 transition transform active:scale-95 relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                        <i data-lucide="arrow-up-circle" class="w-8 h-8 relative z-10"></i>
-                        <span class="font-black text-lg uppercase tracking-tighter relative z-10">ACIMA</span>
-                        <span class="text-[10px] font-bold relative z-10 opacity-80">Preço vai subir</span>
+                    <button class="w-full py-5 btn-call text-white rounded-xl flex flex-col items-center gap-1 transition transform active:scale-95">
+                        <i data-lucide="chevrons-up" class="w-6 h-6"></i>
+                        <span class="font-black text-sm uppercase">Acima</span>
                     </button>
 
-                    <button id="btn-put" class="w-full py-5 btn-put text-white rounded-xl flex flex-col items-center justify-center gap-1 transition transform active:scale-95 relative overflow-hidden group">
-                        <div class="absolute inset-0 bg-white/20 -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                        <span class="font-black text-lg uppercase tracking-tighter relative z-10">ABAIXO</span>
-                        <span class="text-[10px] font-bold relative z-10 opacity-80">Preço vai cair</span>
-                         <i data-lucide="arrow-down-circle" class="w-8 h-8 relative z-10"></i>
+                    <button class="w-full py-5 btn-put text-white rounded-xl flex flex-col items-center gap-1 transition transform active:scale-95">
+                        <span class="font-black text-sm uppercase">Abaixo</span>
+                        <i data-lucide="chevrons-down" class="w-6 h-6"></i>
                     </button>
                 </div>
             </aside>
@@ -233,218 +150,140 @@
     </div>
 
     <script>
-        // Inicializa os ícones Lucide
         lucide.createIcons();
 
-        // --- LÓGICA DE AUTENTICAÇÃO ---
-        const authOverlay = document.getElementById('auth-overlay');
-        const appContainer = document.getElementById('app-container');
-        const registerForm = document.getElementById('register-form');
-        const btnText = document.getElementById('btn-text');
-        const btnLoader = document.getElementById('btn-loader');
+        // CONFIGURAÇÕES DE ESTADO
+        let state = {
+            currentAsset: 'IBOVESPA',
+            chartType: 'area',
+            accentColor: '#2e5bff',
+            balance: 10000.00
+        };
 
-        registerForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Simula processamento
-            btnText.classList.add('hidden');
-            btnLoader.classList.remove('hidden');
-            
-            setTimeout(() => {
-                // Transição de tela
-                authOverlay.style.opacity = '0';
-                authOverlay.style.visibility = 'hidden';
-                appContainer.style.opacity = '1';
-                
-                // Inicializa o gráfico apenas após o login para performance
-                initChart(); 
-            }, 1500);
-        });
+        const assets = {
+            'IBOVESPA': { price: 128450.00, volatility: 25.0, dp: 0 },
+            'EUR/USD': { price: 1.08450, volatility: 0.00015, dp: 5 },
+            'GOLD': { price: 2035.40, volatility: 0.15, dp: 2 },
+            'GBP/USD': { price: 1.26780, volatility: 0.00012, dp: 5 },
+            'USD/JPY': { price: 148.12, volatility: 0.02, dp: 2 }
+        };
 
+        let dataPoints = [];
+        let chart;
 
-        // --- LÓGICA DO TERMINAL DE TRADING ---
-        let currentPrice = 1.08450;
-        let userBalance = 10000.00;
-        const payoutRate = 0.87;
-        let dataSeries = []; // Dados do gráfico
-        let chart; // Referência ao gráfico Apex
-
-        // Elementos da UI
-        const balanceEl = document.getElementById('user-balance');
-        const investmentInput = document.getElementById('investment-amount');
-        const profitEl = document.getElementById('potential-profit');
-        const priceTag = document.getElementById('floating-price-tag');
-        const priceValue = document.getElementById('live-price-value');
-        const tradesTooltip = document.getElementById('trades-history-tooltip');
-
-        // Função para formatar moeda (BRL)
-        const formatBRL = (value) => value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-        // Funções do Painel de Trading
-        function calculateProfit() {
-            const amount = parseFloat(investmentInput.value) || 0;
-            const profit = amount * payoutRate;
-            profitEl.innerText = `+${formatBRL(profit)}`;
-        }
-        function quickAdd(val) {
-            investmentInput.value = (parseFloat(investmentInput.value) || 0) + val;
-            calculateProfit();
+        // INICIALIZAÇÃO
+        function startApp() {
+            document.getElementById('auth-overlay').style.display = 'none';
+            document.getElementById('app-container').style.opacity = '1';
+            renderAssetTabs();
+            initChart();
+            updateLoop();
         }
 
-        // Função de Simulação de Ordem (Call/Put)
-        function placeOrder(type) {
-            const amount = parseFloat(investmentInput.value);
-            if (amount > userBalance || amount <= 0) return alert("Saldo insuficiente ou valor inválido.");
-
-            // 1. Deduz do saldo
-            userBalance -= amount;
-            balanceEl.innerText = formatBRL(userBalance);
-
-            // Feedback visual no botão
-            const btn = type === 'call' ? document.getElementById('btn-call') : document.getElementById('btn-put');
-            const originalHtml = btn.innerHTML;
-            btn.innerHTML = `<div class="loader h-6 w-6 border-2 border-white rounded-full"></div>`;
-            btn.disabled = true;
-
-            // 2. Simulação de Resultado (após 3 segundos)
-            setTimeout(() => {
-                btn.innerHTML = originalHtml;
-                btn.disabled = false;
-
-                // Simulação simples: 50% de chance de vitória
-                const isWin = Math.random() > 0.5; 
-                
-                if (isWin) {
-                    const profit = amount * (1 + payoutRate);
-                    userBalance += profit;
-                    balanceEl.innerText = formatBRL(userBalance);
-                    // Adiciona ao histórico (Vitória)
-                    addToHistory('EUR/USD', type, profit - amount, true);
-                    showToast('Vitória!', `Lucro de ${formatBRL(profit - amount)}`, 'success');
-                } else {
-                     // Adiciona ao histórico (Derrota)
-                    addToHistory('EUR/USD', type, amount, false);
-                    showToast('Derrota', `Preço foi contra sua previsão.`, 'error');
-                }
-            }, 3000);
+        function renderAssetTabs() {
+            const nav = document.getElementById('asset-nav');
+            nav.innerHTML = Object.keys(assets).map(key => `
+                <div onclick="switchAsset('${key}')" class="asset-tab ${state.currentAsset === key ? 'active' : ''} px-6 h-full flex items-center cursor-pointer text-[11px] font-black transition-all border-r border-white/5">
+                    ${key}
+                </div>
+            `).join('');
         }
 
-        // Adiciona listeners aos botões
-        document.getElementById('btn-call').addEventListener('click', () => placeOrder('call'));
-        document.getElementById('btn-put').addEventListener('click', () => placeOrder('put'));
+        function switchAsset(assetKey) {
+            state.currentAsset = assetKey;
+            dataPoints = []; // Reseta o gráfico para nova escala
+            renderAssetTabs();
+            // Reset do gráfico para nova escala instantânea
+            chart.updateOptions({
+                yaxis: { labels: { formatter: val => val.toFixed(assets[assetKey].dp) } }
+            });
+        }
 
-
-        // --- LÓGICA DO GRÁFICO EM TEMPO REAL (ApexCharts) ---
         function initChart() {
-            // Gera dados iniciais
-            const now = Date.now();
-            for (let i = 0; i < 100; i++) {
-                dataSeries.push({
-                    x: now - (100 - i) * 1000,
-                    y: currentPrice + (Math.random() - 0.5) * 0.0005
-                });
+            const asset = assets[state.currentAsset];
+            
+            // Gera 100 pontos iniciais
+            let lastP = asset.price;
+            for(let i=0; i<100; i++){
+                lastP += (Math.random() - 0.5) * asset.volatility;
+                dataPoints.push({ x: Date.now() - (100 - i) * 1000, y: lastP });
             }
 
             const options = {
-                series: [{ name: 'Preço', data: dataSeries }],
+                series: [{ data: dataPoints }],
                 chart: {
-                    type: 'area',
+                    type: state.chartType,
                     height: '100%',
-                    fontFamily: 'JetBrains Mono, sans-serif',
-                    animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 900 } },
+                    animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 800 } },
                     toolbar: { show: false },
-                    zoom: { enabled: false },
                     background: 'transparent'
                 },
-                // Estilo da Linha e Preenchimento (O "Glow" da IQ Option)
-                stroke: { curve: 'smooth', width: 2, colors: ['#2e5bff'] },
+                stroke: { curve: 'smooth', width: 2, colors: [state.accentColor] },
                 fill: {
                     type: 'gradient',
                     gradient: {
                         shadeIntensity: 1,
-                        opacityFrom: 0.5, opacityTo: 0.0,
-                        stops: [0, 100],
-                        colorStops: [
-                            { offset: 0, color: "#2e5bff", opacity: 0.5 },
-                            { offset: 100, color: "#0b0e18", opacity: 0 }
-                        ]
+                        opacityFrom: 0.4,
+                        opacityTo: 0,
+                        colorStops: [{ offset: 0, color: state.accentColor, opacity: 0.4 }, { offset: 100, color: '#000', opacity: 0 }]
                     }
                 },
-                // Remove eixos e grids para visual limpo
-                grid: { show: false },
-                xaxis: { type: 'datetime', labels: { show: false }, axisBorder: { show: false }, axisTicks: { show: false }, range: 60000 /* 1 min visível */},
-                yaxis: { show: false, opposite: true },
-                tooltip: { enabled: false },
-                dataLabels: { enabled: false }
+                grid: { borderColor: 'rgba(255,255,255,0.03)' },
+                xaxis: { type: 'datetime', range: 60000, labels: { show: false }, axisBorder: { show: false } },
+                yaxis: { opposite: true, labels: { style: { colors: '#4b5563', fontSize: '10px' } } },
+                tooltip: { enabled: false }
             };
 
-            chart = new ApexCharts(document.querySelector("#main-chart-container"), options);
+            chart = new ApexCharts(document.querySelector("#chart-main"), options);
             chart.render();
+        }
 
-            // Loop de Simulação de Preço (a cada 1s)
+        function updateLoop() {
             setInterval(() => {
-                // Pequena variação aleatória no preço
-                const change = (Math.random() - 0.5) * 0.0002;
-                currentPrice += change;
-                
-                // Adiciona novo ponto e remove o antigo
-                dataSeries.push({ x: Date.now(), y: currentPrice });
-                dataSeries.shift();
-                chart.updateSeries([{ data: dataSeries }]);
+                const asset = assets[state.currentAsset];
+                const lastPoint = dataPoints[dataPoints.length - 1].y;
+                const change = (Math.random() - 0.5) * asset.volatility;
+                const newPrice = lastPoint + change;
 
-                // Atualiza o Marcador Flutuante
-                priceValue.innerText = currentPrice.toFixed(5);
+                dataPoints.push({ x: Date.now(), y: newPrice });
+                dataPoints.shift();
+
+                chart.updateSeries([{ data: dataPoints }]);
+
+                // UI Updates
+                const tag = document.getElementById('price-tag');
+                const val = document.getElementById('live-price-val');
+                val.innerText = newPrice.toFixed(asset.dp);
                 
-                // Muda a cor do marcador baseado na micro-tendência
-                if(change >= 0) {
-                     priceTag.classList.remove('bg-iq-red'); priceTag.classList.add('bg-blue-600');
-                } else {
-                     priceTag.classList.remove('bg-blue-600'); priceTag.classList.add('bg-iq-red');
-                }
+                // Animação de cor no marcador
+                val.className = `bg-${change >= 0 ? 'blue-600' : 'rose-600'} px-3 py-1 rounded-l text-xs font-bold mono shadow-2xl transition-colors`;
                 
-                // Move o marcador no eixo Y (simulação visual simples)
-                // Em um app real, usaríamos a escala do gráfico.
-                // Aqui, usamos uma porcentagem baseada em uma faixa de preço fictícia.
-                const range = 0.003; // Faixa de movimento
-                const base = 1.08300;
-                const percentage = Math.max(5, Math.min(95, ((currentPrice - base) / range) * 100));
-                priceTag.style.top = `${100 - percentage}%`;
+                // Posicionamento vertical simples (percentual de 10% a 90%)
+                const yPos = 50 + (change * (state.currentAsset === 'IBOVESPA' ? 0.5 : 5000));
+                tag.style.top = `${Math.max(10, Math.min(90, yPos))}%`;
 
             }, 1000);
         }
 
-        // --- Helpers UI ---
-        function addToHistory(asset, type, value, isWin) {
-            if (tradesTooltip.contains(document.querySelector('.italic'))) tradesTooltip.innerHTML = '';
-            
-            const color = isWin ? 'text-green-400' : 'text-red-400';
-            const icon = isWin ? 'trending-up' : 'trending-down';
-            const sign = isWin ? '+' : '-';
-
-            const html = `
-                <div class="flex justify-between items-center mb-2 border-b border-white/5 pb-1">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="${icon}" class="w-4 h-4 ${color}"></i>
-                        <div>
-                            <div class="font-bold">${asset}</div>
-                            <div class="text-[10px] text-zinc-500 uppercase">${type}</div>
-                        </div>
-                    </div>
-                    <div class="font-bold mono ${color}">${sign}${formatBRL(value)}</div>
-                </div>
-            `;
-            tradesTooltip.insertAdjacentHTML('afterbegin', html);
-            lucide.createIcons(); // Re-renderiza ícones novos
+        // CONTROLES DE CONFIGURAÇÃO
+        function toggleSettings() {
+            const panel = document.getElementById('settings-panel');
+            panel.classList.toggle('hidden');
         }
 
-        // Simples sistema de Toast (Notificação)
-        function showToast(title, message, type) {
-            // (Para simplificar este arquivo único, usaremos alerts nativos. 
-            // Em produção, usaríamos uma biblioteca de toast como Toastify-js)
-            // console.log(`${title.toUpperCase()}: ${message}`);
+        function setChartColor(color) {
+            state.accentColor = color;
+            chart.updateOptions({
+                stroke: { colors: [color] },
+                fill: { gradient: { colorStops: [{ offset: 0, color: color, opacity: 0.4 }, { offset: 100, color: '#000', opacity: 0 }] } }
+            });
+            document.getElementById('live-price-val').style.backgroundColor = color;
         }
 
-        // Inicialização
-        calculateProfit(); // Calcula lucro inicial
+        function setChartType(type) {
+            state.chartType = type;
+            chart.updateOptions({ chart: { type: type } });
+        }
     </script>
 </body>
 </html>
