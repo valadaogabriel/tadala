@@ -3,328 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TADALA GEL OFICIAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>BioSlim - O Fim do Efeito Sanfona</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#2e1065', // Roxo Profundo (Autoridade)
+                            light: '#f3e8ff',
+                            green: '#10b981', // Verde Sucesso
+                            cta: '#f97316',   // Laranja Ação
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --bg-dark: #0a0f1e;
-            --card-bg: #131826;
-            --primary-blue: #00b2ff;
-            --text-white: #ffffff;
-            --green-success: #1cb453;
-            --yellow-star: #ffcc00;
-            --gray-text: #a0a0a0;
-        }
-
-        * { box-sizing: border-box; outline: none; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-white); margin: 0; padding: 0; scroll-behavior: smooth; line-height: 1.6; }
-        
-        header { background: #fff; padding: 15px; color: #122f73; text-align: center; font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 20px; text-align: center; }
-
-        /* HERO SECTION */
-        .hero { padding: 40px 20px; background: radial-gradient(circle at center, #1a2035 0%, #0a0f1e 100%); }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; line-height: 1.1; }
-        .highlight { color: var(--primary-blue); }
-        
-        /* ESCALA ERE */
-        .ere-box { 
-            background: var(--card-bg); border: 1px solid #1a2035; border-radius: 15px; 
-            display: flex; flex-wrap: wrap; gap: 30px; padding: 30px; margin: 30px 0; text-align: left;
-            align-items: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .ere-info { flex: 1; min-width: 300px; }
-        .ere-item { display: flex; align-items: center; gap: 15px; margin-bottom: 12px; }
-        .ere-num { background: var(--primary-blue); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; flex-shrink: 0; }
-
-        .btn-cta {
-            background: linear-gradient(90deg, #00b2ff 0%, #007bff 100%);
-            color: white; padding: 18px 35px; font-size: 1.2rem; font-weight: bold; 
-            text-decoration: none; border-radius: 50px; display: inline-block; 
-            text-transform: uppercase; animation: pulse 2s infinite; border: none; cursor: pointer;
-            box-shadow: 0 0 20px rgba(0, 178, 255, 0.4);
-        }
-
-        /* REVIEWS SLIDER */
-        .reviews-section { padding: 50px 0; background: #0c1226; border-top: 1px solid #1a2035; }
-        .slider-wrapper { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; padding: 20px 0; }
-        .reviews-track {
-            display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 10px 0 30px 0; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-        }
-        .reviews-track::-webkit-scrollbar { display: none; }
-        
-        .review-card {
-            flex: 0 0 320px; scroll-snap-align: center; background: var(--card-bg);
-            padding: 25px; border-radius: 15px; border: 1px solid #252d42; text-align: left;
-            display: flex; flex-direction: column; justify-content: space-between;
-        }
-        .review-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
-        .review-img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-blue); }
-        .review-name { font-weight: bold; font-size: 0.95rem; }
-        .review-city { font-size: 0.75rem; color: var(--gray-text); }
-        .stars { color: var(--yellow-star); font-size: 0.8rem; margin: 5px 0; }
-        .review-text { font-size: 0.9rem; color: #e0e0e0; font-style: italic; margin-bottom: 15px; flex-grow: 1; }
-        .verified-badge { font-size: 0.75rem; color: var(--green-success); font-weight: bold; display: flex; align-items: center; gap: 5px; }
-
-        /* BANNER TOP.PNG */
-        .banner-meio { width: 100%; max-width: 900px; margin: 40px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.6); }
-        .banner-meio img { width: 100%; display: block; }
-
-        /* OFERTAS */
-        .ofertas-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
-        .offer-card { 
-            background: var(--card-bg); border: 2px solid #252d42; border-radius: 20px; 
-            padding: 30px; display: flex; flex-direction: column; position: relative; transition: 0.3s;
-        }
-        .offer-card.destaque { border-color: var(--yellow-star); transform: scale(1.05); z-index: 2; background: #161d2f; }
-        .tag-popular { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--yellow-star); color: #000; padding: 6px 20px; font-weight: 900; border-radius: 20px; font-size: 0.8rem; }
-        
-        .product-img { width: 100%; height: auto; max-height: 250px; object-fit: contain; margin: 15px 0; border-radius: 10px; }
-        
-        .price { font-size: 3.2rem; font-weight: 900; margin: 10px 0; color: #fff; }
-        .price span { font-size: 1.2rem; vertical-align: middle; margin-right: 5px; }
-        .price small { font-size: 1.5rem; vertical-align: super; }
-
-        .btn-buy { background: linear-gradient(180deg, #1cb453 0%, #158a40 100%); color: white; padding: 18px; border-radius: 12px; font-weight: 900; text-decoration: none; font-size: 1.3rem; margin-top: auto; display: block; transition: 0.2s; text-align: center; }
-        .btn-buy:hover { transform: translateY(-3px); filter: brightness(1.1); }
-
-        /* FAQ */
-        .faq-section { padding: 60px 20px; }
-        .faq-item { background: var(--card-bg); margin-bottom: 12px; border-radius: 10px; border: 1px solid #252d42; text-align: left; }
-        .faq-question { padding: 18px 25px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; color: var(--primary-blue); }
-        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: 0.3s; color: #ccc; }
-        .faq-item.active .faq-answer { max-height: 150px; padding-bottom: 20px; }
-
-        /* FOOTER */
-        .info-footer { background: #050810; padding: 50px 20px; border-top: 1px solid #1a2035; font-size: 0.9rem; }
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: left; max-width: 1000px; margin: 0 auto; }
-        .payment-icons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
-        .payment-card { background: #fff; padding: 5px; border-radius: 4px; height: 30px; display: flex; align-items: center; }
-        .payment-card img { height: 100%; }
-
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @media (max-width: 600px) { 
-            .hero h1 { font-size: 1.8rem; }
-            .ere-box { flex-direction: column; } 
-            .offer-card.destaque { transform: scale(1); margin: 20px 0; } 
-            .review-card { flex: 0 0 280px; }
+        html { scroll-behavior: smooth; }
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #4c1d95, #d946ef);
         }
     </style>
 </head>
-<body>
+<body class="bg-white text-gray-800 antialiased font-sans">
 
-    <header>Tadala Gel Oficial</header>
+    <div class="bg-red-600 text-white text-center py-2 text-xs md:text-sm font-bold tracking-wide">
+        <i class="fas fa-fire mr-2"></i> ATENÇÃO: Devido à alta demanda no TikTok, restam poucos potes em estoque.
+    </div>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Recupere sua <span class="highlight">Potência Máxima</span> hoje mesmo!</h1>
-            <p>Resultados comprovados em laboratório e aprovado por milhares de homens.</p>
+    <nav class="w-full py-4 bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-black text-brand-dark tracking-tighter">
+                BIO<span class="text-brand-green">SLIM</span>
+            </div>
+            <a href="#ofertas" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition shadow-lg text-sm md:text-base">
+                COMPRAR AGORA
+            </a>
+        </div>
+    </nav>
+
+    <header class="relative overflow-hidden pt-10 pb-16 md:pt-20 md:pb-24">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
             
-            <div class="ere-box">
-                <div class="ere-info">
-                    <h3 style="margin-top:0; color:var(--primary-blue)">Escala de Rigidez (ERE)</h3>
-                    <div class="ere-item"><div class="ere-num">4</div><span><b>Rigidez Total:</b> Performance máxima e duradoura.</span></div>
-                    <div class="ere-item"><div class="ere-num">3</div><span><b>Suave:</b> Perda de firmeza durante o ato.</span></div>
-                    <div class="ere-item"><div class="ere-num">2</div><span><b>Disfunção:</b> Dificuldade em manter a ereção.</span></div>
-                    <p style="color: var(--green-success); margin-top: 15px; font-weight: bold;">✓ O Tadala Gel ajuda você a atingir o Nível 4.</p>
+            <div class="text-center md:text-left z-10">
+                <span class="inline-block py-1 px-3 rounded-full bg-purple-100 text-purple-700 text-xs font-bold mb-4 uppercase tracking-wider">
+                    Nova Fórmula Americana 🇺🇸
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6">
+                    Desbloqueie seu Metabolismo e <span class="gradient-text">Derreta Gordura</span> sem Passar Fome.
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    A única fórmula que ativa o modo "queima-gordura" 24h por dia, eliminando o inchaço e a ansiedade por doces logo na primeira semana.
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#ofertas" class="group bg-brand-cta hover:bg-orange-600 text-white text-xl font-bold py-4 px-8 rounded-lg shadow-xl transition transform hover:-translate-y-1 w-full md:w-auto text-center animate-pulse-slow">
+                        QUERO EMAGRECER AGORA
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition"></i>
+                    </a>
                 </div>
-                <div style="flex: 0.8; text-align: center; border-left: 1px solid #1a2035; padding-left: 20px;">
-                    <p style="font-weight: bold; margin-bottom: 5px;">MÉTODO DE APLICAÇÃO:</p>
-                    <p style="font-size: 0.85rem; color: #aaa;">Uso diário (5 min de massagem).<br>Envio 100% discreto em embalagem comum.</p>
-                    <a href="#ofertas" class="btn-cta">QUERO EXPERIMENTAR</a>
+
+                <div class="flex items-center justify-center md:justify-start gap-4 mt-6 text-xs text-gray-500 font-semibold">
+                    <div class="flex items-center"><i class="fas fa-shield-alt text-green-500 mr-1"></i> Compra Segura</div>
+                    <div class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-1"></i> Aprovado Anvisa</div>
                 </div>
+            </div>
+
+            <div class="relative z-10 flex justify-center">
+                <div class="absolute bg-purple-100 rounded-full w-72 h-72 md:w-96 md:h-96 -z-10 blur-3xl opacity-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <img src="https://placehold.co/400x500/png?text=Frasco+do+Produto" alt="Frasco BioSlim" class="drop-shadow-2xl hover:scale-105 transition duration-500">
             </div>
         </div>
-    </section>
+    </header>
 
-    <section class="reviews-section">
-        <div class="container">
-            <h2 style="font-size: 2.1rem; margin-bottom: 5px;">Quem usou, <span class="highlight">Aprovou!</span></h2>
-            <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px;">
-                <span style="color: var(--yellow-star);">★★★★★</span>
-                <span style="font-size: 0.9rem; opacity: 0.8;">4.9/5 (2.450 avaliações de clientes)</span>
-            </div>
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-12">Você sofre com algum destes problemas?</h2>
             
-            <div class="slider-wrapper">
-                <div class="reviews-track" id="reviewsTrack">
-                    <div class="review-card">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-img">
-                                <div><div class="review-name">Carlos Mendes</div><div class="review-city">Campinas, SP</div></div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"Chegou muito rápido! Em 4 dias estava na minha porta. A embalagem é realmente discreta, ninguém sabe o que tem dentro. O gel tem um cheiro agradável e os resultados na firmeza aparecem na primeira semana."</p>
-                        </div>
-                        <div class="verified-badge">✔ Compra Verificada • <span style="font-weight: normal; opacity: 0.7;">Há 2 dias</span></div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4 border-l-4 border-red-500">
+                    <div class="bg-red-100 p-3 rounded-full text-red-600"><i class="fas fa-pizza-slice"></i></div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg">Fome Descontrolada</h3>
+                        <p class="text-sm text-gray-500">Vontade de comer doces o tempo todo.</p>
                     </div>
-
-                    <div class="review-card">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="review-img">
-                                <div><div class="review-name">Roberto Silveira</div><div class="review-city">Curitiba, PR</div></div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"Tinha receio de comprar pela internet, mas o suporte foi nota 10. O produto é de muita qualidade. Estou no segundo frasco e minha confiança voltou 100%. Recomendo o kit de 3 unidades."</p>
-                        </div>
-                        <div class="verified-badge">✔ Compra Verificada • <span style="font-weight: normal; opacity: 0.7;">Há 5 dias</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4 border-l-4 border-red-500">
+                    <div class="bg-red-100 p-3 rounded-full text-red-600"><i class="fas fa-weight"></i></div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg">Metabolismo Lento</h3>
+                        <p class="text-sm text-gray-500">Come pouco mas não emagrece.</p>
                     </div>
-
-                    <div class="review-card">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://randomuser.me/api/portraits/men/85.jpg" class="review-img">
-                                <div><div class="review-name">André L.</div><div class="review-city">Belo Horizonte, MG</div></div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"Melhor investimento que fiz. O 'brinde surpresa' que veio no kit iniciante também foi sensacional. Mudou completamente meu relacionamento. Comprem sem medo."</p>
-                        </div>
-                        <div class="verified-badge">✔ Compra Verificada • <span style="font-weight: normal; opacity: 0.7;">Há 1 semana</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4 border-l-4 border-red-500">
+                    <div class="bg-red-100 p-3 rounded-full text-red-600"><i class="fas fa-tshirt"></i></div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg">Roupas Apertadas</h3>
+                        <p class="text-sm text-gray-500">Inchaço abdominal que incomoda.</p>
                     </div>
-
-                    <div class="review-card">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://randomuser.me/api/portraits/men/22.jpg" class="review-img">
-                                <div><div class="review-name">Marcos Vinícius</div><div class="review-city">Rio de Janeiro, RJ</div></div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"O gel absorve rápido e não fica melado. Uso todo dia após o banho como diz o manual. Notei uma dilatação maior e muito mais vigor. O envio por Pix liberou na hora o rastreio."</p>
-                        </div>
-                        <div class="verified-badge">✔ Compra Verificada • <span style="font-weight: normal; opacity: 0.7;">Há 3 dias</span></div>
-                    </div>
-
-                    <div class="review-card">
-                        <div>
-                            <div class="review-header">
-                                <img src="https://randomuser.me/api/portraits/men/60.jpg" class="review-img">
-                                <div><div class="review-name">João Paulo K.</div><div class="review-city">Salvador, BA</div></div>
-                            </div>
-                            <div class="stars">★★★★★</div>
-                            <p class="review-text">"Tenho 54 anos e achei que era o fim da linha, mas esse Tadala Gel me surpreendeu. Sinto que as ereções estão muito mais rígidas (Nível 4 mesmo). Vale cada centavo."</p>
-                        </div>
-                        <div class="verified-badge">✔ Compra Verificada • <span style="font-weight: normal; opacity: 0.7;">Há 10 dias</span></div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm flex items-center gap-4 border-l-4 border-red-500">
+                    <div class="bg-red-100 p-3 rounded-full text-red-600"><i class="fas fa-sad-tear"></i></div>
+                    <div class="text-left">
+                        <h3 class="font-bold text-lg">Efeito Sanfona</h3>
+                        <p class="text-sm text-gray-500">Emagrece e engorda tudo de novo.</p>
                     </div>
                 </div>
             </div>
-
-            <div class="banner-meio">
-                <img src="area de imagens/top.png" alt="Escala de Rigidez ERE">
-            </div>
         </div>
     </section>
 
-    <section id="ofertas" class="container" style="padding: 60px 20px;">
-        <h2 style="font-size: 2.2rem;">Escolha seu <span class="highlight">Tratamento</span></h2>
-        <p>Aproveite os descontos exclusivos de hoje com Frete Grátis.</p>
-
-        <div class="ofertas-container">
-            <div class="offer-card">
-                <h3>KIT INICIANTE</h3>
-                <img src="image.png" alt="1 Unidade + Brinde Surpresa" class="product-img">
-                <div style="text-decoration: line-through; color: var(--gray-text); font-size: 0.9rem;">De R$ 197,00 por apenas:</div>
-                <div class="price"><span>R$</span>99<small>,90</small></div>
-                <p style="color: var(--green-success); font-weight: bold; margin-bottom: 15px;">+ BRINDE SURPRESA HOT 🔥</p>
-                <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 20px;">✓ Frete Grátis para todo Brasil<br>✓ Embalagem 100% Discreta</p>
-                <a href="SEU_LINK_AQUI" class="btn-buy">GARANTIR MEU KIT</a>
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Como o <span class="text-purple-700">BioSlim</span> transforma seu corpo</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nossa tecnologia avançada atua diretamente nas células de gordura profunda.</p>
             </div>
 
-            <div class="offer-card destaque">
-                <div class="tag-popular">MAIS VENDIDO</div>
-                <h3>KIT TRATAMENTO COMPLETO</h3>
-                <img src="image.png" alt="3 Frascos" class="product-img" style="filter: hue-rotate(45deg);"> 
-                <div style="text-decoration: line-through; color: var(--gray-text); font-size: 0.9rem;">De R$ 497,00 por:</div>
-                <div class="price"><span>R$</span>149<small>,00</small></div>
-                <p style="color: var(--yellow-star); font-weight: bold; margin-bottom: 15px;">MELHOR CUSTO-BENEFÍCIO</p>
-                <p style="font-size: 0.85rem; color: #ccc; margin-bottom: 20px;">✓ Resultados Permanentes<br>✓ Economia de 60%</p>
-                <a href="SEU_LINK_AQUI" class="btn-buy">EU QUERO O MÁXIMO</a>
-            </div>
-        </div>
-    </section>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-2xl hover:bg-purple-50 transition border border-transparent hover:border-purple-100">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-fire-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Acelerador Metabólico</h3>
+                    <p class="text-gray-600 text-sm">Obriga seu corpo a usar a gordura estocada como fonte de energia, mesmo em repouso.</p>
+                </div>
 
-    <section class="faq-section container">
-        <h3>Dúvidas Frequentes</h3>
-        <div class="faq-item">
-            <div class="faq-question">O ENVIO É DISCRETO? <span>+</span></div>
-            <div class="faq-answer">Sim! A caixa é parda, sem logotipos ou menções ao produto. Sua privacidade é nossa prioridade absoluta.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">QUAL O PRAZO DE ENTREGA? <span>+</span></div>
-            <div class="faq-answer">O prazo médio é de 5 a 12 dias úteis, variando conforme sua região. Você receberá o código de rastreio por e-mail.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">EXISTE GARANTIA? <span>+</span></div>
-            <div class="faq-answer">Sim, oferecemos garantia de satisfação. Se não ficar satisfeito com os resultados, basta entrar em contato com nosso suporte.</div>
-        </div>
-    </section>
+                <div class="text-center p-6 rounded-2xl hover:bg-purple-50 transition border border-transparent hover:border-purple-100">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-hand-paper"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Inibidor de Apetite</h3>
+                    <p class="text-gray-600 text-sm">As fibras inteligentes formam um gel no estômago, prolongando a saciedade por horas.</p>
+                </div>
 
-    <footer class="info-footer">
-        <div class="info-grid">
-            <div>
-                <b>PAGAMENTO SEGURO</b>
-                <div class="payment-icons">
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo_Pix.png" alt="Pix"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa"></div>
-                    <div class="payment-card"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Master"></div>
+                <div class="text-center p-6 rounded-2xl hover:bg-purple-50 transition border border-transparent hover:border-purple-100">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-700 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Detox Profundo</h3>
+                    <p class="text-gray-600 text-sm">Elimina toxinas e líquidos retidos que causam o inchaço abdominal.</p>
                 </div>
             </div>
-            <div>
-                <b>CONTATO</b><br>
-                E-mail: suporte@tadalagel.com<br>
-                Atendimento Segunda a Sexta
-            </div>
-            <div>
-                <b>SEGURANÇA</b><br>
-                🔒 Site Criptografado<br>
-                ✓ Compra 100% Segura
+        </div>
+    </section>
+
+    <section class="py-16 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Fórmula 100% Natural e Segura</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                    <h4 class="font-bold text-lg text-green-400 mb-2">Psyllium</h4>
+                    <p class="text-xs text-slate-400">Aumenta a saciedade e melhora o intestino.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                    <h4 class="font-bold text-lg text-green-400 mb-2">Espirulina</h4>
+                    <p class="text-xs text-slate-400">Superalimento rico em nutrientes e detox.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                    <h4 class="font-bold text-lg text-green-400 mb-2">Cromo</h4>
+                    <p class="text-xs text-slate-400">Reduz drasticamente a vontade de comer doces.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl border border-slate-700 text-center">
+                    <h4 class="font-bold text-lg text-green-400 mb-2">Quitosana</h4>
+                    <p class="text-xs text-slate-400">Fibra que absorve a gordura dos alimentos.</p>
+                </div>
             </div>
         </div>
-        <p style="text-align:center; margin-top: 40px; opacity: 0.5;">© 2026 Tadala Gel Oficial - Todos os direitos reservados.</p>
+    </section>
+
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-12">Quem usa, recomenda!</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-md text-left">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Já tinha tentado de tudo. Com o BioSlim, perdi 8kg em um mês sem passar fome. Me sinto outra mulher!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://placehold.co/100x100?text=A" alt="Foto Cliente">
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Ana Paula</p>
+                            <p class="text-xs text-gray-500">Perdeu 8kg</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-8 rounded-2xl shadow-md text-left">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"O que mais gostei foi que minha ansiedade sumiu. Não ataco mais a geladeira à noite. Recomendo demais!"</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://placehold.co/100x100?text=M" alt="Foto Cliente">
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Mariana Costa</p>
+                            <p class="text-xs text-gray-500">Perdeu 5kg</p>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="bg-white p-8 rounded-2xl shadow-md text-left">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Comprei o kit de 3 potes e ganhei frete grátis. Chegou super rápido e o resultado é real. Minhas calças voltaram a servir."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden">
+                            <img src="https://placehold.co/100x100?text=F" alt="Foto Cliente">
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Fernanda Lima</p>
+                            <p class="text-xs text-gray-500">Perdeu 12kg</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ofertas" class="py-20 bg-gradient-to-b from-purple-900 to-slate-900 text-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-black mb-4">Escolha o Melhor Kit para Você</h2>
+                <p class="text-purple-200">Frete Grátis e Descontos Exclusivos por tempo limitado.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 items-center max-w-5xl mx-auto">
+                
+                <div class="bg-white text-gray-800 rounded-2xl p-6 text-center border-4 border-transparent opacity-90 hover:opacity-100 transition">
+                    <h3 class="text-xl font-bold mb-2">EXPERIMENTAR</h3>
+                    <div class="text-sm text-gray-500 mb-4">Para perder até 3kg</div>
+                    <img src="https://placehold.co/150x200?text=1+Pote" alt="1 Pote" class="mx-auto mb-4 h-32 object-contain">
+                    <div class="text-gray-400 line-through text-sm">De R$ 197,00</div>
+                    <div class="text-3xl font-black text-slate-800 mb-2">R$ 147,00</div>
+                    <div class="text-xs text-gray-500 mb-6">ou 12x de R$ 14,76</div>
+                    <a href="LINK_DO_CHECKOUT_AQUI" class="block w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition">COMPRAR 1 POTE</a>
+                </div>
+
+                <div class="bg-white text-gray-800 rounded-2xl p-8 text-center border-4 border-green-500 transform md:-translate-y-4 shadow-2xl relative">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg">
+                        Campeão de Vendas
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-purple-700">TRATAMENTO 3 MESES</h3>
+                    <div class="text-sm text-gray-500 mb-4">Para perder de 5kg a 10kg</div>
+                    <img src="https://placehold.co/250x200?text=3+Potes" alt="3 Potes" class="mx-auto mb-4 h-40 object-contain">
+                    <div class="bg-green-100 text-green-700 font-bold px-3 py-1 rounded-full text-xs inline-block mb-2">40% DE DESCONTO + FRETE GRÁTIS</div>
+                    <div class="text-gray-400 line-through text-sm">De R$ 591,00</div>
+                    <div class="text-4xl font-black text-slate-800 mb-2">R$ 297,00</div>
+                    <div class="text-sm text-gray-500 mb-8">ou 12x de R$ 29,82</div>
+                    <a href="LINK_DO_CHECKOUT_AQUI" class="block w-full py-4 bg-green-500 hover:bg-green-600 text-white text-xl font-bold rounded-lg transition animate-pulse">COMPRAR AGORA</a>
+                </div>
+
+                <div class="bg-white text-gray-800 rounded-2xl p-6 text-center border-4 border-transparent opacity-90 hover:opacity-100 transition">
+                    <h3 class="text-xl font-bold mb-2">TRATAMENTO COMPLETO</h3>
+                    <div class="text-sm text-gray-500 mb-4">Para perder mais de 10kg</div>
+                    <img src="https://placehold.co/250x200?text=5+Potes" alt="5 Potes" class="mx-auto mb-4 h-32 object-contain">
+                    <div class="bg-purple-100 text-purple-700 font-bold px-3 py-1 rounded-full text-xs inline-block mb-2">60% OFF + FRETE GRÁTIS</div>
+                    <div class="text-gray-400 line-through text-sm">De R$ 985,00</div>
+                    <div class="text-3xl font-black text-slate-800 mb-2">R$ 397,00</div>
+                    <div class="text-xs text-gray-500 mb-6">ou 12x de R$ 39,86</div>
+                    <a href="LINK_DO_CHECKOUT_AQUI" class="block w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-lg transition">COMPRAR 5 POTES</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white border-b">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+            <div class="w-32 md:w-48 text-green-500 flex-shrink-0 text-center text-9xl">
+               <i class="fas fa-shield-check"></i>
+            </div>
+            <div class="text-center md:text-left">
+                <h3 class="text-2xl font-bold text-slate-900 mb-4">Garantia Blindada de 30 Dias</h3>
+                <p class="text-gray-600 mb-4">
+                    Nós confiamos tanto na nossa fórmula que fazemos um desafio: Use o BioSlim por 30 dias. Se você não ver resultado na balança ou no espelho, nós devolvemos <strong>100% do seu dinheiro</strong>. Sem perguntas, sem burocracia.
+                </p>
+                <p class="font-bold text-slate-900">O risco é todo nosso!</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-8">Perguntas Frequentes</h2>
+            
+            <div class="space-y-4">
+                <details class="group bg-white rounded-lg shadow-sm">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-lg">
+                        <span>Qual o prazo de entrega?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-gray-600 px-4 pb-4">
+                        O prazo médio é de 3 a 7 dias úteis para todo o Brasil. O produto é enviado em até 24h após a confirmação do pagamento.
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-lg shadow-sm">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-lg">
+                        <span>Como devo tomar?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-gray-600 px-4 pb-4">
+                        Recomendamos ingerir 2 cápsulas por dia, preferencialmente antes das principais refeições (almoço e jantar), com bastante água.
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-lg shadow-sm">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-lg">
+                        <span>Tem efeitos colaterais?</span>
+                        <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                    </summary>
+                    <div class="text-gray-600 px-4 pb-4">
+                        Não. Por ser um produto 100% natural, não possui contraindicações nem causa efeitos colaterais. Apenas gestantes e lactantes devem consultar um médico antes.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-gray-400 py-12 text-sm">
+        <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-4 gap-8">
+            <div class="col-span-1 md:col-span-2">
+                <div class="text-2xl font-black text-white mb-4">BIO<span class="text-green-500">SLIM</span></div>
+                <p class="mb-4">Sua melhor versão começa agora. Tecnologia avançada para emagrecimento saudável e definitivo.</p>
+                <p>CNPJ: 00.000.000/0001-00</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Links Úteis</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-white">Rastrear Pedido</a></li>
+                    <li><a href="#" class="hover:text-white">Termos de Uso</a></li>
+                    <li><a href="#" class="hover:text-white">Políticas de Privacidade</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Formas de Pagamento</h4>
+                <div class="flex gap-2 text-2xl">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fas fa-barcode"></i>
+                    <i class="fab fa-pix"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-12 pt-8 border-t border-slate-800">
+            &copy; 2023 BioSlim. Todos os direitos reservados.
+            <div class="mt-2 text-xs text-gray-600">Este site não é afiliado ao Facebook ou a qualquer entidade do Facebook.</div>
+        </div>
     </footer>
 
-    <script>
-        // FAQ Interativo
-        document.querySelectorAll('.faq-question').forEach(q => {
-            q.addEventListener('click', () => {
-                const item = q.parentElement;
-                item.classList.toggle('active');
-            });
-        });
+    <a href="https://wa.me/SEUNUMERO" target="_blank" class="fixed bottom-4 right-4 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-2xl z-50 text-3xl transition transform hover:scale-110">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-        // Auto-scroll Suave no Slider de depoimentos
-        const track = document.getElementById('reviewsTrack');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        // Permitir arrastar com o mouse também
-        track.addEventListener('mousedown', (e) => {
-            isDown = true;
-            startX = e.pageX - track.offsetLeft;
-            scrollLeft = track.scrollLeft;
-        });
-        track.addEventListener('mouseleave', () => isDown = false);
-        track.addEventListener('mouseup', () => isDown = false);
-        track.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - track.offsetLeft;
-            const walk = (x - startX) * 2;
-            track.scrollLeft = scrollLeft - walk;
-        });
-
-        setInterval(() => {
-            if(!isDown) {
-                if (track.scrollLeft + track.offsetWidth >= track.scrollWidth - 10) {
-                    track.scrollTo({ left: 0, behavior: 'smooth' });
-                } else {
-                    track.scrollBy({ left: 340, behavior: 'smooth' });
-                }
-            }
-        }, 5000);
-    </script>
 </body>
 </html>
