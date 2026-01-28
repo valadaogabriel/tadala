@@ -1,337 +1,257 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VallaTrade Pro | Institutional Terminal</title>
+    <title>VallaTrade | Ultra High-Speed Terminal</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap');
         
         :root {
-            --bg-main: #0a0a0c;
-            --bg-card: #141417;
-            --border: #27272a;
-            --accent: #3b82f6;
+            --iq-bg: #0b0e18;
+            --iq-up: #00ff88;
+            --iq-down: #ff3366;
+            --iq-accent: #2e5bff;
         }
 
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: var(--bg-main);
-            color: #e4e4e7;
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--iq-bg);
+            color: #ffffff;
+            overflow: hidden;
         }
 
-        .mono { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Scrollbar Customization */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: var(--bg-main); }
-        ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 10px; }
+        /* Efeito de Brilho IQ Option */
+        .neon-glow-up { filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.4)); }
+        .neon-glow-down { filter: drop-shadow(0 0 8px rgba(255, 51, 102, 0.4)); }
 
-        .glass-header {
-            background: rgba(10, 10, 12, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+        .glass-ui {
+            background: rgba(20, 26, 45, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .order-book-row:hover { background: rgba(255, 255, 255, 0.03); }
-        
-        .btn-buy { background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); }
-        .btn-sell { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        /* Animação do Preço Flutuante */
+        @keyframes pulse-price {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .price-tag-live { animation: pulse-price 2s infinite; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-thumb { background: #2d3446; border-radius: 10px; }
     </style>
 </head>
-<body class="h-screen flex flex-col overflow-hidden">
+<body class="h-screen flex flex-col">
 
-    <nav class="glass-header px-6 py-3 flex justify-between items-center z-50">
-        <div class="flex items-center gap-10">
+    <header class="h-14 flex items-center justify-between px-6 border-b border-white/5 z-50">
+        <div class="flex items-center gap-6">
             <div class="flex items-center gap-2">
-                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <i data-lucide="trending-up" class="text-white w-5 h-5"></i>
+                <div class="w-7 h-7 bg-blue-600 rounded flex items-center justify-center rotate-45">
+                    <i data-lucide="zap" class="text-white w-4 h-4 -rotate-45"></i>
                 </div>
-                <span class="text-xl font-extrabold tracking-tight">VALLA<span class="text-blue-500">TRADE</span></span>
+                <span class="text-xl font-extrabold tracking-tighter">VALLA<span class="text-blue-500">TRADE</span></span>
             </div>
-            
-            <div class="hidden lg:flex items-center gap-6 text-sm font-medium text-zinc-400">
-                <a href="#" class="hover:text-white flex items-center gap-2"><i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard</a>
-                <a href="#" class="text-blue-500 flex items-center gap-2"><i data-lucide="candlestick-chart" class="w-4 h-4"></i> Terminal</a>
-                <a href="#" class="hover:text-white flex items-center gap-2"><i data-lucide="wallet" class="w-4 h-4"></i> Wallet</a>
+            <div class="h-4 w-px bg-white/10"></div>
+            <div class="flex items-center gap-3">
+                <img src="https://flagcdn.com/w20/br.png" class="w-5 h-3 object-cover rounded-sm">
+                <span class="text-xs font-bold text-zinc-400">IBOVESPA <span class="text-white ml-2">128.450</span></span>
             </div>
         </div>
 
-        <div class="flex items-center gap-4">
-            <div class="hidden md:block px-4 py-1.5 border border-zinc-800 rounded-full bg-zinc-900/50">
-                <span class="text-[10px] text-zinc-500 block leading-none font-bold uppercase">Equity Value</span>
-                <span class="text-sm font-bold text-emerald-400 mono">R$ 124.502,30</span>
+        <div class="flex items-center gap-6">
+            <div class="text-right">
+                <div class="text-[10px] text-zinc-500 font-bold uppercase tracking-wider">Conta Real</div>
+                <div class="text-emerald-400 font-bold mono">R$ 14.205,50</div>
             </div>
-            <button class="p-2 hover:bg-zinc-800 rounded-lg transition text-zinc-400">
-                <i data-lucide="bell" class="w-5 h-5"></i>
-            </button>
-            <div class="w-9 h-9 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full border-2 border-zinc-800"></div>
+            <button class="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded font-black text-xs transition uppercase shadow-lg shadow-orange-900/20">Depósito</button>
+            <div class="w-8 h-8 rounded-full bg-zinc-800 border border-white/10"></div>
         </div>
-    </nav>
+    </header>
 
     <div class="flex flex-1 overflow-hidden">
         
-        <aside class="w-80 border-r border-zinc-800 bg-[#0a0a0c] hidden md:flex flex-col">
-            <div class="p-4 flex gap-2">
-                <div class="relative flex-1">
-                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-zinc-500"></i>
-                    <input type="text" placeholder="Search Assets..." class="w-full bg-zinc-900 border border-zinc-800 rounded-md py-2 pl-9 pr-4 text-xs focus:outline-none focus:border-blue-500">
-                </div>
-            </div>
-
-            <div class="flex-1 overflow-y-auto" id="assetList">
-                </div>
+        <aside class="w-16 border-r border-white/5 flex flex-col items-center py-6 gap-8 bg-[#080a12]">
+            <i data-lucide="line-chart" class="w-6 h-6 text-blue-500 cursor-pointer"></i>
+            <i data-lucide="history" class="w-6 h-6 text-zinc-500 hover:text-white cursor-pointer transition"></i>
+            <i data-lucide="trophy" class="w-6 h-6 text-zinc-500 hover:text-white cursor-pointer transition"></i>
+            <i data-lucide="help-circle" class="w-6 h-6 text-zinc-500 hover:text-white cursor-pointer transition mt-auto"></i>
         </aside>
 
-        <main class="flex-1 flex flex-col bg-[#0e0e10]">
-            <div class="p-6 border-b border-zinc-800 flex justify-between items-center bg-[#0a0a0c]">
-                <div class="flex items-center gap-6">
-                    <div>
-                        <h2 class="text-2xl font-extrabold tracking-tight uppercase" id="currentAsset">PETR4</h2>
-                        <span class="text-xs text-zinc-500 font-bold">PETRÓLEO BRASILEIRO S.A.</span>
-                    </div>
-                    <div class="h-10 w-px bg-zinc-800"></div>
-                    <div>
-                        <div class="text-2xl font-bold mono" id="livePrice">R$ 38,42</div>
-                        <div class="text-xs font-bold text-emerald-500">+2.45% <span class="text-zinc-500 ml-1">Today</span></div>
-                    </div>
+        <main class="flex-1 relative flex flex-col">
+            <div class="h-12 bg-white/5 flex items-center px-4 gap-2">
+                <div class="bg-zinc-900 px-4 h-full flex items-center gap-3 border-t-2 border-blue-500">
+                    <span class="text-xs font-black uppercase tracking-widest">EUR/USD</span>
+                    <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-1 rounded font-bold">87%</span>
+                    <i data-lucide="x" class="w-3 h-3 text-zinc-600 hover:text-white cursor-pointer"></i>
                 </div>
-                <div class="flex bg-zinc-900 p-1 rounded-lg">
-                    <button class="px-3 py-1 text-xs font-bold rounded hover:bg-zinc-800">1H</button>
-                    <button class="px-3 py-1 text-xs font-bold rounded bg-zinc-800 text-blue-500 shadow-sm">4H</button>
-                    <button class="px-3 py-1 text-xs font-bold rounded hover:bg-zinc-800">1D</button>
-                </div>
+                <button class="w-8 h-8 flex items-center justify-center hover:bg-white/5 rounded-full transition">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                </button>
             </div>
 
-            <div class="flex-1 p-4 relative">
-                <div id="mainChart" class="h-full w-full"></div>
-            </div>
-
-            <div class="h-64 border-t border-zinc-800 flex bg-[#0a0a0c]">
-                <div class="w-1/2 border-r border-zinc-800 p-4">
-                    <h3 class="text-[10px] font-black uppercase text-zinc-500 mb-3 tracking-widest">Order Book</h3>
-                    <div class="grid grid-cols-3 text-[10px] text-zinc-600 mb-2 font-bold px-2">
-                        <span>PRICE</span>
-                        <span class="text-center">SIZE</span>
-                        <span class="text-right">TOTAL</span>
-                    </div>
-                    <div class="space-y-1" id="orderBook">
-                        </div>
-                </div>
-                <div class="w-1/2 p-4">
-                    <h3 class="text-[10px] font-black uppercase text-zinc-500 mb-3 tracking-widest">Recent Activity</h3>
-                    <div class="space-y-3" id="tradesList">
-                        </div>
+            <div class="flex-1 relative">
+                <div id="chart-iq" class="absolute inset-0"></div>
+                
+                <div id="live-tag" class="absolute right-0 top-1/2 -translate-y-1/2 bg-blue-600 px-3 py-1 rounded-l-md font-bold mono text-sm shadow-xl z-10 flex items-center gap-2">
+                    <span id="price-value">1.08425</span>
+                    <div class="w-2 h-2 bg-white rounded-full animate-ping"></div>
                 </div>
             </div>
         </main>
 
-        <aside class="w-80 border-l border-zinc-800 bg-[#0a0a0c] p-6 flex flex-col">
-            <div class="flex gap-2 p-1 bg-zinc-900 rounded-xl mb-8">
-                <button class="flex-1 py-3 text-xs font-black rounded-lg bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">BUY</button>
-                <button class="flex-1 py-3 text-xs font-black rounded-lg text-zinc-500 hover:text-white transition">SELL</button>
+        <aside class="w-72 bg-[#080a12] border-l border-white/5 p-6 flex flex-col gap-6">
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Tempo</label>
+                <div class="relative">
+                    <input type="text" value="00:01:00" class="w-full bg-zinc-900/50 border border-white/10 rounded p-3 text-sm font-bold text-center outline-none">
+                    <div class="absolute right-3 top-3 flex gap-1">
+                        <i data-lucide="plus" class="w-4 h-4 text-zinc-500 cursor-pointer"></i>
+                    </div>
+                </div>
             </div>
 
-            <div class="space-y-6 flex-1">
-                <div>
-                    <label class="text-[10px] font-black text-zinc-500 uppercase mb-2 block">Order Type</label>
-                    <div class="relative">
-                        <select class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-3 text-xs appearance-none focus:border-blue-500 outline-none">
-                            <option>Limit Order</option>
-                            <option>Market Order</option>
-                            <option>Stop-Limit</option>
-                        </select>
-                        <i data-lucide="chevron-down" class="absolute right-3 top-3 w-4 h-4 text-zinc-500"></i>
-                    </div>
+            <div class="space-y-2">
+                <label class="text-[10px] font-black text-zinc-500 uppercase tracking-widest">Valor</label>
+                <div class="relative">
+                    <input type="text" value="R$ 100,00" class="w-full bg-zinc-900/50 border border-white/10 rounded p-4 text-xl font-black text-center outline-none mono">
+                </div>
+            </div>
+
+            <div class="mt-auto space-y-4">
+                <div class="flex justify-between text-xs font-bold px-2">
+                    <span class="text-zinc-500 uppercase">Rendimento</span>
+                    <span class="text-emerald-400">+ R$ 87,00</span>
                 </div>
 
-                <div>
-                    <div class="flex justify-between mb-2">
-                        <label class="text-[10px] font-black text-zinc-500 uppercase">Amount</label>
-                        <span class="text-[10px] text-blue-500 font-bold cursor-pointer hover:underline">Max: 3.2k</span>
-                    </div>
-                    <div class="relative">
-                        <input type="number" value="100" class="w-full bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-lg font-bold mono focus:border-blue-500 outline-none">
-                        <span class="absolute right-4 top-5 text-xs font-bold text-zinc-600">QTY</span>
-                    </div>
-                </div>
-
-                <div class="p-4 bg-zinc-900/50 rounded-xl border border-dashed border-zinc-800">
-                    <div class="flex justify-between text-xs mb-2">
-                        <span class="text-zinc-500">Execution Price</span>
-                        <span class="mono font-bold">R$ 38,42</span>
-                    </div>
-                    <div class="flex justify-between text-xs font-bold">
-                        <span class="text-zinc-500">Total (Incl. Fees)</span>
-                        <span class="text-white mono">R$ 3.846,50</span>
-                    </div>
-                </div>
-
-                <button class="w-full py-4 btn-buy text-white font-black rounded-xl shadow-lg shadow-emerald-900/20 hover:scale-[1.02] transition active:scale-95">
-                    PLACE BUY ORDER
+                <button class="w-full py-6 bg-emerald-500 hover:bg-emerald-400 text-white rounded-lg flex flex-col items-center justify-center gap-1 transition transform active:scale-95 shadow-lg shadow-emerald-900/20">
+                    <i data-lucide="chevron-up" class="w-8 h-8"></i>
+                    <span class="font-black text-lg uppercase tracking-tighter">Acima</span>
                 </button>
-            </div>
 
-            <div class="mt-auto pt-6 border-t border-zinc-800">
-                <div class="flex items-center gap-3 text-zinc-500">
-                    <i data-lucide="info" class="w-4 h-4"></i>
-                    <p class="text-[10px] leading-tight">Prices are delayed by 0.5s. Your account is protected by Valla Shield.</p>
-                </div>
+                <button class="w-full py-6 bg-rose-500 hover:bg-rose-400 text-white rounded-lg flex flex-col items-center justify-center gap-1 transition transform active:scale-95 shadow-lg shadow-rose-900/20">
+                    <span class="font-black text-lg uppercase tracking-tighter">Abaixo</span>
+                    <i data-lucide="chevron-down" class="w-8 h-8"></i>
+                </button>
             </div>
         </aside>
     </div>
 
-    <div class="h-8 bg-zinc-950 border-t border-zinc-900 flex items-center overflow-hidden">
-        <div class="flex animate-[scroll_30s_linear_infinite] whitespace-nowrap gap-10 text-[10px] font-bold text-zinc-500">
-            <span>NASDAQ: <span class="text-emerald-400">15.230 (+1.2%)</span></span>
-            <span>BTC/BRL: <span class="text-red-400">R$ 230.120 (-0.4%)</span></span>
-            <span>PETR4: <span class="text-emerald-400">R$ 38,42 (+2.4%)</span></span>
-            <span>VALE3: <span class="text-emerald-400">R$ 62,15 (+0.1%)</span></span>
-            <span>IBOV: <span class="text-zinc-300">128.450 (0.0%)</span></span>
-            <span>NASDAQ: <span class="text-emerald-400">15.230 (+1.2%)</span></span>
-            <span>BTC/BRL: <span class="text-red-400">R$ 230.120 (-0.4%)</span></span>
-        </div>
-    </div>
-
     <script>
-        // Initialize Icons
         lucide.createIcons();
 
-        // Assets Mock Data
-        const assets = [
-            { symbol: 'PETR4', price: 38.42, change: 2.45, name: 'Petrobras' },
-            { symbol: 'VALE3', price: 62.15, change: -1.12, name: 'Vale S.A.' },
-            { symbol: 'ITUB4', price: 32.10, change: 0.85, name: 'Itaú Unibanco' },
-            { symbol: 'MGLU3', price: 2.15, change: -4.20, name: 'Magalu' },
-            { symbol: 'WEGE3', price: 36.40, change: 1.50, name: 'Weg' }
-        ];
+        // Dados Iniciais
+        let currentPrice = 1.08425;
+        let dataSeries = Array.from({length: 60}, (_, i) => ({
+            x: new Date(Date.now() - (60 - i) * 1000).getTime(),
+            y: 1.08425 + (Math.random() * 0.002)
+        }));
 
-        const assetList = document.getElementById('assetList');
-        assets.forEach(asset => {
-            const div = document.createElement('div');
-            div.className = `p-4 hover:bg-zinc-900 cursor-pointer transition border-l-2 ${asset.symbol === 'PETR4' ? 'border-blue-500 bg-zinc-900/50' : 'border-transparent'}`;
-            div.innerHTML = `
-                <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-sm">${asset.symbol}</span>
-                    <span class="${asset.change > 0 ? 'text-emerald-500' : 'text-red-500'} mono text-[10px] font-bold">${asset.change > 0 ? '+' : ''}${asset.change}%</span>
-                </div>
-                <div class="flex justify-between text-[10px] text-zinc-500">
-                    <span>${asset.name}</span>
-                    <span class="mono italic">R$ ${asset.price.toFixed(2)}</span>
-                </div>
-            `;
-            assetList.appendChild(div);
-        });
-
-        // Chart Configuration (ApexCharts)
-        const chartOptions = {
+        // Configuração ApexCharts Estilo IQ Option
+        const options = {
             series: [{
-                data: Array.from({length: 40}, (_, i) => ({
-                    x: new Date(Date.now() - (40 - i) * 3600000),
-                    y: [37 + Math.random(), 38 + Math.random(), 36 + Math.random(), 37 + Math.random()]
-                }))
+                name: 'Price',
+                data: dataSeries
             }],
             chart: {
-                type: 'candlestick',
+                id: 'realtime',
+                type: 'area',
                 height: '100%',
-                background: 'transparent',
+                animations: {
+                    enabled: true,
+                    easing: 'linear',
+                    dynamicAnimation: { speed: 1000 }
+                },
                 toolbar: { show: false },
-                animations: { enabled: true }
+                zoom: { enabled: false },
+                background: 'transparent'
             },
-            theme: { mode: 'dark' },
-            xaxis: { type: 'datetime', labels: { style: { colors: '#71717a', fontSize: '10px' } }, axisBorder: { show: false } },
-            yaxis: { labels: { style: { colors: '#71717a', fontSize: '10px' } } },
-            grid: { borderColor: '#18181b', strokeDashArray: 4 },
-            plotOptions: {
-                candlestick: {
-                    colors: { upward: '#10b981', downward: '#ef4444' }
+            dataLabels: { enabled: false },
+            stroke: {
+                curve: 'smooth',
+                width: 3,
+                colors: ['#2e5bff']
+            },
+            fill: {
+                type: 'gradient',
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.4,
+                    opacityTo: 0,
+                    stops: [0, 90, 100],
+                    colorStops: [
+                        { offset: 0, color: "#2e5bff", opacity: 0.4 },
+                        { offset: 100, color: "#2e5bff", opacity: 0 }
+                    ]
                 }
-            }
+            },
+            grid: {
+                borderColor: 'rgba(255, 255, 255, 0.03)',
+                xaxis: { lines: { show: true } },
+                yaxis: { lines: { show: true } }
+            },
+            xaxis: {
+                type: 'datetime',
+                range: 60000, // 1 minuto visível
+                labels: { show: false },
+                axisBorder: { show: false },
+                axisTicks: { show: false }
+            },
+            yaxis: {
+                opposite: true,
+                labels: {
+                    style: { colors: '#4b5563', fontSize: '10px', fontWeight: 'bold' }
+                }
+            },
+            tooltip: { enabled: false }
         };
 
-        const chart = new ApexCharts(document.querySelector("#mainChart"), chartOptions);
+        const chart = new ApexCharts(document.querySelector("#chart-iq"), options);
         chart.render();
 
-        // Order Book Simulation
-        function updateOrderBook() {
-            const container = document.getElementById('orderBook');
-            container.innerHTML = '';
-            // Sells (Red)
-            for(let i=0; i<4; i++) {
-                const price = 38.50 + (i * 0.05);
-                const size = (Math.random() * 2000).toFixed(0);
-                container.innerHTML += `
-                    <div class="grid grid-cols-3 text-[11px] mono py-1 px-2 order-book-row relative">
-                        <span class="text-red-500 font-bold">${price.toFixed(2)}</span>
-                        <span class="text-center text-zinc-400">${size}</span>
-                        <span class="text-right text-zinc-500">${(price * size / 1000).toFixed(1)}k</span>
-                        <div class="absolute right-0 top-0 h-full bg-red-500/5" style="width: ${Math.random() * 60}%"></div>
-                    </div>
-                `;
-            }
-            // Bids (Green)
-            for(let i=0; i<4; i++) {
-                const price = 38.40 - (i * 0.05);
-                const size = (Math.random() * 2000).toFixed(0);
-                container.innerHTML += `
-                    <div class="grid grid-cols-3 text-[11px] mono py-1 px-2 order-book-row relative">
-                        <span class="text-emerald-500 font-bold">${price.toFixed(2)}</span>
-                        <span class="text-center text-zinc-400">${size}</span>
-                        <span class="text-right text-zinc-500">${(price * size / 1000).toFixed(1)}k</span>
-                        <div class="absolute right-0 top-0 h-full bg-emerald-500/5" style="width: ${Math.random() * 60}%"></div>
-                    </div>
-                `;
-            }
-        }
-
-        // Live Trades Simulation
-        function updateTrades() {
-            const container = document.getElementById('tradesList');
-            const icons = ['arrow-up-right', 'arrow-down-right'];
-            const types = ['Buy', 'Sell'];
-            const colors = ['text-emerald-500', 'text-red-500'];
-            
-            const rand = Math.floor(Math.random() * 2);
-            const price = 38.42 + (Math.random() * 0.1);
-            
-            const tradeHtml = `
-                <div class="flex justify-between items-center text-xs border-b border-zinc-900 pb-2">
-                    <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 rounded-full ${rand === 0 ? 'bg-emerald-500' : 'bg-red-500'} animate-pulse"></div>
-                        <span class="font-bold">${types[rand]} Order</span>
-                    </div>
-                    <span class="mono font-bold">${price.toFixed(2)}</span>
-                    <span class="text-zinc-600 text-[10px]">15:30:12</span>
-                </div>
-            `;
-            container.insertAdjacentHTML('afterbegin', tradeHtml);
-            if(container.children.length > 5) container.lastElementChild.remove();
-        }
-
-        // Real-time Updates
+        // Simulação de Movimentação Real-time
         setInterval(() => {
-            const priceEl = document.getElementById('livePrice');
-            const currentPrice = 38.42 + (Math.random() * 0.4 - 0.2);
-            priceEl.innerText = `R$ ${currentPrice.toFixed(2)}`;
-            updateOrderBook();
-            updateTrades();
-        }, 2000);
+            const lastData = dataSeries[dataSeries.length - 1];
+            const volatility = 0.00015;
+            const change = (Math.random() - 0.5) * volatility;
+            
+            currentPrice = parseFloat((currentPrice + change).toFixed(5));
+            
+            const newDataPoint = {
+                x: new Date().getTime(),
+                y: currentPrice
+            };
 
-        updateOrderBook();
-        updateTrades();
+            dataSeries.push(newDataPoint);
+            dataSeries.shift(); // Remove o ponto mais antigo
 
+            chart.updateSeries([{ data: dataSeries }]);
+
+            // Atualiza o Marcador Flutuante
+            const priceEl = document.getElementById('price-value');
+            const liveTag = document.getElementById('live-tag');
+            priceEl.innerText = currentPrice.toFixed(5);
+
+            // Muda cor se sobe ou desce
+            if(change > 0) {
+                liveTag.classList.replace('bg-rose-600', 'bg-blue-600');
+            } else {
+                liveTag.classList.replace('bg-blue-600', 'bg-rose-600');
+            }
+
+            // Reposicionamento suave do marcador (estimado)
+            // Na vida real, usaríamos a API do gráfico para pegar a coordenada Y exata
+            const yPos = 50 + (change * 50000); 
+            liveTag.style.top = `${Math.max(20, Math.min(80, yPos))}%`;
+
+        }, 1000);
     </script>
-
-    <style>
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-    </style>
 </body>
 </html>
