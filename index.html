@@ -1,31 +1,194 @@
-// Função para analisar a tendência dos últimos 10 segundos
-function getTradingSignal() {
-    if (dataPoints.length < 10) return "AGUARDANDO...";
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VallaTrade Pro | Signal AI Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap');
+        :root { --iq-bg: #05070a; --iq-blue: #2e5bff; --iq-green: #00ff88; --iq-red: #ff3366; }
+        body { font-family: 'Outfit', sans-serif; background-color: var(--iq-bg); color: #e4e4e7; overflow: hidden; }
+        .glass { background: rgba(13, 17, 28, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .pulse-green { animation: pulseG 1.5s infinite; }
+        @keyframes pulseG { 0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); } }
+    </style>
+</head>
+<body class="h-screen flex flex-col">
 
-    const lastPrices = dataPoints.slice(-10); // Pega os últimos 10 pontos
-    const first = lastPrices[0].y;
-    const last = lastPrices[lastPrices.length - 1].y;
-
-    if (last > first) {
-        return { action: "COMPRA", color: "text-emerald-400", icon: "trending-up" };
-    } else if (last < first) {
-        return { action: "VENDA", color: "text-rose-500", icon: "trending-down" };
-    } else {
-        return { action: "NEUTRO", color: "text-zinc-400", icon: "minus" };
-    }
-}
-
-// Atualiza o painel de sinal a cada segundo
-setInterval(() => {
-    const signal = getTradingSignal();
-    const signalDiv = document.getElementById('signal-display');
-    if (signalDiv) {
-        signalDiv.innerHTML = `
-            <div class="flex items-center gap-2 ${signal.color} font-black animate-pulse">
-                <i data-lucide="${signal.icon}" class="w-4 h-4"></i>
-                <span>SUGESTÃO: ${signal.action}</span>
+    <header class="h-16 border-b border-white/5 flex items-center justify-between px-6 glass z-50">
+        <div class="flex items-center gap-4">
+            <span class="text-2xl font-black italic tracking-tighter text-blue-500">V<span class="text-white">TRADE AI</span></span>
+            <div class="bg-zinc-900 px-3 py-1 rounded text-[10px] font-bold text-blue-400 border border-blue-500/20">ALGORITMO V3.1 ATIVO</div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="text-right">
+                <div class="text-[10px] text-zinc-500 font-bold uppercase">Banca de Teste</div>
+                <div class="text-white font-bold mono" id="balance">R$ 10.000,00</div>
             </div>
-        `;
+            <button class="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-lg font-bold text-xs transition">DEPOSITAR</button>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <aside class="w-20 border-r border-white/5 flex flex-col items-center py-6 gap-8 glass">
+            <div class="flex flex-col items-center gap-1 group cursor-pointer">
+                <i data-lucide="zap" class="text-yellow-400"></i>
+                <span class="text-[9px] font-bold text-zinc-500">SINAIS</span>
+            </div>
+            <div class="flex flex-col items-center gap-1 group cursor-pointer">
+                <i data-lucide="shield-check" class="text-blue-500"></i>
+                <span class="text-[9px] font-bold text-zinc-500">SEGURO</span>
+            </div>
+        </aside>
+
+        <main class="flex-1 relative bg-[#05070a]">
+            <div id="ai-alert" class="absolute top-10 left-1/2 -translate-x-1/2 z-40 transition-all duration-500 scale-0">
+                <div class="glass px-8 py-3 rounded-2xl border-2 border-emerald-500/50 flex items-center gap-4">
+                    <div class="w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
+                    <div class="text-center">
+                        <div class="text-[10px] font-bold text-emerald-500 uppercase">Entrada Confirmada</div>
+                        <div class="text-lg font-black" id="ai-suggestion">CALCULANDO...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="main-chart" class="w-full h-full"></div>
+            
+            <div id="price-marker" class="absolute right-0 top-1/2 bg-blue-600 px-3 py-1 rounded-l font-bold mono text-sm z-30">0.0000</div>
+        </main>
+
+        <aside class="w-80 border-l border-white/5 p-6 flex flex-col gap-6 glass">
+            <div class="bg-zinc-900/50 p-4 rounded-xl space-y-3">
+                <div class="flex justify-between text-[10px] font-bold uppercase">
+                    <span>Vendedores</span>
+                    <span>Compradores</span>
+                </div>
+                <div class="h-2 w-full bg-zinc-800 rounded-full overflow-hidden flex">
+                    <div id="sell-bar" class="h-full bg-rose-500 transition-all duration-1000" style="width: 50%"></div>
+                    <div id="buy-bar" class="h-full bg-emerald-500 transition-all duration-1000" style="width: 50%"></div>
+                </div>
+                <div class="text-center text-[10px] font-bold text-zinc-500" id="probability-text">PROCESSANDO DADOS DO MERCADO...</div>
+            </div>
+
+            <div class="space-y-4">
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black text-zinc-500 uppercase">Tempo de Expiração</label>
+                    <select class="w-full bg-zinc-900 border border-white/10 rounded-lg p-3 font-bold outline-none">
+                        <option>1 MINUTO</option>
+                        <option>5 MINUTOS</option>
+                    </select>
+                </div>
+                <div class="space-y-1">
+                    <label class="text-[10px] font-black text-zinc-500 uppercase">Investimento</label>
+                    <input type="number" value="100" class="w-full bg-zinc-900 border border-white/10 rounded-lg p-4 text-xl font-bold text-center mono outline-none">
+                </div>
+            </div>
+
+            <div class="mt-auto space-y-3">
+                <button onclick="trade('call')" class="w-full py-6 bg-emerald-500 hover:bg-emerald-400 rounded-2xl flex flex-col items-center gap-1 transition-all transform active:scale-95 shadow-lg shadow-emerald-900/20">
+                    <i data-lucide="arrow-up-circle" class="w-8 h-8"></i>
+                    <span class="font-black uppercase">Acima (BUY)</span>
+                </button>
+                <button onclick="trade('put')" class="w-full py-6 bg-rose-500 hover:bg-rose-400 rounded-2xl flex flex-col items-center gap-1 transition-all transform active:scale-95 shadow-lg shadow-rose-900/20">
+                    <span class="font-black uppercase">Abaixo (SELL)</span>
+                    <i data-lucide="arrow-down-circle" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script>
         lucide.createIcons();
-    }
-}, 1000);
+        let currentPrice = 1.08450;
+        let dataSeries = [];
+        let chart;
+
+        // INICIALIZA O GRAFICO
+        function init() {
+            const now = Date.now();
+            for(let i=0; i<60; i++) {
+                currentPrice += (Math.random() - 0.5) * 0.0002;
+                dataSeries.push({ x: now - (60-i)*1000, y: currentPrice });
+            }
+
+            const options = {
+                series: [{ data: dataSeries }],
+                chart: { 
+                    type: 'area', height: '100%', 
+                    animations: { enabled: true, easing: 'linear', dynamicAnimation: { speed: 800 } },
+                    toolbar: { show: false }, zoom: { enabled: false }, background: 'transparent'
+                },
+                stroke: { curve: 'smooth', width: 3, colors: ['#2e5bff'] },
+                fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.3, opacityTo: 0 } },
+                grid: { show: false },
+                xaxis: { type: 'datetime', range: 60000, labels: { show: false }, axisBorder: { show: false } },
+                yaxis: { show: false },
+                tooltip: { enabled: false }
+            };
+
+            chart = new ApexCharts(document.querySelector("#main-chart"), options);
+            chart.render();
+            updateLoop();
+        }
+
+        // LOOP DE ATUALIZAÇÃO E INTELIGENCIA
+        function updateLoop() {
+            setInterval(() => {
+                const change = (Math.random() - 0.5) * 0.0003;
+                currentPrice += change;
+                const now = Date.now();
+
+                dataSeries.push({ x: now, y: currentPrice });
+                dataSeries.shift();
+                chart.updateSeries([{ data: dataSeries }]);
+
+                // Atualiza marcador de preço
+                const marker = document.getElementById('price-marker');
+                marker.innerText = currentPrice.toFixed(5);
+                marker.style.top = `${50 + (Math.random() * 20 - 10)}%`;
+
+                // LOGICA DE SINAL AI
+                updateAISignals();
+            }, 1000);
+        }
+
+        function updateAISignals() {
+            const buyProb = Math.floor(Math.random() * (90 - 10 + 1)) + 10;
+            const sellProb = 100 - buyProb;
+            
+            document.getElementById('buy-bar').style.width = buyProb + '%';
+            document.getElementById('sell-bar').style.width = sellProb + '%';
+            
+            const alertBox = document.getElementById('ai-alert');
+            const sugText = document.getElementById('ai-suggestion');
+            const probText = document.getElementById('probability-text');
+
+            if (buyProb > 80) {
+                alertBox.classList.remove('scale-0');
+                sugText.innerText = "FORTE COMPRA (CALL)";
+                sugText.className = "text-lg font-black text-emerald-400";
+                probText.innerText = `ANÁLISE: ${buyProb}% DE CHANCE DE ALTA`;
+            } else if (sellProb > 80) {
+                alertBox.classList.remove('scale-0');
+                sugText.innerText = "FORTE VENDA (PUT)";
+                sugText.className = "text-lg font-black text-rose-500";
+                probText.innerText = `ANÁLISE: ${sellProb}% DE CHANCE DE QUEDA`;
+            } else {
+                alertBox.classList.add('scale-0');
+                probText.innerText = "MERCADO OSCILANDO - AGUARDE...";
+            }
+        }
+
+        function trade(type) {
+            console.log("Ordem enviada: " + type);
+            // Aqui você integraria com o backend real
+        }
+
+        init();
+    </script>
+</body>
+</html>
